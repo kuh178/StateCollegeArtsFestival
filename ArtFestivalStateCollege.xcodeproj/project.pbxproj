@@ -1,0 +1,1146 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ABBDD3DF803F4EE1AFE08F86 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5E5C1942E94F24B0C0B4F1 /* libPods.a */; };
+		FA0A6BB418DB545700E706F5 /* UserInputDetailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6BB318DB545700E706F5 /* UserInputDetailedViewController.m */; };
+		FA0A6BB718DB636F00E706F5 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0A6BB618DB636F00E706F5 /* AssetsLibrary.framework */; };
+		FA0A6BBB18DB655E00E706F5 /* UIImage+Decompression.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6BBA18DB655E00E706F5 /* UIImage+Decompression.m */; };
+		FA0A6BBF18DB773A00E706F5 /* ArtistsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6BBE18DB773A00E706F5 /* ArtistsDetailViewController.m */; };
+		FA0A6BC218DB7F9900E706F5 /* MyActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6BC118DB7F9900E706F5 /* MyActivitiesViewController.m */; };
+		FA0A6BC618DB936100E706F5 /* SocialNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6BC518DB936100E706F5 /* SocialNewsViewController.m */; };
+		FA0A6BCA18DB970F00E706F5 /* art-gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = FA0A6BC918DB970F00E706F5 /* art-gallery.png */; };
+		FA0A6BD018DB97ED00E706F5 /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = FA0A6BCF18DB97ED00E706F5 /* picture.png */; };
+		FA0A6BD518DBC3C900E706F5 /* EventMapViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6BD418DBC3C900E706F5 /* EventMapViewViewController.m */; };
+		FA4407B71AD318D9001CEFFC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4407B61AD318D9001CEFFC /* ProfileViewController.m */; };
+		FA446E7319556D44007941C6 /* MapPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA446E7219556D44007941C6 /* MapPhotosViewController.m */; };
+		FA446E7519558199007941C6 /* Festival-Map.png in Resources */ = {isa = PBXBuildFile; fileRef = FA446E7419558199007941C6 /* Festival-Map.png */; };
+		FA446E7719560312007941C6 /* message-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA446E7619560312007941C6 /* message-7.png */; };
+		FA446E7A19560454007941C6 /* AddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA446E7919560454007941C6 /* AddCommentViewController.m */; };
+		FA446E8719567C2F007941C6 /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FA446E8619567C2F007941C6 /* MapViewAnnotation.m */; };
+		FA446E8D195686A2007941C6 /* map_icon_pink.png in Resources */ = {isa = PBXBuildFile; fileRef = FA446E8C195686A2007941C6 /* map_icon_pink.png */; };
+		FA446E911956A430007941C6 /* ist_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FA446E901956A430007941C6 /* ist_logo.png */; };
+		FA48A31E1AD375CC00B21CCE /* ChooseInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48A31D1AD375CC00B21CCE /* ChooseInterestViewController.m */; };
+		FA67962718D6719700A5BECC /* twitter_blue_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = FA67962618D6719700A5BECC /* twitter_blue_bar.png */; };
+		FA78AD571958A04B0000EEC2 /* ArtistsMoreImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA78AD561958A04B0000EEC2 /* ArtistsMoreImagesViewController.m */; };
+		FA8B7FA218DE172A001F3B1B /* map-paper-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FA118DE172A001F3B1B /* map-paper-7.png */; };
+		FA8B7FA418DE173B001F3B1B /* trophy-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FA318DE173B001F3B1B /* trophy-7.png */; };
+		FA8B7FA618DE175E001F3B1B /* music-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FA518DE175E001F3B1B /* music-7.png */; };
+		FA8B7FA818DE1789001F3B1B /* photos-default-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FA718DE1789001F3B1B /* photos-default-7.png */; };
+		FA8B7FAA18DE17A7001F3B1B /* man-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FA918DE17A7001F3B1B /* man-7.png */; };
+		FA8B7FAC18DE183B001F3B1B /* rss-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FAB18DE183B001F3B1B /* rss-7.png */; };
+		FA8B7FAE18DE18CF001F3B1B /* home-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FAD18DE18CF001F3B1B /* home-7.png */; };
+		FA8B7FB018DE1AE9001F3B1B /* flag-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FAF18DE1AE9001F3B1B /* flag-7.png */; };
+		FA8B7FB218DE1CEF001F3B1B /* microphone-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FB118DE1CEF001F3B1B /* microphone-7.png */; };
+		FA8B7FB418DE1E0A001F3B1B /* slr_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FB318DE1E0A001F3B1B /* slr_camera.png */; };
+		FA8B7FC718EDCE76001F3B1B /* LocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B7FC618EDCE76001F3B1B /* LocationAnnotation.m */; };
+		FA8B7FCD18F1E816001F3B1B /* thumbs_up.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FCC18F1E815001F3B1B /* thumbs_up.png */; };
+		FA8B7FD518F1E9CF001F3B1B /* website.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FD418F1E9CF001F3B1B /* website.png */; };
+		FA8B7FD818F1EC2E001F3B1B /* FestivalMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B7FD718F1EC2E001F3B1B /* FestivalMapViewController.m */; };
+		FA8B7FDA18F25818001F3B1B /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FD918F25817001F3B1B /* plus.png */; };
+		FAAA6072195E954300433679 /* FestivalMapWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAA6071195E954300433679 /* FestivalMapWebViewController.m */; };
+		FAAA6074195E973B00433679 /* festivalmap.pdf in Resources */ = {isa = PBXBuildFile; fileRef = FAAA6073195E973A00433679 /* festivalmap.pdf */; };
+		FAAA6075195EB3C500433679 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E8E418C6509800BDD03D /* XCTest.framework */; };
+		FAAA6078195EB4E700433679 /* StoryBoard_Small.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAAA6076195EB4E700433679 /* StoryBoard_Small.storyboard */; };
+		FAC153AD19058BBB004B7923 /* ArtistsWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC153AC19058BBB004B7923 /* ArtistsWebPageViewController.m */; };
+		FAC3914119514B9600A2ED2D /* PopularMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC3914019514B9600A2ED2D /* PopularMainViewController.m */; };
+		FAC3914419514D2100A2ED2D /* 2014_poster.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAC3914219514D2100A2ED2D /* 2014_poster.jpg */; };
+		FAC3914519514D2100A2ED2D /* 2024_cpfa_button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAC3914319514D2100A2ED2D /* 2024_cpfa_button.jpg */; };
+		FAC391471952A10E00A2ED2D /* picture_100_100.png in Resources */ = {isa = PBXBuildFile; fileRef = FAC391461952A10E00A2ED2D /* picture_100_100.png */; };
+		FAC391491952A16500A2ED2D /* compass_256_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FAC391481952A16500A2ED2D /* compass_256_256.png */; };
+		FAC3914B1952A1FC00A2ED2D /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = FAC3914A1952A1FC00A2ED2D /* info.png */; };
+		FAC391511952A91E00A2ED2D /* HeatMap.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC3914E1952A91E00A2ED2D /* HeatMap.m */; };
+		FAC391521952A91E00A2ED2D /* HeatMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC391501952A91E00A2ED2D /* HeatMapView.m */; };
+		FAC391551952A93B00A2ED2D /* HeatMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC391541952A93B00A2ED2D /* HeatMapViewController.m */; };
+		FAC391601952D37B00A2ED2D /* medal_silver.png in Resources */ = {isa = PBXBuildFile; fileRef = FAC3915D1952D37B00A2ED2D /* medal_silver.png */; };
+		FAC391611952D37B00A2ED2D /* medal_bronze.png in Resources */ = {isa = PBXBuildFile; fileRef = FAC3915E1952D37B00A2ED2D /* medal_bronze.png */; };
+		FAC391621952D37B00A2ED2D /* medal_gold.png in Resources */ = {isa = PBXBuildFile; fileRef = FAC3915F1952D37B00A2ED2D /* medal_gold.png */; };
+		FAC391651953522E00A2ED2D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC391641953522E00A2ED2D /* RegisterViewController.m */; };
+		FAC391681953523900A2ED2D /* SigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC391671953523900A2ED2D /* SigninViewController.m */; };
+		FAC3916B1953B8C300A2ED2D /* AddUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC3916A1953B8C300A2ED2D /* AddUsersViewController.m */; };
+		FAC39172195414D500A2ED2D /* MyPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC39171195414D500A2ED2D /* MyPhotoViewController.m */; };
+		FAF6E8C318C6509800BDD03D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E8C218C6509800BDD03D /* Foundation.framework */; };
+		FAF6E8C518C6509800BDD03D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E8C418C6509800BDD03D /* CoreGraphics.framework */; };
+		FAF6E8C718C6509800BDD03D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E8C618C6509800BDD03D /* UIKit.framework */; };
+		FAF6E8CD18C6509800BDD03D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAF6E8CB18C6509800BDD03D /* InfoPlist.strings */; };
+		FAF6E8CF18C6509800BDD03D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E8CE18C6509800BDD03D /* main.m */; };
+		FAF6E8D318C6509800BDD03D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E8D218C6509800BDD03D /* AppDelegate.m */; };
+		FAF6E8D618C6509800BDD03D /* StoryBoard5.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF6E8D418C6509800BDD03D /* StoryBoard5.storyboard */; };
+		FAF6E8D918C6509800BDD03D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E8D818C6509800BDD03D /* FirstViewController.m */; };
+		FAF6E8DC18C6509800BDD03D /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E8DB18C6509800BDD03D /* SecondViewController.m */; };
+		FAF6E8DE18C6509800BDD03D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF6E8DD18C6509800BDD03D /* Images.xcassets */; };
+		FAF6E8E618C6509800BDD03D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E8C218C6509800BDD03D /* Foundation.framework */; };
+		FAF6E8E718C6509800BDD03D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E8C618C6509800BDD03D /* UIKit.framework */; };
+		FAF6E8EF18C6509800BDD03D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAF6E8ED18C6509800BDD03D /* InfoPlist.strings */; };
+		FAF6E8F118C6509800BDD03D /* ArtFestivalStateCollegeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E8F018C6509800BDD03D /* ArtFestivalStateCollegeTests.m */; };
+		FAF6E90018C6868B00BDD03D /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E8FF18C6868B00BDD03D /* NewsViewController.m */; };
+		FAF6E90318C6869300BDD03D /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E90218C6869300BDD03D /* MoreViewController.m */; };
+		FAF6E90718C686B000BDD03D /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E90618C686B000BDD03D /* EventDetailViewController.m */; };
+		FAF6E90A18C686CD00BDD03D /* GoingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E90918C686CD00BDD03D /* GoingDetailViewController.m */; };
+		FAF6E90D18C686DA00BDD03D /* UserInputDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E90C18C686DA00BDD03D /* UserInputDetailViewController.m */; };
+		FAF6E91018C686F200BDD03D /* AddUserInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E90F18C686F200BDD03D /* AddUserInputViewController.m */; };
+		FAF6E91A18C688F800BDD03D /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E91318C688F800BDD03D /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FAF6E91B18C688F800BDD03D /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E91518C688F800BDD03D /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FAF6E91C18C688F800BDD03D /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E91718C688F800BDD03D /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FAF6E91D18C688F800BDD03D /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E91918C688F800BDD03D /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FAF6E92218C6890200BDD03D /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E91F18C6890200BDD03D /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FAF6E92318C6890200BDD03D /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E92118C6890200BDD03D /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FAF6E95F18D4D0E400BDD03D /* 2013_Poster_Lg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAF6E95E18D4D0E400BDD03D /* 2013_Poster_Lg.jpg */; };
+		FAF6E96118D4D17F00BDD03D /* FB-f-Logo__blue_1024.png in Resources */ = {isa = PBXBuildFile; fileRef = FAF6E96018D4D17F00BDD03D /* FB-f-Logo__blue_1024.png */; };
+		FAF6E96318D4D31700BDD03D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E96218D4D31700BDD03D /* Social.framework */; };
+		FAF6E96518D4D32600BDD03D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E96418D4D32600BDD03D /* CFNetwork.framework */; };
+		FAF6E96718D4D32C00BDD03D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E96618D4D32C00BDD03D /* ImageIO.framework */; };
+		FAF6E96918D4D33500BDD03D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E96818D4D33500BDD03D /* SystemConfiguration.framework */; };
+		FAF6E96B18D4D34100BDD03D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E96A18D4D34100BDD03D /* MobileCoreServices.framework */; };
+		FAF6E96D18D4D34900BDD03D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E96C18D4D34900BDD03D /* libz.dylib */; };
+		FAF6E96F18D4D34F00BDD03D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E96E18D4D34F00BDD03D /* AVFoundation.framework */; };
+		FAF6E97118D4D35700BDD03D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97018D4D35700BDD03D /* CoreData.framework */; };
+		FAF6E97318D4D35C00BDD03D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97218D4D35C00BDD03D /* CoreText.framework */; };
+		FAF6E97518D4D36200BDD03D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97418D4D36200BDD03D /* GLKit.framework */; };
+		FAF6E97718D4D36A00BDD03D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97618D4D36A00BDD03D /* libc++.dylib */; };
+		FAF6E97918D4D37100BDD03D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97818D4D37100BDD03D /* libicucore.dylib */; };
+		FAF6E97B18D4D37800BDD03D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97A18D4D37800BDD03D /* OpenGLES.framework */; };
+		FAF6E97D18D4D38400BDD03D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97C18D4D38400BDD03D /* QuartzCore.framework */; };
+		FAF6E97F18D4D38B00BDD03D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97E18D4D38B00BDD03D /* AdSupport.framework */; };
+		FAF6E98618D4D3DF00BDD03D /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E98518D4D3DF00BDD03D /* libGoogleAnalyticsServices.a */; };
+		FAF6E98A18D4D52000BDD03D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E98918D4D52000BDD03D /* LoginViewController.m */; };
+		FAF6E99318D5582900BDD03D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E99218D5582900BDD03D /* MapKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FAF6E8E818C6509800BDD03D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAF6E8B718C6509800BDD03D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAF6E8BE18C6509800BDD03D;
+			remoteInfo = ArtFestivalStateCollege;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6C5E5C1942E94F24B0C0B4F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		804B949E2F1DA46931BE0C10 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		EBF321C4AF014764FBDF6955 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FA0A6BB218DB545700E706F5 /* UserInputDetailedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInputDetailedViewController.h; sourceTree = "<group>"; };
+		FA0A6BB318DB545700E706F5 /* UserInputDetailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInputDetailedViewController.m; sourceTree = "<group>"; };
+		FA0A6BB618DB636F00E706F5 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		FA0A6BB918DB655E00E706F5 /* UIImage+Decompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Decompression.h"; sourceTree = "<group>"; };
+		FA0A6BBA18DB655E00E706F5 /* UIImage+Decompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Decompression.m"; sourceTree = "<group>"; };
+		FA0A6BBD18DB773A00E706F5 /* ArtistsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsDetailViewController.h; sourceTree = "<group>"; };
+		FA0A6BBE18DB773A00E706F5 /* ArtistsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsDetailViewController.m; sourceTree = "<group>"; };
+		FA0A6BC018DB7F9900E706F5 /* MyActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivitiesViewController.h; sourceTree = "<group>"; };
+		FA0A6BC118DB7F9900E706F5 /* MyActivitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivitiesViewController.m; sourceTree = "<group>"; };
+		FA0A6BC418DB936100E706F5 /* SocialNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNewsViewController.h; sourceTree = "<group>"; };
+		FA0A6BC518DB936100E706F5 /* SocialNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNewsViewController.m; sourceTree = "<group>"; };
+		FA0A6BC918DB970F00E706F5 /* art-gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "art-gallery.png"; sourceTree = "<group>"; };
+		FA0A6BCF18DB97ED00E706F5 /* picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture.png; sourceTree = "<group>"; };
+		FA0A6BD318DBC3C900E706F5 /* EventMapViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMapViewViewController.h; sourceTree = "<group>"; };
+		FA0A6BD418DBC3C900E706F5 /* EventMapViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMapViewViewController.m; sourceTree = "<group>"; };
+		FA4407B51AD318D9001CEFFC /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		FA4407B61AD318D9001CEFFC /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		FA446E7119556D44007941C6 /* MapPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPhotosViewController.h; sourceTree = "<group>"; };
+		FA446E7219556D44007941C6 /* MapPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPhotosViewController.m; sourceTree = "<group>"; };
+		FA446E7419558199007941C6 /* Festival-Map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Festival-Map.png"; sourceTree = "<group>"; };
+		FA446E7619560312007941C6 /* message-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message-7.png"; sourceTree = "<group>"; };
+		FA446E7819560454007941C6 /* AddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCommentViewController.h; sourceTree = "<group>"; };
+		FA446E7919560454007941C6 /* AddCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCommentViewController.m; sourceTree = "<group>"; };
+		FA446E8519567C2F007941C6 /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
+		FA446E8619567C2F007941C6 /* MapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewAnnotation.m; sourceTree = "<group>"; };
+		FA446E8C195686A2007941C6 /* map_icon_pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_icon_pink.png; sourceTree = "<group>"; };
+		FA446E901956A430007941C6 /* ist_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ist_logo.png; sourceTree = "<group>"; };
+		FA48A31C1AD375CC00B21CCE /* ChooseInterestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseInterestViewController.h; sourceTree = "<group>"; };
+		FA48A31D1AD375CC00B21CCE /* ChooseInterestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseInterestViewController.m; sourceTree = "<group>"; };
+		FA67962618D6719700A5BECC /* twitter_blue_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_blue_bar.png; sourceTree = "<group>"; };
+		FA78AD551958A04B0000EEC2 /* ArtistsMoreImagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsMoreImagesViewController.h; sourceTree = "<group>"; };
+		FA78AD561958A04B0000EEC2 /* ArtistsMoreImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsMoreImagesViewController.m; sourceTree = "<group>"; };
+		FA8B7FA118DE172A001F3B1B /* map-paper-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-paper-7.png"; sourceTree = "<group>"; };
+		FA8B7FA318DE173B001F3B1B /* trophy-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trophy-7.png"; sourceTree = "<group>"; };
+		FA8B7FA518DE175E001F3B1B /* music-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music-7.png"; sourceTree = "<group>"; };
+		FA8B7FA718DE1789001F3B1B /* photos-default-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photos-default-7.png"; sourceTree = "<group>"; };
+		FA8B7FA918DE17A7001F3B1B /* man-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "man-7.png"; sourceTree = "<group>"; };
+		FA8B7FAB18DE183B001F3B1B /* rss-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rss-7.png"; sourceTree = "<group>"; };
+		FA8B7FAD18DE18CF001F3B1B /* home-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-7.png"; sourceTree = "<group>"; };
+		FA8B7FAF18DE1AE9001F3B1B /* flag-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flag-7.png"; sourceTree = "<group>"; };
+		FA8B7FB118DE1CEF001F3B1B /* microphone-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "microphone-7.png"; sourceTree = "<group>"; };
+		FA8B7FB318DE1E0A001F3B1B /* slr_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slr_camera.png; sourceTree = "<group>"; };
+		FA8B7FC518EDCE76001F3B1B /* LocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAnnotation.h; sourceTree = "<group>"; };
+		FA8B7FC618EDCE76001F3B1B /* LocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotation.m; sourceTree = "<group>"; };
+		FA8B7FCC18F1E815001F3B1B /* thumbs_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbs_up.png; sourceTree = "<group>"; };
+		FA8B7FD418F1E9CF001F3B1B /* website.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = website.png; sourceTree = "<group>"; };
+		FA8B7FD618F1EC2E001F3B1B /* FestivalMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalMapViewController.h; sourceTree = "<group>"; };
+		FA8B7FD718F1EC2E001F3B1B /* FestivalMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalMapViewController.m; sourceTree = "<group>"; };
+		FA8B7FD918F25817001F3B1B /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		FAAA6070195E954300433679 /* FestivalMapWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalMapWebViewController.h; sourceTree = "<group>"; };
+		FAAA6071195E954300433679 /* FestivalMapWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalMapWebViewController.m; sourceTree = "<group>"; };
+		FAAA6073195E973A00433679 /* festivalmap.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = festivalmap.pdf; sourceTree = "<group>"; };
+		FAAA6077195EB4E700433679 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/StoryBoard_Small.storyboard; sourceTree = "<group>"; };
+		FAC153AB19058BBB004B7923 /* ArtistsWebPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsWebPageViewController.h; sourceTree = "<group>"; };
+		FAC153AC19058BBB004B7923 /* ArtistsWebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsWebPageViewController.m; sourceTree = "<group>"; };
+		FAC3913F19514B9600A2ED2D /* PopularMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopularMainViewController.h; sourceTree = "<group>"; };
+		FAC3914019514B9600A2ED2D /* PopularMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopularMainViewController.m; sourceTree = "<group>"; };
+		FAC3914219514D2100A2ED2D /* 2014_poster.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2014_poster.jpg; sourceTree = "<group>"; };
+		FAC3914319514D2100A2ED2D /* 2024_cpfa_button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2024_cpfa_button.jpg; sourceTree = "<group>"; };
+		FAC391461952A10E00A2ED2D /* picture_100_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_100_100.png; sourceTree = "<group>"; };
+		FAC391481952A16500A2ED2D /* compass_256_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass_256_256.png; sourceTree = "<group>"; };
+		FAC3914A1952A1FC00A2ED2D /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
+		FAC3914D1952A91E00A2ED2D /* HeatMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeatMap.h; sourceTree = "<group>"; };
+		FAC3914E1952A91E00A2ED2D /* HeatMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeatMap.m; sourceTree = "<group>"; };
+		FAC3914F1952A91E00A2ED2D /* HeatMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeatMapView.h; sourceTree = "<group>"; };
+		FAC391501952A91E00A2ED2D /* HeatMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeatMapView.m; sourceTree = "<group>"; };
+		FAC391531952A93B00A2ED2D /* HeatMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeatMapViewController.h; sourceTree = "<group>"; };
+		FAC391541952A93B00A2ED2D /* HeatMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeatMapViewController.m; sourceTree = "<group>"; };
+		FAC3915D1952D37B00A2ED2D /* medal_silver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = medal_silver.png; sourceTree = "<group>"; };
+		FAC3915E1952D37B00A2ED2D /* medal_bronze.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = medal_bronze.png; sourceTree = "<group>"; };
+		FAC3915F1952D37B00A2ED2D /* medal_gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = medal_gold.png; sourceTree = "<group>"; };
+		FAC391631953522E00A2ED2D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		FAC391641953522E00A2ED2D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		FAC391661953523900A2ED2D /* SigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigninViewController.h; sourceTree = "<group>"; };
+		FAC391671953523900A2ED2D /* SigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigninViewController.m; sourceTree = "<group>"; };
+		FAC391691953B8C300A2ED2D /* AddUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddUsersViewController.h; sourceTree = "<group>"; };
+		FAC3916A1953B8C300A2ED2D /* AddUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddUsersViewController.m; sourceTree = "<group>"; };
+		FAC39170195414D500A2ED2D /* MyPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPhotoViewController.h; sourceTree = "<group>"; };
+		FAC39171195414D500A2ED2D /* MyPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPhotoViewController.m; sourceTree = "<group>"; };
+		FAF6E8BF18C6509800BDD03D /* ArtFestivalStateCollege.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtFestivalStateCollege.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAF6E8C218C6509800BDD03D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FAF6E8C418C6509800BDD03D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FAF6E8C618C6509800BDD03D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FAF6E8CA18C6509800BDD03D /* ArtFestivalStateCollege-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ArtFestivalStateCollege-Info.plist"; sourceTree = "<group>"; };
+		FAF6E8CC18C6509800BDD03D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FAF6E8CE18C6509800BDD03D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FAF6E8D018C6509800BDD03D /* ArtFestivalStateCollege-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ArtFestivalStateCollege-Prefix.pch"; sourceTree = "<group>"; };
+		FAF6E8D118C6509800BDD03D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FAF6E8D218C6509800BDD03D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FAF6E8D518C6509800BDD03D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/StoryBoard5.storyboard; sourceTree = "<group>"; };
+		FAF6E8D718C6509800BDD03D /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		FAF6E8D818C6509800BDD03D /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		FAF6E8DA18C6509800BDD03D /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		FAF6E8DB18C6509800BDD03D /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		FAF6E8DD18C6509800BDD03D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FAF6E8E318C6509800BDD03D /* ArtFestivalStateCollegeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArtFestivalStateCollegeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAF6E8E418C6509800BDD03D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		FAF6E8EC18C6509800BDD03D /* ArtFestivalStateCollegeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ArtFestivalStateCollegeTests-Info.plist"; sourceTree = "<group>"; };
+		FAF6E8EE18C6509800BDD03D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FAF6E8F018C6509800BDD03D /* ArtFestivalStateCollegeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtFestivalStateCollegeTests.m; sourceTree = "<group>"; };
+		FAF6E8FE18C6868B00BDD03D /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
+		FAF6E8FF18C6868B00BDD03D /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		FAF6E90118C6869300BDD03D /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		FAF6E90218C6869300BDD03D /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		FAF6E90518C686B000BDD03D /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
+		FAF6E90618C686B000BDD03D /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		FAF6E90818C686CD00BDD03D /* GoingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoingDetailViewController.h; sourceTree = "<group>"; };
+		FAF6E90918C686CD00BDD03D /* GoingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoingDetailViewController.m; sourceTree = "<group>"; };
+		FAF6E90B18C686DA00BDD03D /* UserInputDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInputDetailViewController.h; sourceTree = "<group>"; };
+		FAF6E90C18C686DA00BDD03D /* UserInputDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInputDetailViewController.m; sourceTree = "<group>"; };
+		FAF6E90E18C686F200BDD03D /* AddUserInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddUserInputViewController.h; sourceTree = "<group>"; };
+		FAF6E90F18C686F200BDD03D /* AddUserInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddUserInputViewController.m; sourceTree = "<group>"; };
+		FAF6E91218C688F800BDD03D /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		FAF6E91318C688F800BDD03D /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		FAF6E91418C688F800BDD03D /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		FAF6E91518C688F800BDD03D /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		FAF6E91618C688F800BDD03D /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		FAF6E91718C688F800BDD03D /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		FAF6E91818C688F800BDD03D /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		FAF6E91918C688F800BDD03D /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		FAF6E91E18C6890200BDD03D /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		FAF6E91F18C6890200BDD03D /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		FAF6E92018C6890200BDD03D /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		FAF6E92118C6890200BDD03D /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		FAF6E92418C6892700BDD03D /* JSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		FAF6E95E18D4D0E400BDD03D /* 2013_Poster_Lg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2013_Poster_Lg.jpg; sourceTree = "<group>"; };
+		FAF6E96018D4D17F00BDD03D /* FB-f-Logo__blue_1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__blue_1024.png"; sourceTree = "<group>"; };
+		FAF6E96218D4D31700BDD03D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		FAF6E96418D4D32600BDD03D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		FAF6E96618D4D32C00BDD03D /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		FAF6E96818D4D33500BDD03D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FAF6E96A18D4D34100BDD03D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		FAF6E96C18D4D34900BDD03D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		FAF6E96E18D4D34F00BDD03D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FAF6E97018D4D35700BDD03D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FAF6E97218D4D35C00BDD03D /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		FAF6E97418D4D36200BDD03D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		FAF6E97618D4D36A00BDD03D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		FAF6E97818D4D37100BDD03D /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		FAF6E97A18D4D37800BDD03D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FAF6E97C18D4D38400BDD03D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FAF6E97E18D4D38B00BDD03D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		FAF6E98518D4D3DF00BDD03D /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		FAF6E98818D4D52000BDD03D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		FAF6E98918D4D52000BDD03D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		FAF6E98C18D545F000BDD03D /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		FAF6E98D18D545F000BDD03D /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		FAF6E98E18D545F000BDD03D /* GAIFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		FAF6E98F18D545F000BDD03D /* GAILogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		FAF6E99018D545F000BDD03D /* GAITrackedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		FAF6E99118D545F000BDD03D /* GAITracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		FAF6E99218D5582900BDD03D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FAF6E8BC18C6509800BDD03D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAF6E97B18D4D37800BDD03D /* OpenGLES.framework in Frameworks */,
+				FAF6E97518D4D36200BDD03D /* GLKit.framework in Frameworks */,
+				FAF6E97318D4D35C00BDD03D /* CoreText.framework in Frameworks */,
+				FA0A6BB718DB636F00E706F5 /* AssetsLibrary.framework in Frameworks */,
+				FAF6E99318D5582900BDD03D /* MapKit.framework in Frameworks */,
+				FAF6E98618D4D3DF00BDD03D /* libGoogleAnalyticsServices.a in Frameworks */,
+				FAF6E8C718C6509800BDD03D /* UIKit.framework in Frameworks */,
+				FAF6E8C518C6509800BDD03D /* CoreGraphics.framework in Frameworks */,
+				FAF6E97F18D4D38B00BDD03D /* AdSupport.framework in Frameworks */,
+				FAF6E97D18D4D38400BDD03D /* QuartzCore.framework in Frameworks */,
+				FAF6E97918D4D37100BDD03D /* libicucore.dylib in Frameworks */,
+				FAF6E97718D4D36A00BDD03D /* libc++.dylib in Frameworks */,
+				FAF6E97118D4D35700BDD03D /* CoreData.framework in Frameworks */,
+				FAF6E96F18D4D34F00BDD03D /* AVFoundation.framework in Frameworks */,
+				FAF6E96D18D4D34900BDD03D /* libz.dylib in Frameworks */,
+				FAF6E96B18D4D34100BDD03D /* MobileCoreServices.framework in Frameworks */,
+				FAF6E96918D4D33500BDD03D /* SystemConfiguration.framework in Frameworks */,
+				FAF6E96718D4D32C00BDD03D /* ImageIO.framework in Frameworks */,
+				FAF6E96518D4D32600BDD03D /* CFNetwork.framework in Frameworks */,
+				FAF6E96318D4D31700BDD03D /* Social.framework in Frameworks */,
+				FAF6E8C318C6509800BDD03D /* Foundation.framework in Frameworks */,
+				ABBDD3DF803F4EE1AFE08F86 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAF6E8E018C6509800BDD03D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAAA6075195EB3C500433679 /* XCTest.framework in Frameworks */,
+				FAF6E8E718C6509800BDD03D /* UIKit.framework in Frameworks */,
+				FAF6E8E618C6509800BDD03D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EAE2F54B3BB29EFA7586CCBE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EBF321C4AF014764FBDF6955 /* Pods.debug.xcconfig */,
+				804B949E2F1DA46931BE0C10 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FA0A6BB818DB655500E706F5 /* ImageHandler */ = {
+			isa = PBXGroup;
+			children = (
+				FA0A6BB918DB655E00E706F5 /* UIImage+Decompression.h */,
+				FA0A6BBA18DB655E00E706F5 /* UIImage+Decompression.m */,
+			);
+			name = ImageHandler;
+			sourceTree = "<group>";
+		};
+		FA0A6BBC18DB772B00E706F5 /* ArtistPage */ = {
+			isa = PBXGroup;
+			children = (
+				FA0A6BBD18DB773A00E706F5 /* ArtistsDetailViewController.h */,
+				FA0A6BBE18DB773A00E706F5 /* ArtistsDetailViewController.m */,
+				FAC153AB19058BBB004B7923 /* ArtistsWebPageViewController.h */,
+				FAC153AC19058BBB004B7923 /* ArtistsWebPageViewController.m */,
+				FA78AD551958A04B0000EEC2 /* ArtistsMoreImagesViewController.h */,
+				FA78AD561958A04B0000EEC2 /* ArtistsMoreImagesViewController.m */,
+			);
+			name = ArtistPage;
+			sourceTree = "<group>";
+		};
+		FA0A6BC318DB934C00E706F5 /* MorePage */ = {
+			isa = PBXGroup;
+			children = (
+				FAF6E90118C6869300BDD03D /* MoreViewController.h */,
+				FAF6E90218C6869300BDD03D /* MoreViewController.m */,
+				FA0A6BC418DB936100E706F5 /* SocialNewsViewController.h */,
+				FA0A6BC518DB936100E706F5 /* SocialNewsViewController.m */,
+				FA8B7FD618F1EC2E001F3B1B /* FestivalMapViewController.h */,
+				FA8B7FD718F1EC2E001F3B1B /* FestivalMapViewController.m */,
+				FAAA6070195E954300433679 /* FestivalMapWebViewController.h */,
+				FAAA6071195E954300433679 /* FestivalMapWebViewController.m */,
+			);
+			name = MorePage;
+			sourceTree = "<group>";
+		};
+		FA4407B41AD318BD001CEFFC /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FA4407B51AD318D9001CEFFC /* ProfileViewController.h */,
+				FA4407B61AD318D9001CEFFC /* ProfileViewController.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		FA6B17821AD06D850086F493 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				FAAA6073195E973A00433679 /* festivalmap.pdf */,
+				FA446E901956A430007941C6 /* ist_logo.png */,
+				FA446E8C195686A2007941C6 /* map_icon_pink.png */,
+				FA446E7619560312007941C6 /* message-7.png */,
+				FA446E7419558199007941C6 /* Festival-Map.png */,
+				FAC3914A1952A1FC00A2ED2D /* info.png */,
+				FAC391481952A16500A2ED2D /* compass_256_256.png */,
+				FAC391461952A10E00A2ED2D /* picture_100_100.png */,
+				FAC3915D1952D37B00A2ED2D /* medal_silver.png */,
+				FAC3915E1952D37B00A2ED2D /* medal_bronze.png */,
+				FAC3915F1952D37B00A2ED2D /* medal_gold.png */,
+				FAC3914219514D2100A2ED2D /* 2014_poster.jpg */,
+				FAC3914319514D2100A2ED2D /* 2024_cpfa_button.jpg */,
+				FA8B7FD918F25817001F3B1B /* plus.png */,
+				FA8B7FD418F1E9CF001F3B1B /* website.png */,
+				FA8B7FCC18F1E815001F3B1B /* thumbs_up.png */,
+				FA8B7FB318DE1E0A001F3B1B /* slr_camera.png */,
+				FA8B7FB118DE1CEF001F3B1B /* microphone-7.png */,
+				FA8B7FAF18DE1AE9001F3B1B /* flag-7.png */,
+				FA8B7FAD18DE18CF001F3B1B /* home-7.png */,
+				FA8B7FAB18DE183B001F3B1B /* rss-7.png */,
+				FA8B7FA918DE17A7001F3B1B /* man-7.png */,
+				FA8B7FA718DE1789001F3B1B /* photos-default-7.png */,
+				FA8B7FA518DE175E001F3B1B /* music-7.png */,
+				FA8B7FA318DE173B001F3B1B /* trophy-7.png */,
+				FA8B7FA118DE172A001F3B1B /* map-paper-7.png */,
+				FA0A6BCF18DB97ED00E706F5 /* picture.png */,
+				FA0A6BC918DB970F00E706F5 /* art-gallery.png */,
+				FA67962618D6719700A5BECC /* twitter_blue_bar.png */,
+				FAF6E96018D4D17F00BDD03D /* FB-f-Logo__blue_1024.png */,
+				FAF6E95E18D4D0E400BDD03D /* 2013_Poster_Lg.jpg */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		FA8B7FC418EDCE6F001F3B1B /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				FA8B7FC518EDCE76001F3B1B /* LocationAnnotation.h */,
+				FA8B7FC618EDCE76001F3B1B /* LocationAnnotation.m */,
+			);
+			name = Maps;
+			sourceTree = "<group>";
+		};
+		FAC3913E19514B7B00A2ED2D /* Popular */ = {
+			isa = PBXGroup;
+			children = (
+				FAC3913F19514B9600A2ED2D /* PopularMainViewController.h */,
+				FAC3914019514B9600A2ED2D /* PopularMainViewController.m */,
+				FAC39170195414D500A2ED2D /* MyPhotoViewController.h */,
+				FAC39171195414D500A2ED2D /* MyPhotoViewController.m */,
+			);
+			name = Popular;
+			sourceTree = "<group>";
+		};
+		FAC3914C1952A91E00A2ED2D /* HeatMap */ = {
+			isa = PBXGroup;
+			children = (
+				FAC3914D1952A91E00A2ED2D /* HeatMap.h */,
+				FAC3914E1952A91E00A2ED2D /* HeatMap.m */,
+				FAC3914F1952A91E00A2ED2D /* HeatMapView.h */,
+				FAC391501952A91E00A2ED2D /* HeatMapView.m */,
+				FAC391531952A93B00A2ED2D /* HeatMapViewController.h */,
+				FAC391541952A93B00A2ED2D /* HeatMapViewController.m */,
+				FA446E7119556D44007941C6 /* MapPhotosViewController.h */,
+				FA446E7219556D44007941C6 /* MapPhotosViewController.m */,
+				FA446E8519567C2F007941C6 /* MapViewAnnotation.h */,
+				FA446E8619567C2F007941C6 /* MapViewAnnotation.m */,
+			);
+			path = HeatMap;
+			sourceTree = "<group>";
+		};
+		FAF6E8B618C6509800BDD03D = {
+			isa = PBXGroup;
+			children = (
+				FAF6E8C818C6509800BDD03D /* ArtFestivalStateCollege */,
+				FAF6E8EA18C6509800BDD03D /* ArtFestivalStateCollegeTests */,
+				FAF6E8C118C6509800BDD03D /* Frameworks */,
+				FAF6E8C018C6509800BDD03D /* Products */,
+				EAE2F54B3BB29EFA7586CCBE /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		FAF6E8C018C6509800BDD03D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FAF6E8BF18C6509800BDD03D /* ArtFestivalStateCollege.app */,
+				FAF6E8E318C6509800BDD03D /* ArtFestivalStateCollegeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FAF6E8C118C6509800BDD03D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA0A6BB618DB636F00E706F5 /* AssetsLibrary.framework */,
+				FAF6E99218D5582900BDD03D /* MapKit.framework */,
+				FAF6E98518D4D3DF00BDD03D /* libGoogleAnalyticsServices.a */,
+				FAF6E97E18D4D38B00BDD03D /* AdSupport.framework */,
+				FAF6E97C18D4D38400BDD03D /* QuartzCore.framework */,
+				FAF6E97A18D4D37800BDD03D /* OpenGLES.framework */,
+				FAF6E97818D4D37100BDD03D /* libicucore.dylib */,
+				FAF6E97618D4D36A00BDD03D /* libc++.dylib */,
+				FAF6E97418D4D36200BDD03D /* GLKit.framework */,
+				FAF6E97218D4D35C00BDD03D /* CoreText.framework */,
+				FAF6E97018D4D35700BDD03D /* CoreData.framework */,
+				FAF6E96E18D4D34F00BDD03D /* AVFoundation.framework */,
+				FAF6E96C18D4D34900BDD03D /* libz.dylib */,
+				FAF6E96A18D4D34100BDD03D /* MobileCoreServices.framework */,
+				FAF6E96818D4D33500BDD03D /* SystemConfiguration.framework */,
+				FAF6E96618D4D32C00BDD03D /* ImageIO.framework */,
+				FAF6E96418D4D32600BDD03D /* CFNetwork.framework */,
+				FAF6E96218D4D31700BDD03D /* Social.framework */,
+				FAF6E8C218C6509800BDD03D /* Foundation.framework */,
+				FAF6E8C418C6509800BDD03D /* CoreGraphics.framework */,
+				FAF6E8C618C6509800BDD03D /* UIKit.framework */,
+				FAF6E8E418C6509800BDD03D /* XCTest.framework */,
+				6C5E5C1942E94F24B0C0B4F1 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FAF6E8C818C6509800BDD03D /* ArtFestivalStateCollege */ = {
+			isa = PBXGroup;
+			children = (
+				FA4407B41AD318BD001CEFFC /* Profile */,
+				FAC3914C1952A91E00A2ED2D /* HeatMap */,
+				FAC3913E19514B7B00A2ED2D /* Popular */,
+				FA8B7FC418EDCE6F001F3B1B /* Maps */,
+				FA0A6BC318DB934C00E706F5 /* MorePage */,
+				FA0A6BBC18DB772B00E706F5 /* ArtistPage */,
+				FA0A6BB818DB655500E706F5 /* ImageHandler */,
+				FAF6E98B18D545E400BDD03D /* GoogleAnalytics */,
+				FAF6E98718D4D50F00BDD03D /* Account */,
+				FAF6E91118C688EB00BDD03D /* JSON */,
+				FAF6E90418C6869E00BDD03D /* EventPage */,
+				FAF6E8FA18C6866900BDD03D /* MainPage */,
+				FAF6E8D118C6509800BDD03D /* AppDelegate.h */,
+				FAF6E8D218C6509800BDD03D /* AppDelegate.m */,
+				FAF6E8D418C6509800BDD03D /* StoryBoard5.storyboard */,
+				FAAA6076195EB4E700433679 /* StoryBoard_Small.storyboard */,
+				FAF6E8DD18C6509800BDD03D /* Images.xcassets */,
+				FAF6E8C918C6509800BDD03D /* Supporting Files */,
+			);
+			path = ArtFestivalStateCollege;
+			sourceTree = "<group>";
+		};
+		FAF6E8C918C6509800BDD03D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA6B17821AD06D850086F493 /* Images */,
+				FAF6E8CA18C6509800BDD03D /* ArtFestivalStateCollege-Info.plist */,
+				FAF6E8CB18C6509800BDD03D /* InfoPlist.strings */,
+				FAF6E8CE18C6509800BDD03D /* main.m */,
+				FAF6E8D018C6509800BDD03D /* ArtFestivalStateCollege-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FAF6E8EA18C6509800BDD03D /* ArtFestivalStateCollegeTests */ = {
+			isa = PBXGroup;
+			children = (
+				FAF6E8F018C6509800BDD03D /* ArtFestivalStateCollegeTests.m */,
+				FAF6E8EB18C6509800BDD03D /* Supporting Files */,
+			);
+			path = ArtFestivalStateCollegeTests;
+			sourceTree = "<group>";
+		};
+		FAF6E8EB18C6509800BDD03D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FAF6E8EC18C6509800BDD03D /* ArtFestivalStateCollegeTests-Info.plist */,
+				FAF6E8ED18C6509800BDD03D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FAF6E8FA18C6866900BDD03D /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				FAF6E8D718C6509800BDD03D /* FirstViewController.h */,
+				FAF6E8D818C6509800BDD03D /* FirstViewController.m */,
+				FAF6E8DA18C6509800BDD03D /* SecondViewController.h */,
+				FAF6E8DB18C6509800BDD03D /* SecondViewController.m */,
+				FAF6E8FE18C6868B00BDD03D /* NewsViewController.h */,
+				FAF6E8FF18C6868B00BDD03D /* NewsViewController.m */,
+				FA0A6BC018DB7F9900E706F5 /* MyActivitiesViewController.h */,
+				FA0A6BC118DB7F9900E706F5 /* MyActivitiesViewController.m */,
+			);
+			name = MainPage;
+			sourceTree = "<group>";
+		};
+		FAF6E90418C6869E00BDD03D /* EventPage */ = {
+			isa = PBXGroup;
+			children = (
+				FAF6E90518C686B000BDD03D /* EventDetailViewController.h */,
+				FAF6E90618C686B000BDD03D /* EventDetailViewController.m */,
+				FAF6E90818C686CD00BDD03D /* GoingDetailViewController.h */,
+				FAF6E90918C686CD00BDD03D /* GoingDetailViewController.m */,
+				FAF6E90B18C686DA00BDD03D /* UserInputDetailViewController.h */,
+				FAF6E90C18C686DA00BDD03D /* UserInputDetailViewController.m */,
+				FAF6E90E18C686F200BDD03D /* AddUserInputViewController.h */,
+				FAF6E90F18C686F200BDD03D /* AddUserInputViewController.m */,
+				FA0A6BB218DB545700E706F5 /* UserInputDetailedViewController.h */,
+				FA0A6BB318DB545700E706F5 /* UserInputDetailedViewController.m */,
+				FA0A6BD318DBC3C900E706F5 /* EventMapViewViewController.h */,
+				FA0A6BD418DBC3C900E706F5 /* EventMapViewViewController.m */,
+				FAC391691953B8C300A2ED2D /* AddUsersViewController.h */,
+				FAC3916A1953B8C300A2ED2D /* AddUsersViewController.m */,
+				FA446E7819560454007941C6 /* AddCommentViewController.h */,
+				FA446E7919560454007941C6 /* AddCommentViewController.m */,
+			);
+			name = EventPage;
+			sourceTree = "<group>";
+		};
+		FAF6E91118C688EB00BDD03D /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				FAF6E92418C6892700BDD03D /* JSON.h */,
+				FAF6E91E18C6890200BDD03D /* NSObject+SBJSON.h */,
+				FAF6E91F18C6890200BDD03D /* NSObject+SBJSON.m */,
+				FAF6E92018C6890200BDD03D /* NSString+SBJSON.h */,
+				FAF6E92118C6890200BDD03D /* NSString+SBJSON.m */,
+				FAF6E91218C688F800BDD03D /* SBJSON.h */,
+				FAF6E91318C688F800BDD03D /* SBJSON.m */,
+				FAF6E91418C688F800BDD03D /* SBJsonBase.h */,
+				FAF6E91518C688F800BDD03D /* SBJsonBase.m */,
+				FAF6E91618C688F800BDD03D /* SBJsonParser.h */,
+				FAF6E91718C688F800BDD03D /* SBJsonParser.m */,
+				FAF6E91818C688F800BDD03D /* SBJsonWriter.h */,
+				FAF6E91918C688F800BDD03D /* SBJsonWriter.m */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
+		FAF6E98718D4D50F00BDD03D /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				FAF6E98818D4D52000BDD03D /* LoginViewController.h */,
+				FAF6E98918D4D52000BDD03D /* LoginViewController.m */,
+				FAC391631953522E00A2ED2D /* RegisterViewController.h */,
+				FAC391641953522E00A2ED2D /* RegisterViewController.m */,
+				FAC391661953523900A2ED2D /* SigninViewController.h */,
+				FAC391671953523900A2ED2D /* SigninViewController.m */,
+				FA48A31C1AD375CC00B21CCE /* ChooseInterestViewController.h */,
+				FA48A31D1AD375CC00B21CCE /* ChooseInterestViewController.m */,
+			);
+			name = Account;
+			sourceTree = "<group>";
+		};
+		FAF6E98B18D545E400BDD03D /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				FAF6E98C18D545F000BDD03D /* GAI.h */,
+				FAF6E98D18D545F000BDD03D /* GAIDictionaryBuilder.h */,
+				FAF6E98E18D545F000BDD03D /* GAIFields.h */,
+				FAF6E98F18D545F000BDD03D /* GAILogger.h */,
+				FAF6E99018D545F000BDD03D /* GAITrackedViewController.h */,
+				FAF6E99118D545F000BDD03D /* GAITracker.h */,
+			);
+			name = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FAF6E8BE18C6509800BDD03D /* ArtFestivalStateCollege */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAF6E8F418C6509800BDD03D /* Build configuration list for PBXNativeTarget "ArtFestivalStateCollege" */;
+			buildPhases = (
+				6D1E8D9A9A634002BB222F6B /* Check Pods Manifest.lock */,
+				FAF6E8BB18C6509800BDD03D /* Sources */,
+				FAF6E8BC18C6509800BDD03D /* Frameworks */,
+				FAF6E8BD18C6509800BDD03D /* Resources */,
+				8E1CE962930F47BD83A8C18A /* Copy Pods Resources */,
+				FA446E921956AF83007941C6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArtFestivalStateCollege;
+			productName = ArtFestivalStateCollege;
+			productReference = FAF6E8BF18C6509800BDD03D /* ArtFestivalStateCollege.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FAF6E8E218C6509800BDD03D /* ArtFestivalStateCollegeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAF6E8F718C6509800BDD03D /* Build configuration list for PBXNativeTarget "ArtFestivalStateCollegeTests" */;
+			buildPhases = (
+				FAF6E8DF18C6509800BDD03D /* Sources */,
+				FAF6E8E018C6509800BDD03D /* Frameworks */,
+				FAF6E8E118C6509800BDD03D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FAF6E8E918C6509800BDD03D /* PBXTargetDependency */,
+			);
+			name = ArtFestivalStateCollegeTests;
+			productName = ArtFestivalStateCollegeTests;
+			productReference = FAF6E8E318C6509800BDD03D /* ArtFestivalStateCollegeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FAF6E8B718C6509800BDD03D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Kyungsik Han";
+				TargetAttributes = {
+					FAF6E8BE18C6509800BDD03D = {
+						DevelopmentTeam = J767EA589G;
+					};
+					FAF6E8E218C6509800BDD03D = {
+						TestTargetID = FAF6E8BE18C6509800BDD03D;
+					};
+				};
+			};
+			buildConfigurationList = FAF6E8BA18C6509800BDD03D /* Build configuration list for PBXProject "ArtFestivalStateCollege" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FAF6E8B618C6509800BDD03D;
+			productRefGroup = FAF6E8C018C6509800BDD03D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FAF6E8BE18C6509800BDD03D /* ArtFestivalStateCollege */,
+				FAF6E8E218C6509800BDD03D /* ArtFestivalStateCollegeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FAF6E8BD18C6509800BDD03D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA446E911956A430007941C6 /* ist_logo.png in Resources */,
+				FA0A6BCA18DB970F00E706F5 /* art-gallery.png in Resources */,
+				FAC3914519514D2100A2ED2D /* 2024_cpfa_button.jpg in Resources */,
+				FA8B7FB218DE1CEF001F3B1B /* microphone-7.png in Resources */,
+				FAF6E96118D4D17F00BDD03D /* FB-f-Logo__blue_1024.png in Resources */,
+				FA8B7FCD18F1E816001F3B1B /* thumbs_up.png in Resources */,
+				FA8B7FB018DE1AE9001F3B1B /* flag-7.png in Resources */,
+				FA8B7FA818DE1789001F3B1B /* photos-default-7.png in Resources */,
+				FA0A6BD018DB97ED00E706F5 /* picture.png in Resources */,
+				FAF6E8DE18C6509800BDD03D /* Images.xcassets in Resources */,
+				FAF6E8CD18C6509800BDD03D /* InfoPlist.strings in Resources */,
+				FAC391611952D37B00A2ED2D /* medal_bronze.png in Resources */,
+				FA446E7519558199007941C6 /* Festival-Map.png in Resources */,
+				FAC391621952D37B00A2ED2D /* medal_gold.png in Resources */,
+				FA8B7FA418DE173B001F3B1B /* trophy-7.png in Resources */,
+				FA8B7FA218DE172A001F3B1B /* map-paper-7.png in Resources */,
+				FA8B7FAC18DE183B001F3B1B /* rss-7.png in Resources */,
+				FA67962718D6719700A5BECC /* twitter_blue_bar.png in Resources */,
+				FAAA6078195EB4E700433679 /* StoryBoard_Small.storyboard in Resources */,
+				FAC3914B1952A1FC00A2ED2D /* info.png in Resources */,
+				FA8B7FAA18DE17A7001F3B1B /* man-7.png in Resources */,
+				FAC391471952A10E00A2ED2D /* picture_100_100.png in Resources */,
+				FA8B7FA618DE175E001F3B1B /* music-7.png in Resources */,
+				FA8B7FB418DE1E0A001F3B1B /* slr_camera.png in Resources */,
+				FAC3914419514D2100A2ED2D /* 2014_poster.jpg in Resources */,
+				FAC391491952A16500A2ED2D /* compass_256_256.png in Resources */,
+				FAAA6074195E973B00433679 /* festivalmap.pdf in Resources */,
+				FA446E7719560312007941C6 /* message-7.png in Resources */,
+				FA8B7FD518F1E9CF001F3B1B /* website.png in Resources */,
+				FA8B7FAE18DE18CF001F3B1B /* home-7.png in Resources */,
+				FA446E8D195686A2007941C6 /* map_icon_pink.png in Resources */,
+				FA8B7FDA18F25818001F3B1B /* plus.png in Resources */,
+				FAF6E8D618C6509800BDD03D /* StoryBoard5.storyboard in Resources */,
+				FAF6E95F18D4D0E400BDD03D /* 2013_Poster_Lg.jpg in Resources */,
+				FAC391601952D37B00A2ED2D /* medal_silver.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAF6E8E118C6509800BDD03D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAF6E8EF18C6509800BDD03D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6D1E8D9A9A634002BB222F6B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8E1CE962930F47BD83A8C18A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA446E921956AF83007941C6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FAF6E8BB18C6509800BDD03D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA0A6BB418DB545700E706F5 /* UserInputDetailedViewController.m in Sources */,
+				FAF6E91D18C688F800BDD03D /* SBJsonWriter.m in Sources */,
+				FA8B7FD818F1EC2E001F3B1B /* FestivalMapViewController.m in Sources */,
+				FAF6E8DC18C6509800BDD03D /* SecondViewController.m in Sources */,
+				FAC391511952A91E00A2ED2D /* HeatMap.m in Sources */,
+				FAC391681953523900A2ED2D /* SigninViewController.m in Sources */,
+				FAF6E90718C686B000BDD03D /* EventDetailViewController.m in Sources */,
+				FAF6E98A18D4D52000BDD03D /* LoginViewController.m in Sources */,
+				FAF6E8D318C6509800BDD03D /* AppDelegate.m in Sources */,
+				FAC3914119514B9600A2ED2D /* PopularMainViewController.m in Sources */,
+				FAF6E91B18C688F800BDD03D /* SBJsonBase.m in Sources */,
+				FAF6E90018C6868B00BDD03D /* NewsViewController.m in Sources */,
+				FAF6E8D918C6509800BDD03D /* FirstViewController.m in Sources */,
+				FA446E8719567C2F007941C6 /* MapViewAnnotation.m in Sources */,
+				FA0A6BC218DB7F9900E706F5 /* MyActivitiesViewController.m in Sources */,
+				FAF6E91C18C688F800BDD03D /* SBJsonParser.m in Sources */,
+				FA446E7A19560454007941C6 /* AddCommentViewController.m in Sources */,
+				FAF6E91A18C688F800BDD03D /* SBJSON.m in Sources */,
+				FA0A6BD518DBC3C900E706F5 /* EventMapViewViewController.m in Sources */,
+				FAC391551952A93B00A2ED2D /* HeatMapViewController.m in Sources */,
+				FAAA6072195E954300433679 /* FestivalMapWebViewController.m in Sources */,
+				FAF6E90318C6869300BDD03D /* MoreViewController.m in Sources */,
+				FAF6E90D18C686DA00BDD03D /* UserInputDetailViewController.m in Sources */,
+				FAC39172195414D500A2ED2D /* MyPhotoViewController.m in Sources */,
+				FA78AD571958A04B0000EEC2 /* ArtistsMoreImagesViewController.m in Sources */,
+				FAF6E91018C686F200BDD03D /* AddUserInputViewController.m in Sources */,
+				FAF6E92318C6890200BDD03D /* NSString+SBJSON.m in Sources */,
+				FAC153AD19058BBB004B7923 /* ArtistsWebPageViewController.m in Sources */,
+				FA0A6BC618DB936100E706F5 /* SocialNewsViewController.m in Sources */,
+				FAF6E8CF18C6509800BDD03D /* main.m in Sources */,
+				FA8B7FC718EDCE76001F3B1B /* LocationAnnotation.m in Sources */,
+				FAC3916B1953B8C300A2ED2D /* AddUsersViewController.m in Sources */,
+				FA0A6BBF18DB773A00E706F5 /* ArtistsDetailViewController.m in Sources */,
+				FAC391651953522E00A2ED2D /* RegisterViewController.m in Sources */,
+				FA48A31E1AD375CC00B21CCE /* ChooseInterestViewController.m in Sources */,
+				FA4407B71AD318D9001CEFFC /* ProfileViewController.m in Sources */,
+				FAC391521952A91E00A2ED2D /* HeatMapView.m in Sources */,
+				FA0A6BBB18DB655E00E706F5 /* UIImage+Decompression.m in Sources */,
+				FAF6E92218C6890200BDD03D /* NSObject+SBJSON.m in Sources */,
+				FA446E7319556D44007941C6 /* MapPhotosViewController.m in Sources */,
+				FAF6E90A18C686CD00BDD03D /* GoingDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAF6E8DF18C6509800BDD03D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAF6E8F118C6509800BDD03D /* ArtFestivalStateCollegeTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FAF6E8E918C6509800BDD03D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FAF6E8BE18C6509800BDD03D /* ArtFestivalStateCollege */;
+			targetProxy = FAF6E8E818C6509800BDD03D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FAAA6076195EB4E700433679 /* StoryBoard_Small.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAAA6077195EB4E700433679 /* Base */,
+			);
+			name = StoryBoard_Small.storyboard;
+			sourceTree = "<group>";
+		};
+		FAF6E8CB18C6509800BDD03D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAF6E8CC18C6509800BDD03D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FAF6E8D418C6509800BDD03D /* StoryBoard5.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAF6E8D518C6509800BDD03D /* Base */,
+			);
+			name = StoryBoard5.storyboard;
+			sourceTree = "<group>";
+		};
+		FAF6E8ED18C6509800BDD03D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAF6E8EE18C6509800BDD03D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FAF6E8F218C6509800BDD03D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: John Carroll (QR98EQ97WG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: John Carroll (QR98EQ97WG)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7s arm64";
+			};
+			name = Debug;
+		};
+		FAF6E8F318C6509800BDD03D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: John Carroll (J767EA589G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: John Carroll (J767EA589G)";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s arm64";
+			};
+			name = Release;
+		};
+		FAF6E8F518C6509800BDD03D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBF321C4AF014764FBDF6955 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ENABLE_MODULES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/kyungsikhan/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ArtFestivalStateCollege/ArtFestivalStateCollege-Prefix.pch";
+				INFOPLIST_FILE = "ArtFestivalStateCollege/ArtFestivalStateCollege-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/kyungsikhan/Keith/iPhone\\ Dev/ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FAF6E8F618C6509800BDD03D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 804B949E2F1DA46931BE0C10 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ENABLE_MODULES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/kyungsikhan/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ArtFestivalStateCollege/ArtFestivalStateCollege-Prefix.pch";
+				INFOPLIST_FILE = "ArtFestivalStateCollege/ArtFestivalStateCollege-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/kyungsikhan/Keith/iPhone\\ Dev/ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		FAF6E8F818C6509800BDD03D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ArtFestivalStateCollege.app/ArtFestivalStateCollege";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ArtFestivalStateCollege/ArtFestivalStateCollege-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ArtFestivalStateCollegeTests/ArtFestivalStateCollegeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		FAF6E8F918C6509800BDD03D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ArtFestivalStateCollege.app/ArtFestivalStateCollege";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ArtFestivalStateCollege/ArtFestivalStateCollege-Prefix.pch";
+				INFOPLIST_FILE = "ArtFestivalStateCollegeTests/ArtFestivalStateCollegeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FAF6E8BA18C6509800BDD03D /* Build configuration list for PBXProject "ArtFestivalStateCollege" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAF6E8F218C6509800BDD03D /* Debug */,
+				FAF6E8F318C6509800BDD03D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAF6E8F418C6509800BDD03D /* Build configuration list for PBXNativeTarget "ArtFestivalStateCollege" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAF6E8F518C6509800BDD03D /* Debug */,
+				FAF6E8F618C6509800BDD03D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAF6E8F718C6509800BDD03D /* Build configuration list for PBXNativeTarget "ArtFestivalStateCollegeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAF6E8F818C6509800BDD03D /* Debug */,
+				FAF6E8F918C6509800BDD03D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FAF6E8B718C6509800BDD03D /* Project object */;
+}
