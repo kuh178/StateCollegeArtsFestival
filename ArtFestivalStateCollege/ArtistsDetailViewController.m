@@ -19,7 +19,7 @@
 
 @implementation ArtistsDetailViewController
 
-@synthesize artistImage, artistEmail, artistName, artistBooth, artistCategory, artistDescription, artistMap, item;
+@synthesize artistImage, artistEmailBtn, artistMoreImageBtn, artistName, artistBooth, artistCategory, artistDescription, artistMap, item;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -67,6 +67,18 @@
     adjustedRegion.span.longitudeDelta  = 0.01;
     adjustedRegion.span.latitudeDelta  = 0.01;
     [artistMap setRegion:adjustedRegion animated:YES];
+    
+    artistEmailBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    artistEmailBtn.layer.cornerRadius = 5;
+    artistEmailBtn.layer.borderWidth = 1;
+    
+    artistMoreImageBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    artistMoreImageBtn.layer.cornerRadius = 5;
+    artistMoreImageBtn.layer.borderWidth = 1;
+    
+    artistMap.layer.borderColor = [[UIColor grayColor] CGColor];
+    artistMap.layer.cornerRadius = 5;
+    artistMap.layer.borderWidth = 1;
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

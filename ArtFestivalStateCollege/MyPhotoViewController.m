@@ -111,7 +111,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             NSIndexPath *currentIndexPathForCell = [collectionView indexPathForCell:cell];
             if (currentIndexPathForCell.row == rowIndex) {
-                [userImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
+                [userImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
                 userImage.layer.cornerRadius = 5.0f;
                 userImage.clipsToBounds = YES;
             }
@@ -131,7 +131,6 @@
     [viewController setItem:item];
     [self.navigationController pushViewController:viewController animated:YES];
     //[self presentViewController:viewController animated:YES completion:nil];
-    
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -14,7 +14,7 @@
 #import "AddUserInputViewController.h"
 #import "ArtistsWebPageViewController.h"
 #import "QuartzCore/QuartzCore.h"
-
+#import "ProfileViewController.h"
 
 @interface EventDetailViewController ()
 @property (nonatomic, assign) BOOL statusBarHidden;
@@ -22,7 +22,7 @@
 
 @implementation EventDetailViewController
 
-@synthesize eventImage, eventButtonImage, eventName, eventDatetime, eventGoingBtn, eventButton, eventWebPageBtn, eventUserInputAddBtn, eventGoingAddBtn, eventUserInputBtn, eventLocationName, eventDescription, eventMap, item, latitude, longitude;
+@synthesize eventImage, eventButtonImage, eventName, eventDatetime, eventGoingBtn, eventButton, eventWebPageBtn, eventUserInputAddBtn, eventGoingAddBtn, eventUserInputBtn, eventLocationName, eventDescription, eventMap, item, latitude, longitude, isOfficial, eventView1;
 
 int photo_cnt = 0;
 
@@ -39,6 +39,31 @@ int photo_cnt = 0;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // button rounded corner
+    eventGoingBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    eventGoingBtn.layer.cornerRadius = 5;
+    eventGoingBtn.layer.borderWidth = 1;
+    
+    eventUserInputBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    eventUserInputBtn.layer.cornerRadius = 5;
+    eventUserInputBtn.layer.borderWidth = 1;
+    
+    eventWebPageBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    eventWebPageBtn.layer.cornerRadius = 5;
+    eventWebPageBtn.layer.borderWidth = 1;
+    
+    eventMap.layer.borderColor = [[UIColor grayColor] CGColor];
+    eventMap.layer.cornerRadius = 5;
+    eventMap.layer.borderWidth = 1.0;
+    
+    eventDescription.layer.borderColor = [[UIColor grayColor] CGColor];
+    eventDescription.layer.cornerRadius = 5;
+    eventDescription.layer.borderWidth = 1.0;
+    
+    eventView1.layer.borderColor = [[UIColor blackColor] CGColor];
+    eventView1.layer.cornerRadius = 5;
+    eventView1.layer.borderWidth = 1.0;
     
     // set up location manager
     _locationManager = [[CLLocationManager alloc] init];
@@ -92,22 +117,61 @@ int photo_cnt = 0;
     adjustedRegion.span.latitudeDelta  = 0.01;
     [eventMap setRegion:adjustedRegion animated:YES];
     
-    if ([[item objectForKey:@"button"] intValue] == 1) {
-        eventButton.text = @"Button required";
+    // check if the event is official one
+    if (isOfficial) {
+        if ([[item objectForKey:@"button"] intValue] == 1) {
+            eventButton.text = @"Button required";
+            eventButtonImage.hidden = NO;
+        }
+        else {
+            eventButton.text = @"Free event";
+            eventButtonImage.hidden = NO;
+            eventButtonImage.alpha = 0.2;
+        }
+    }
+    else { // if not official use eventButton text for displaying user_name who posted the event
+        eventButton.text = [item objectForKey:@"user_name"];
+        [eventButtonImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"user_image"]]]];
+        eventButtonImage.layer.cornerRadius = 4.0f;
+        eventButtonImage.clipsToBounds = YES;
         eventButtonImage.hidden = NO;
+        
+        [self tapGestureRecognizer];
+    }
+    
+    // set location name; if null, just Location
+    if ([[item objectForKey:@"location_name"] isEqual:[NSNull null]]) {
+        eventLocationName.text = @"Location";
+        eventLocationName.hidden = NO;
     }
     else {
-        eventButton.text = @"No button required";
-        eventButtonImage.hidden = YES;
+        eventLocationName.text = [item objectForKey:@"location_name"];
+        eventLocationName.hidden = NO;
     }
-    
-    eventLocationName.text = [item objectForKey:@"location_name"];
     
     // hide website btn if nothing exists
-    if ([[item objectForKey:@"website"] isEqualToString:@"none"]) {
-        eventWebPageBtn.hidden = YES;
+    if ([[item objectForKey:@"website"] isEqualToString:@"none"] ||
+        [[item objectForKey:@"website"] isEqual:[NSNull null]] ||
+        [[item objectForKey:@"website"] length] == 0) {
+        eventWebPageBtn.enabled = NO;
+        eventWebPageBtn.alpha = 0.2;
     }
 }
+
+- (void) tapGestureRecognizer {
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [eventButton setUserInteractionEnabled:YES];
+    [eventButton addGestureRecognizer:singleTap];
+}
+
+- (void) tapDetected {
+    ProfileViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileViewController"];
+    viewController.hidesBottomBarWhenPushed = YES;
+    [viewController setUserID:[[item objectForKey:@"user_id"] intValue]];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {

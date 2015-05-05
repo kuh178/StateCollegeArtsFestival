@@ -10,6 +10,7 @@
 #import "SocialNewsViewController.h"
 #import "FestivalMapViewController.h"
 #import "LoginViewController.h"
+#import "ProfileViewController.h"
 
 @interface MoreViewController ()
 
@@ -62,6 +63,14 @@
     }
     else if([[segue identifier] isEqualToString: @"FestivalMapViewController"]) {
         FestivalMapViewController *viewController = (FestivalMapViewController *)[segue destinationViewController];
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    else if([[segue identifier] isEqualToString: @"ProfileViewController"]) {
+        
+        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+        
+        ProfileViewController *viewController = (ProfileViewController *)[segue destinationViewController];
+        viewController.userID = [[userDefault objectForKey:@"user_id"] intValue];
         viewController.hidesBottomBarWhenPushed = YES;
     }
 }

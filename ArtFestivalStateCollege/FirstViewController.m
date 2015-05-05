@@ -133,6 +133,7 @@ int flag = firstDay;
     EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
     viewController.hidesBottomBarWhenPushed = YES;
     [viewController setItem:item];
+    [viewController setIsOfficial:YES];
     [self.navigationController pushViewController:viewController animated:YES];
     //[self presentViewController:viewController animated:YES completion:nil];
 }

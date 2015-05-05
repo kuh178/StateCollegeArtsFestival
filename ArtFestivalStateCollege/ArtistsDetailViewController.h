@@ -18,7 +18,8 @@
     IBOutlet UILabel            *artistCategory;
     IBOutlet UILabel            *artistDescription;
     
-    IBOutlet UIButton           *artistEmail;
+    IBOutlet UIButton           *artistMoreImageBtn;
+    IBOutlet UIButton           *artistEmailBtn;
 
     IBOutlet MKMapView          *artistMap;
 
@@ -31,7 +32,9 @@
 @property (nonatomic, retain) IBOutlet UILabel            *artistCategory;
 @property (nonatomic, retain) IBOutlet UILabel            *artistDescription;
 @property (nonatomic, retain) IBOutlet MKMapView          *artistMap;
-@property (nonatomic, retain) IBOutlet UIButton           *artistEmail;
+
+@property (nonatomic, retain) IBOutlet UIButton           *artistMoreImageBtn;
+@property (nonatomic, retain) IBOutlet UIButton           *artistEmailBtn;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *startLocation;

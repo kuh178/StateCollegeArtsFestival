@@ -22,6 +22,8 @@
     IBOutlet UIButton           *eventWebPageBtn;
     IBOutlet UIButton           *eventGoingAddBtn;
     
+    IBOutlet UIView             *eventView1;
+    
     IBOutlet UITextView         *eventDescription;
     
     IBOutlet MKMapView          *eventMap;
@@ -30,6 +32,7 @@
     
     NSMutableDictionary         *item;
     
+    BOOL isOfficial;
     double latitude;
     double longitude;
 }
@@ -42,6 +45,8 @@
 @property (nonatomic, retain) IBOutlet UIButton           *eventGoingBtn;
 @property (nonatomic, retain) IBOutlet UIButton           *eventUserInputBtn;
 @property (nonatomic, retain) IBOutlet UILabel            *eventButton;
+@property (nonatomic, retain) IBOutlet UIView             *eventView1;
+
 
 @property (nonatomic, retain) IBOutlet UIButton           *eventWebPageBtn;
 @property (nonatomic, retain) IBOutlet UIButton           *eventGoingAddBtn;
@@ -55,13 +60,13 @@
 
 @property (nonatomic, assign) double latitude;
 @property (nonatomic, assign) double longitude;
+@property (nonatomic, assign) BOOL isOfficial;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *startLocation;
 
 - (IBAction)eventGoingBtnPressed:(id)sender;
 - (IBAction)eventUserInputBtnPressed:(id)sender;
-
 - (IBAction)eventGoingAddBtnPressed:(id)sender;
 //- (IBAction)eventUserInputAddBtnPressed:(id)sender;
 

@@ -17,6 +17,12 @@
 		FA0A6BCA18DB970F00E706F5 /* art-gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = FA0A6BC918DB970F00E706F5 /* art-gallery.png */; };
 		FA0A6BD018DB97ED00E706F5 /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = FA0A6BCF18DB97ED00E706F5 /* picture.png */; };
 		FA0A6BD518DBC3C900E706F5 /* EventMapViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6BD418DBC3C900E706F5 /* EventMapViewViewController.m */; };
+		FA27BDFE1AF7EEE500715ABF /* UserPhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA27BDFD1AF7EEE500715ABF /* UserPhotoListViewController.m */; };
+		FA27BE021AF86A1A00715ABF /* MeetupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA27BE011AF86A1A00715ABF /* MeetupListViewController.m */; };
+		FA27BE051AF86A2A00715ABF /* MeetupCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA27BE041AF86A2A00715ABF /* MeetupCreateViewController.m */; };
+		FA27BE081AF86A3400715ABF /* MeetupEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA27BE071AF86A3400715ABF /* MeetupEditViewController.m */; };
+		FA27BE0B1AF86A3F00715ABF /* MeetupDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA27BE0A1AF86A3F00715ABF /* MeetupDetailViewController.m */; };
+		FA27BE0D1AF93C3300715ABF /* people-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA27BE0C1AF93C3300715ABF /* people-7.png */; };
 		FA4407B71AD318D9001CEFFC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4407B61AD318D9001CEFFC /* ProfileViewController.m */; };
 		FA446E7319556D44007941C6 /* MapPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA446E7219556D44007941C6 /* MapPhotosViewController.m */; };
 		FA446E7519558199007941C6 /* Festival-Map.png in Resources */ = {isa = PBXBuildFile; fileRef = FA446E7419558199007941C6 /* Festival-Map.png */; };
@@ -141,6 +147,17 @@
 		FA0A6BCF18DB97ED00E706F5 /* picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture.png; sourceTree = "<group>"; };
 		FA0A6BD318DBC3C900E706F5 /* EventMapViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMapViewViewController.h; sourceTree = "<group>"; };
 		FA0A6BD418DBC3C900E706F5 /* EventMapViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMapViewViewController.m; sourceTree = "<group>"; };
+		FA27BDFC1AF7EEE500715ABF /* UserPhotoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPhotoListViewController.h; sourceTree = "<group>"; };
+		FA27BDFD1AF7EEE500715ABF /* UserPhotoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPhotoListViewController.m; sourceTree = "<group>"; };
+		FA27BE001AF86A1A00715ABF /* MeetupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetupListViewController.h; sourceTree = "<group>"; };
+		FA27BE011AF86A1A00715ABF /* MeetupListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetupListViewController.m; sourceTree = "<group>"; };
+		FA27BE031AF86A2A00715ABF /* MeetupCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetupCreateViewController.h; sourceTree = "<group>"; };
+		FA27BE041AF86A2A00715ABF /* MeetupCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetupCreateViewController.m; sourceTree = "<group>"; };
+		FA27BE061AF86A3400715ABF /* MeetupEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetupEditViewController.h; sourceTree = "<group>"; };
+		FA27BE071AF86A3400715ABF /* MeetupEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetupEditViewController.m; sourceTree = "<group>"; };
+		FA27BE091AF86A3F00715ABF /* MeetupDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetupDetailViewController.h; sourceTree = "<group>"; };
+		FA27BE0A1AF86A3F00715ABF /* MeetupDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetupDetailViewController.m; sourceTree = "<group>"; };
+		FA27BE0C1AF93C3300715ABF /* people-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "people-7.png"; sourceTree = "<group>"; };
 		FA4407B51AD318D9001CEFFC /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		FA4407B61AD318D9001CEFFC /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		FA446E7119556D44007941C6 /* MapPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPhotosViewController.h; sourceTree = "<group>"; };
@@ -369,11 +386,28 @@
 			name = MorePage;
 			sourceTree = "<group>";
 		};
+		FA27BDFF1AF86A0E00715ABF /* Meetup */ = {
+			isa = PBXGroup;
+			children = (
+				FA27BE001AF86A1A00715ABF /* MeetupListViewController.h */,
+				FA27BE011AF86A1A00715ABF /* MeetupListViewController.m */,
+				FA27BE031AF86A2A00715ABF /* MeetupCreateViewController.h */,
+				FA27BE041AF86A2A00715ABF /* MeetupCreateViewController.m */,
+				FA27BE061AF86A3400715ABF /* MeetupEditViewController.h */,
+				FA27BE071AF86A3400715ABF /* MeetupEditViewController.m */,
+				FA27BE091AF86A3F00715ABF /* MeetupDetailViewController.h */,
+				FA27BE0A1AF86A3F00715ABF /* MeetupDetailViewController.m */,
+			);
+			name = Meetup;
+			sourceTree = "<group>";
+		};
 		FA4407B41AD318BD001CEFFC /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				FA4407B51AD318D9001CEFFC /* ProfileViewController.h */,
 				FA4407B61AD318D9001CEFFC /* ProfileViewController.m */,
+				FA27BDFC1AF7EEE500715ABF /* UserPhotoListViewController.h */,
+				FA27BDFD1AF7EEE500715ABF /* UserPhotoListViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -390,6 +424,7 @@
 				FAC391481952A16500A2ED2D /* compass_256_256.png */,
 				FAC391461952A10E00A2ED2D /* picture_100_100.png */,
 				FAC3915D1952D37B00A2ED2D /* medal_silver.png */,
+				FA27BE0C1AF93C3300715ABF /* people-7.png */,
 				FAC3915E1952D37B00A2ED2D /* medal_bronze.png */,
 				FAC3915F1952D37B00A2ED2D /* medal_gold.png */,
 				FAC3914219514D2100A2ED2D /* 2014_poster.jpg */,
@@ -506,6 +541,7 @@
 		FAF6E8C818C6509800BDD03D /* ArtFestivalStateCollege */ = {
 			isa = PBXGroup;
 			children = (
+				FA27BDFF1AF86A0E00715ABF /* Meetup */,
 				FA4407B41AD318BD001CEFFC /* Profile */,
 				FAC3914C1952A91E00A2ED2D /* HeatMap */,
 				FAC3913E19514B7B00A2ED2D /* Popular */,
@@ -726,6 +762,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA27BE0D1AF93C3300715ABF /* people-7.png in Resources */,
 				FA446E911956A430007941C6 /* ist_logo.png in Resources */,
 				FA0A6BCA18DB970F00E706F5 /* art-gallery.png in Resources */,
 				FAC3914519514D2100A2ED2D /* 2024_cpfa_button.jpg in Resources */,
@@ -827,13 +864,16 @@
 			files = (
 				FA0A6BB418DB545700E706F5 /* UserInputDetailedViewController.m in Sources */,
 				FAF6E91D18C688F800BDD03D /* SBJsonWriter.m in Sources */,
+				FA27BE081AF86A3400715ABF /* MeetupEditViewController.m in Sources */,
 				FA8B7FD818F1EC2E001F3B1B /* FestivalMapViewController.m in Sources */,
 				FAF6E8DC18C6509800BDD03D /* SecondViewController.m in Sources */,
+				FA27BE0B1AF86A3F00715ABF /* MeetupDetailViewController.m in Sources */,
 				FAC391511952A91E00A2ED2D /* HeatMap.m in Sources */,
 				FAC391681953523900A2ED2D /* SigninViewController.m in Sources */,
 				FAF6E90718C686B000BDD03D /* EventDetailViewController.m in Sources */,
 				FAF6E98A18D4D52000BDD03D /* LoginViewController.m in Sources */,
 				FAF6E8D318C6509800BDD03D /* AppDelegate.m in Sources */,
+				FA27BE021AF86A1A00715ABF /* MeetupListViewController.m in Sources */,
 				FAC3914119514B9600A2ED2D /* PopularMainViewController.m in Sources */,
 				FAF6E91B18C688F800BDD03D /* SBJsonBase.m in Sources */,
 				FAF6E90018C6868B00BDD03D /* NewsViewController.m in Sources */,
@@ -858,9 +898,11 @@
 				FA8B7FC718EDCE76001F3B1B /* LocationAnnotation.m in Sources */,
 				FAC3916B1953B8C300A2ED2D /* AddUsersViewController.m in Sources */,
 				FA0A6BBF18DB773A00E706F5 /* ArtistsDetailViewController.m in Sources */,
+				FA27BE051AF86A2A00715ABF /* MeetupCreateViewController.m in Sources */,
 				FAC391651953522E00A2ED2D /* RegisterViewController.m in Sources */,
 				FA48A31E1AD375CC00B21CCE /* ChooseInterestViewController.m in Sources */,
 				FA4407B71AD318D9001CEFFC /* ProfileViewController.m in Sources */,
+				FA27BDFE1AF7EEE500715ABF /* UserPhotoListViewController.m in Sources */,
 				FAC391521952A91E00A2ED2D /* HeatMapView.m in Sources */,
 				FA0A6BBB18DB655E00E706F5 /* UIImage+Decompression.m in Sources */,
 				FAF6E92218C6890200BDD03D /* NSObject+SBJSON.m in Sources */,
