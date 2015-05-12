@@ -15,12 +15,15 @@
     NSMutableArray              *jsonArray;
     
     IBOutlet UITableView        *tableViewList;
+    IBOutlet UISegmentedControl *myListSegment;
     
 }
 
 @property (nonatomic, retain) NSMutableArray                *myList;
 @property (nonatomic, retain) NSMutableArray                *jsonArray;
 @property (nonatomic, retain) IBOutlet UITableView          *tableViewList;
+@property (nonatomic, retain) IBOutlet UISegmentedControl   *myListSegment;
 
+-(IBAction)myListSegmentSelected:(id)sender;
 
 @end

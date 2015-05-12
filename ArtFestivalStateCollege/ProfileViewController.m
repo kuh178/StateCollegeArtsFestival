@@ -19,8 +19,11 @@
 @implementation ProfileViewController
 
 @synthesize profileImage, logoutBtn, seePhotosBtn, updateBtn, userNameLabel;
+@synthesize changeProfilePhotoBtn;
 @synthesize photosLabel, commentsLabel, likesLabel, uniqueUsersLabel;
 @synthesize userID;
+
+@synthesize interestBtn1, interestBtn2, interestBtn3, interestBtn4, interestBtn5;
 
 NSString *username;
 NSString *email;
@@ -41,6 +44,9 @@ NSMutableArray *userPhotoArray;
     
     updateBtn.layer.cornerRadius = 5;
     updateBtn.layer.borderWidth = 1;
+
+    changeProfilePhotoBtn.layer.cornerRadius = 5;
+    changeProfilePhotoBtn.layer.borderWidth = 1;
     
     [self downloadProfile];
 }
@@ -102,6 +108,31 @@ NSMutableArray *userPhotoArray;
             likesLabel.text = [NSString stringWithFormat:@"%@", [item objectForKey:@"user_likes_cnt"]];
             photosLabel.text = [NSString stringWithFormat:@"%d", [[item objectForKey:@"user_content"] count]];
             
+            // preferences
+            // change the alpha value of interest btn depending on its value
+            NSMutableDictionary *preferences = [item objectForKey:@"user_preferences"];
+            int interest1 = [[preferences objectForKey:@"interest_1"] intValue];
+            int interest2 = [[preferences objectForKey:@"interest_2"] intValue];
+            int interest3 = [[preferences objectForKey:@"interest_3"] intValue];
+            int interest4 = [[preferences objectForKey:@"interest_4"] intValue];
+            int interest5 = [[preferences objectForKey:@"interest_5"] intValue];
+            
+            if (interest1 == 0) {
+                interestBtn1.alpha = 0.3;
+            }
+            if (interest2 == 0) {
+                interestBtn2.alpha = 0.3;
+            }
+            if (interest3 == 0) {
+                interestBtn3.alpha = 0.3;
+            }
+            if (interest4 == 0) {
+                interestBtn4.alpha = 0.3;
+            }
+            if (interest5 == 0) {
+                interestBtn5.alpha = 0.3;
+            }
+
         }
         else {
             UIAlertView *dialog = [[UIAlertView alloc]init];
@@ -166,6 +197,10 @@ NSMutableArray *userPhotoArray;
         viewController.photoList = userPhotoArray;
         viewController.username = username;
     }
+}
+
+- (IBAction)changeProfilePhotoBtnPressed:(id)sender {
+    
 }
 
 @end

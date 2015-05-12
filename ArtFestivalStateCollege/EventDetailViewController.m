@@ -22,7 +22,8 @@
 
 @implementation EventDetailViewController
 
-@synthesize eventImage, eventButtonImage, eventName, eventDatetime, eventGoingBtn, eventButton, eventWebPageBtn, eventUserInputAddBtn, eventGoingAddBtn, eventUserInputBtn, eventLocationName, eventDescription, eventMap, item, latitude, longitude, isOfficial, eventView1;
+@synthesize eventImage, eventButtonImage, eventName, eventDatetime, eventGoingBtn, eventButton, eventWebPageBtn, eventUserInputAddBtn, eventGoingAddBtn, eventUserInputBtn, eventLikeBtn, eventLocationName, eventDescription, eventMap, item, latitude, longitude, isOfficial, eventView1, eventWebImage, eventRemoveBtn, eventEditBtn;
+@synthesize view1, view2, view3, view4;
 
 int photo_cnt = 0;
 
@@ -42,28 +43,50 @@ int photo_cnt = 0;
     
     // button rounded corner
     eventGoingBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    eventGoingBtn.layer.borderWidth = 1.0;
     eventGoingBtn.layer.cornerRadius = 5;
-    eventGoingBtn.layer.borderWidth = 1;
     
     eventUserInputBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    eventUserInputBtn.layer.borderWidth = 1.0;
     eventUserInputBtn.layer.cornerRadius = 5;
-    eventUserInputBtn.layer.borderWidth = 1;
     
     eventWebPageBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    eventWebPageBtn.layer.borderWidth = 1.0;
     eventWebPageBtn.layer.cornerRadius = 5;
-    eventWebPageBtn.layer.borderWidth = 1;
     
-    eventMap.layer.borderColor = [[UIColor grayColor] CGColor];
+    eventLikeBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    eventLikeBtn.layer.borderWidth = 1.0;
+    eventLikeBtn.layer.cornerRadius = 5;
+    
+    eventEditBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    eventEditBtn.layer.borderWidth = 1.0;
+    eventEditBtn.layer.cornerRadius = 5;
+    
+    eventRemoveBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    eventRemoveBtn.layer.borderWidth = 1.0;
+    eventRemoveBtn.layer.cornerRadius = 5;
+
     eventMap.layer.cornerRadius = 5;
-    eventMap.layer.borderWidth = 1.0;
     
-    eventDescription.layer.borderColor = [[UIColor grayColor] CGColor];
     eventDescription.layer.cornerRadius = 5;
-    eventDescription.layer.borderWidth = 1.0;
     
-    eventView1.layer.borderColor = [[UIColor blackColor] CGColor];
     eventView1.layer.cornerRadius = 5;
-    eventView1.layer.borderWidth = 1.0;
+    
+    view1.layer.borderColor = [[UIColor blackColor] CGColor];
+    view1.layer.cornerRadius = 5;
+    view1.layer.borderWidth = 1.0;
+    
+    view2.layer.borderColor = [[UIColor blackColor] CGColor];
+    view2.layer.cornerRadius = 5;
+    view2.layer.borderWidth = 1.0;
+    
+    view3.layer.borderColor = [[UIColor blackColor] CGColor];
+    view3.layer.cornerRadius = 5;
+    view3.layer.borderWidth = 1.0;
+    
+    view4.layer.borderColor = [[UIColor blackColor] CGColor];
+    view4.layer.cornerRadius = 5;
+    view4.layer.borderWidth = 1.0;
     
     // set up location manager
     _locationManager = [[CLLocationManager alloc] init];
@@ -127,6 +150,9 @@ int photo_cnt = 0;
             eventButton.text = @"Free event";
             eventButtonImage.hidden = NO;
             eventButtonImage.alpha = 0.2;
+            
+            eventEditBtn.hidden = YES;
+            eventRemoveBtn.hidden = YES;
         }
     }
     else { // if not official use eventButton text for displaying user_name who posted the event
@@ -154,6 +180,7 @@ int photo_cnt = 0;
         [[item objectForKey:@"website"] isEqual:[NSNull null]] ||
         [[item objectForKey:@"website"] length] == 0) {
         eventWebPageBtn.enabled = NO;
+        eventWebImage.alpha = 0.2;
         eventWebPageBtn.alpha = 0.2;
     }
 }
@@ -225,8 +252,9 @@ int photo_cnt = 0;
             NSMutableDictionary *eventItem = [eventInfoItem objectAtIndex:0];
             
             // update the going and userinput btn texts
-            [eventGoingBtn setTitle:[NSString stringWithFormat:@"Attending (%lu)", (unsigned long)[[eventItem objectForKey:@"going_user_ary"] count]] forState:UIControlStateNormal];
-            [eventUserInputBtn setTitle:[NSString stringWithFormat:@"Photos (%d)", [[eventItem objectForKey:@"user_content_cnt"] intValue]] forState:UIControlStateNormal];
+            [eventGoingBtn setTitle:[NSString stringWithFormat:@"     (%lu)", (unsigned long)[[eventItem objectForKey:@"going_user_ary"] count]] forState:UIControlStateNormal];
+            [eventUserInputBtn setTitle:[NSString stringWithFormat:@"     (%d)", [[eventItem objectForKey:@"user_content_cnt"] intValue]] forState:UIControlStateNormal];
+            [eventLikeBtn setTitle:[NSString stringWithFormat:@"     (%d)", [[eventItem objectForKey:@"favorite_cnt"] intValue]] forState:UIControlStateNormal];
             
             photo_cnt = [[eventItem objectForKey:@"user_content_cnt"] intValue];
         }
@@ -280,27 +308,83 @@ int photo_cnt = 0;
     }];
 }
 
+- (void) uploadMyFavorite {
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"],
+                             @"event_id"    :[item objectForKey:@"id"],
+                             @"datetime"    :[NSString stringWithFormat:@"%@", timeStampValue],
+                             @"latitude"    :[NSString stringWithFormat:@"%f", latitude],
+                             @"longitude"   :[NSString stringWithFormat:@"%f", longitude]};
+    
+    [manager POST:@"http://community.ist.psu.edu/Festival/upload_my_favorite_events.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+        
+        if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
+            [self downloadEventUpdates];
+        }
+        else {
+            UIAlertView *dialog = [[UIAlertView alloc]init];
+            [dialog setDelegate:self];
+            [dialog setTitle:@"Message"];
+            [dialog setMessage:[responseObject objectForKey:@"message"]];
+            [dialog addButtonWithTitle:@"OK"];
+            [dialog show];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
+- (void) removeEvent {
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"],
+                             @"event_id"    :[item objectForKey:@"id"]};
+    
+    [manager POST:@"http://community.ist.psu.edu/Festival/remove_meetup.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+        
+        if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
+            // when succeed, dismiss the current view controller
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Operation: %@, Error: %@", operation, error);
+    }];
+}
+
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
-    if ([title isEqualToString:@"Going"]){ // Going
+    if ([title isEqualToString:@"Attending"]){ // Attending
         [self uploadMyGoing];
     }
-    else {
-        
+    else if ([title isEqualToString:@"Favorite"]){ // Favorite
+        [self uploadMyFavorite];
+    }
+    else if ([title isEqualToString:@"Remove"]) {
+        [self removeEvent];
     }
 }
 
 
 - (IBAction)eventGoingBtnPressed:(id)sender {
-    
-    //GoingDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"GoingDetailViewController"];
-    //viewController.hidesBottomBarWhenPushed = YES;
-    //[viewController setUserList:[item objectForKey:@"going_user_ary"]];
-    //[viewController setEventID:[[item objectForKey:@"id"] intValue]];
-    //[self.navigationController pushViewController:viewController animated:YES];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Attending this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Going", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Attending this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Attending", nil];
     [alert show];
 }
 
@@ -314,7 +398,12 @@ int photo_cnt = 0;
 }
 
 - (IBAction)eventGoingAddBtnPressed:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Attending this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Going", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Attending this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Attending", nil];
+    [alert show];
+}
+
+- (IBAction)eventLikeBtnPressed:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Add this event as your favorite?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Favorite", nil];
     [alert show];
 }
 
@@ -338,6 +427,11 @@ int photo_cnt = 0;
     else {
         return YES;
     }
+}
+
+- (IBAction)eventRemoveBtnPressed:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Remove this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
+    [alert show];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

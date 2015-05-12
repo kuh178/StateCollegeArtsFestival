@@ -17,7 +17,7 @@
 @implementation AddUserInputViewController
 
 // photo tutorial: http://www.appcoda.com/ios-programming-camera-iphone-app/
-@synthesize imageView, takePhotoBtn, tagUsersBtn, uploadBtn, eventID, commentText, imageText, latitude, longitude;
+@synthesize imageView, takePhotoBtn, tagUsersBtn, uploadBtn, eventID, commentText, imageText, latitude, longitude, fromEvent;
 
 NSData      *imageData;
 UIImage     *chosenImage;

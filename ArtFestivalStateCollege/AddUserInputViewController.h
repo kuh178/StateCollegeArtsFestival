@@ -25,6 +25,7 @@
     double longitude;
     
     int eventID;
+    int fromEvent;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView      *imageView;
@@ -38,6 +39,7 @@
 @property (nonatomic, assign) double latitude;
 @property (nonatomic, assign) double longitude;
 @property (nonatomic, assign) int eventID;
+@property (nonatomic, assign) int fromEvent;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *startLocation;

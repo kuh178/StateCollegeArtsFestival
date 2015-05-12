@@ -12,6 +12,8 @@
 #import "EventDetailViewController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "UserInputDetailViewController.h"
+#import "UserPhotoListViewController.h"
+#import "UserInputDetailedViewController.h"
 
 @interface MyActivitiesViewController ()
 
@@ -19,7 +21,13 @@
 
 @implementation MyActivitiesViewController
 
-@synthesize myList, jsonArray, tableViewList;
+@synthesize myList, jsonArray, tableViewList, myListSegment;
+
+#define MY_EVENTS 1
+#define MY_PHOTOS 2
+#define PEOPLE_LIKE_ME 3
+
+int myType = MY_EVENTS;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +46,8 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
+    [self downloadContent];
 }
 
 
@@ -54,8 +64,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self downloadContent];
 }
 
 // Table view property
@@ -64,9 +72,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    NSLog(@"number of rows : %d", [myList count]);
-    
     return [myList count];
 }
 
@@ -84,31 +89,59 @@
     NSMutableDictionary *item    = [myList objectAtIndex:indexPath.row];
     UIImageView *eventImage      = (UIImageView *)[cell viewWithTag:100];
     UILabel *eventName           = (UILabel *)[cell viewWithTag:101];
-    UILabel *eventDate       = (UILabel *)[cell viewWithTag:102];
+    UILabel *eventDate           = (UILabel *)[cell viewWithTag:102];
     
-    // event image
-    [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
-    eventImage.layer.cornerRadius = 4.0f;
-    eventImage.clipsToBounds = YES;
-    
-    // event question
-    eventName.text = [item objectForKey:@"name"];
-    
-    // event datetime
-    // ref: http://stackoverflow.com/questions/1862905/nsdate-convert-date-to-gmt
-    NSTimeInterval _interval=[[item objectForKey:@"datetime"] doubleValue];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
-    
-    NSTimeInterval timeZoneOffset = [[NSTimeZone defaultTimeZone] secondsFromGMT]; // You could also use the systemTimeZone method
-    NSTimeInterval gmtTimeInterval = [date timeIntervalSinceReferenceDate] - timeZoneOffset;
-    NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
-    
-    NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
-    [_formatter setLocale:[NSLocale currentLocale]];
-    [_formatter setDateFormat:@"MMM dd, hh:mm a"];
-    NSString *_date=[_formatter stringFromDate:gmtDate];
-    eventDate.text = _date;
-
+    if (myType == MY_EVENTS) {
+        // event image
+        [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
+        eventImage.layer.cornerRadius = 4.0f;
+        eventImage.clipsToBounds = YES;
+        
+        // event question
+        eventName.text = [item objectForKey:@"name"];
+        
+        // event datetime
+        // ref: http://stackoverflow.com/questions/1862905/nsdate-convert-date-to-gmt
+        NSTimeInterval _interval=[[item objectForKey:@"datetime"] doubleValue];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+        
+        NSTimeInterval timeZoneOffset = [[NSTimeZone defaultTimeZone] secondsFromGMT]; // You could also use the systemTimeZone method
+        NSTimeInterval gmtTimeInterval = [date timeIntervalSinceReferenceDate] - timeZoneOffset;
+        NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
+        
+        NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
+        [_formatter setLocale:[NSLocale currentLocale]];
+        [_formatter setDateFormat:@"MMM dd, hh:mm a"];
+        NSString *_date=[_formatter stringFromDate:gmtDate];
+        eventDate.text = _date;
+    }
+    else { // MY_PHOTOS
+        // event image
+        [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
+        eventImage.layer.cornerRadius = 4.0f;
+        eventImage.clipsToBounds = YES;
+        
+        // event question
+        eventName.text = [item objectForKey:@"comment"];
+  
+        // event count
+        if ([[item objectForKey:@"like_cnt"] intValue] <= 1) {
+            if ([[item objectForKey:@"comment_cnt"] intValue] <= 1) {
+                eventDate.text = [NSString stringWithFormat:@"%d like %d comment", [[item objectForKey:@"like_cnt"] intValue], [[item objectForKey:@"comment_cnt"] intValue]];
+            }
+            else {
+                eventDate.text = [NSString stringWithFormat:@"%d like %d comments", [[item objectForKey:@"like_cnt"] intValue], [[item objectForKey:@"comment_cnt"] intValue]];
+            }
+        }
+        else {
+            if ([[item objectForKey:@"comment_cnt"] intValue] <= 1) {
+                eventDate.text = [NSString stringWithFormat:@"%d likes %d comment", [[item objectForKey:@"like_cnt"] intValue], [[item objectForKey:@"comment_cnt"] intValue]];
+            }
+            else {
+                eventDate.text = [NSString stringWithFormat:@"%d likes %d comments", [[item objectForKey:@"like_cnt"] intValue], [[item objectForKey:@"comment_cnt"] intValue]];
+            }
+        }
+    }
     
     return cell;
 }
@@ -116,10 +149,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableDictionary *item = [myList objectAtIndex:indexPath.row];
     
-    EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
-    viewController.hidesBottomBarWhenPushed = YES;
-    [viewController setItem:item];
-    [self.navigationController pushViewController:viewController animated:YES];
+    if (myType == MY_EVENTS) {
+        EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
+        viewController.hidesBottomBarWhenPushed = YES;
+        [viewController setItem:item];
+        [viewController setIsOfficial:YES];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    else {
+        UserInputDetailedViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserInputDetailedViewController"];
+        viewController.hidesBottomBarWhenPushed = YES;
+        [viewController setItem:item];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 - (void) downloadContent {
@@ -166,14 +208,72 @@
     }];
 }
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString: @"UserInputDetailViewController"]) {
-        UserInputDetailViewController *viewController = (UserInputDetailViewController *)[segue destinationViewController];
-        viewController.hidesBottomBarWhenPushed = YES;
-        viewController.eventID = -1;
-    }
+- (void) downloadMyPhotos {
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"]};
+    
+    [manager POST:@"http://community.ist.psu.edu/Festival/download_user_photos.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
+            jsonArray = [NSMutableArray arrayWithCapacity:0];
+            myList = [NSMutableArray arrayWithCapacity:0];
+            [jsonArray addObjectsFromArray:[responseObject objectForKey:@"results"]];
+            
+            if ([jsonArray count] > 0) {
+                // insert new items into table
+                for (int i = 0; i < [jsonArray count]; i++) {
+                    
+                    // get an item
+                    NSDictionary *item = [jsonArray objectAtIndex:i];
+                    [myList addObject:item];
+                }
+            }
+            else {
+                NSLog(@"No data available");
+            }
+            
+            [tableViewList reloadData];
+        }
+        else {
+            UIAlertView *dialog = [[UIAlertView alloc]init];
+            [dialog setDelegate:self];
+            [dialog setTitle:@"Message"];
+            [dialog setMessage:@"No results found"];
+            [dialog addButtonWithTitle:@"OK"];
+            [dialog show];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", operation);
+    }];
 }
 
+- (void) downloadPeopleLikeMe {
+    
+}
+
+- (IBAction)myListSegmentSelected:(id)sender {
+    if (myListSegment.selectedSegmentIndex == 0) { // My Events
+        
+        myType = MY_EVENTS;
+        
+        [self downloadContent];
+    }
+    else if (myListSegment.selectedSegmentIndex == 1) { // My Photos
+        
+        myType = MY_PHOTOS;
+        
+        [self downloadMyPhotos];
+    }
+    else { // People Like Me
+        
+        myType = PEOPLE_LIKE_ME;
+        
+        [self downloadPeopleLikeMe];
+    }
+}
 
 @end

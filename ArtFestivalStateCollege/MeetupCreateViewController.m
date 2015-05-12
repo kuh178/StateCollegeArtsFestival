@@ -32,6 +32,7 @@ UIImage     *chosenImage;
     meetupWhenPicker.layer.borderColor = [[UIColor blackColor] CGColor];
     meetupWhenPicker.layer.cornerRadius = 5;
     meetupWhenPicker.layer.borderWidth = 1;
+    meetupWhenPicker.timeZone = [NSTimeZone localTimeZone];
     
     mapView.layer.borderColor = [[UIColor blackColor] CGColor];
     mapView.layer.cornerRadius = 5;
@@ -133,7 +134,9 @@ UIImage     *chosenImage;
     NSLocale *usLocale = [[NSLocale alloc]
                           initWithLocaleIdentifier:@"en_US"];
     
-    NSDate *pickerDate = [meetupWhenPicker date];
+    NSDate *pickerDate = [meetupWhenPicker date] ;
+    NSLog(@"pickerDate %@", pickerDate);
+    
     NSString *selectionString = [[NSString alloc]
                                  initWithFormat:@"%@",
                                  [pickerDate descriptionWithLocale:usLocale]];
@@ -147,7 +150,7 @@ UIImage     *chosenImage;
         if (imageData) {
             NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
             
-            NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
+            NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[pickerDate timeIntervalSince1970]];
             
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"],
@@ -163,7 +166,7 @@ UIImage     *chosenImage;
             } success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Success: %@", responseObject);
                 // go to the previous page
-
+                [self.navigationController popViewControllerAnimated:YES];
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"operation : %@", operation.responseString);

@@ -18,7 +18,7 @@
 
 @implementation MeetupListViewController
 
-@synthesize tableViewList, eventList, refreshBtn;
+@synthesize tableViewList, eventList, refreshBtn, filterSegment;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,15 +29,17 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    
-    
-    [self downloadContent];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.navigationController.navigationItem.backBarButtonItem.title = @"Back";
     //self.hidesBottomBarWhenPushed = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self downloadContent];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -148,6 +150,15 @@
 
 -(IBAction)refreshBtnPressed:(id)sender {
     [self downloadContent];
+}
+
+-(IBAction)filterSegmentSelected:(id)sender {
+    if (filterSegment.selectedSegmentIndex == 0) { // filter by time
+
+    }
+    else { // filter by location
+        
+    }
 }
 
 @end

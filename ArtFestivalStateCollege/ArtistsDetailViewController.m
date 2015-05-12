@@ -12,6 +12,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ArtistsWebPageViewController.h"
 #import "ArtistsMoreImagesViewController.h"
+#import "AFHTTPRequestOperationManager.h"
 
 @interface ArtistsDetailViewController ()
 
@@ -20,6 +21,8 @@
 @implementation ArtistsDetailViewController
 
 @synthesize artistImage, artistEmailBtn, artistMoreImageBtn, artistName, artistBooth, artistCategory, artistDescription, artistMap, item;
+@synthesize view1, view2;
+@synthesize artistFavoriteBtn, artistWebPageBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -68,22 +71,48 @@
     adjustedRegion.span.latitudeDelta  = 0.01;
     [artistMap setRegion:adjustedRegion animated:YES];
     
-    artistEmailBtn.layer.borderColor = [[UIColor blackColor] CGColor];
     artistEmailBtn.layer.cornerRadius = 5;
-    artistEmailBtn.layer.borderWidth = 1;
+    
+    // button rounded corner
+    artistUserPhotosBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    artistUserPhotosBtn.layer.borderWidth = 1.0;
+    artistUserPhotosBtn.layer.cornerRadius = 5;
     
     artistMoreImageBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    artistMoreImageBtn.layer.borderWidth = 1.0;
     artistMoreImageBtn.layer.cornerRadius = 5;
-    artistMoreImageBtn.layer.borderWidth = 1;
     
+    artistWebPageBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    artistWebPageBtn.layer.borderWidth = 1.0;
+    artistWebPageBtn.layer.cornerRadius = 5;
+    
+    artistFavoriteBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    artistFavoriteBtn.layer.borderWidth = 1.0;
+    artistFavoriteBtn.layer.cornerRadius = 5;
+
     artistMap.layer.borderColor = [[UIColor grayColor] CGColor];
     artistMap.layer.cornerRadius = 5;
     artistMap.layer.borderWidth = 1;
+    
+    view1.layer.borderColor = [[UIColor grayColor] CGColor];
+    view1.layer.cornerRadius = 5;
+    view1.layer.borderWidth = 1;
+    
+    view2.layer.borderColor = [[UIColor grayColor] CGColor];
+    view2.layer.cornerRadius = 5;
+    view2.layer.borderWidth = 1;
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.screenName = @"ArtistsDetailViewController";
     self.navigationItem.backBarButtonItem.title = @"Back";
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // load event updates everytime the view is opened
+    [self downloadArtistUpdates];
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,21 +140,102 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
 }
 
+- (IBAction)artistFavoriteBtnPressed:(id)sender {
+    [self uploadMyFavorite];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSString *currentLatitude = [[NSString alloc]
+                                 initWithFormat:@"%+.6f",
+                                 newLocation.coordinate.latitude];
+    latitude = [currentLatitude doubleValue];
+    
+    NSString *currentLongitude = [[NSString alloc]
+                                  initWithFormat:@"%+.6f",
+                                  newLocation.coordinate.longitude];
+    longitude = [currentLongitude doubleValue];
+    
+    if (latitude != 0.0 && longitude != 0.0) {
+        [_locationManager stopUpdatingLocation];
+    }
+}
+
+- (void) uploadMyFavorite {
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"],
+                             @"artist_id"   :[item objectForKey:@"id"],
+                             @"datetime"    :[NSString stringWithFormat:@"%@", timeStampValue],
+                             @"latitude"    :[NSString stringWithFormat:@"%f", latitude],
+                             @"longitude"   :[NSString stringWithFormat:@"%f", longitude]};
+    
+    [manager POST:@"http://community.ist.psu.edu/Festival/upload_my_favorite_artist.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+        
+        if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
+            [self downloadArtistUpdates];
+        }
+        else {
+            UIAlertView *dialog = [[UIAlertView alloc]init];
+            [dialog setDelegate:self];
+            [dialog setTitle:@"Message"];
+            [dialog setMessage:[responseObject objectForKey:@"message"]];
+            [dialog addButtonWithTitle:@"OK"];
+            [dialog show];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Operation: %@, Error: %@", operation, error);
+    }];
+}
+
+- (void) downloadArtistUpdates {
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"artist_id"    :[NSString stringWithFormat:@"%d", [[item objectForKey:@"id"] intValue]]};
+    
+    [manager POST:@"http://community.ist.psu.edu/Festival/download_artist_details.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+        
+        if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
+            [artistFavoriteBtn setTitle:[NSString stringWithFormat:@"     (%lu)", (unsigned long)[[responseObject objectForKey:@"favorite_cnt"] intValue]] forState:UIControlStateNormal];
+        }
+        else {
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString: @"ArtistsWebPageViewController"]) {
         ArtistsWebPageViewController *viewController = (ArtistsWebPageViewController *)[segue destinationViewController];
         viewController.hidesBottomBarWhenPushed = YES;
-        [viewController setWebLink:[item objectForKey:@"website"]];
+        viewController.webLink = [item objectForKey:@"website"];
     }
     else if ([[segue identifier] isEqualToString: @"ArtistsMoreImagesViewController"]) {
         ArtistsMoreImagesViewController *viewController = (ArtistsMoreImagesViewController *)[segue destinationViewController];
         viewController.hidesBottomBarWhenPushed = YES;
-        
         NSMutableArray *photoArray = [[NSMutableArray alloc]initWithCapacity:0];
         [photoArray addObjectsFromArray:[item objectForKey:@"image_url"]];
+        viewController.photoList = photoArray;
+    }
+    else if ([[segue identifier] isEqualToString: @"UserInputDetailViewController"]) {
+        UserInputDetailViewController *viewController = (UserInputDetailViewController *)[segue destinationViewController];
+        viewController.eventID = [[item objectForKey:@"id"] intValue];
+    }
+    else {
         
-        [viewController setPhotoList:photoArray];
     }
 }
 

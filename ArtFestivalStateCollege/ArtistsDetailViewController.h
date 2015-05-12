@@ -19,11 +19,20 @@
     IBOutlet UILabel            *artistDescription;
     
     IBOutlet UIButton           *artistMoreImageBtn;
+    IBOutlet UIButton           *artistUserPhotosBtn;
     IBOutlet UIButton           *artistEmailBtn;
+    IBOutlet UIButton           *artistWebPageBtn;
+    IBOutlet UIButton           *artistFavoriteBtn;
 
     IBOutlet MKMapView          *artistMap;
+    
+    IBOutlet UIView             *view1;
+    IBOutlet UIView             *view2;
 
     NSMutableDictionary         *item;
+    
+    double latitude;
+    double longitude;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView        *artistImage;
@@ -35,13 +44,18 @@
 
 @property (nonatomic, retain) IBOutlet UIButton           *artistMoreImageBtn;
 @property (nonatomic, retain) IBOutlet UIButton           *artistEmailBtn;
+@property (nonatomic, retain) IBOutlet UIButton           *artistWebPageBtn;
+@property (nonatomic, retain) IBOutlet UIButton           *artistFavoriteBtn;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *startLocation;
 
+@property (nonatomic, retain) IBOutlet UIView             *view1;
+@property (nonatomic, retain) IBOutlet UIView             *view2;
 
 @property (nonatomic, retain) NSMutableDictionary         *item;
 
 - (IBAction)artistEmailBtnPressed:(id)sender;
+- (IBAction)artistFavoriteBtnPressed:(id)sender;
 
 @end
