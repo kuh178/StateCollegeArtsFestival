@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "ProfileViewController.h"
 //#import <GoogleMaps/GoogleMaps.h>
 
 
@@ -18,6 +19,7 @@
 //@synthesize session = _session;
 
 //NSString *const FBSessionStateChangedNotification = @"edu.psu.ist.cscl.ArtFestivalStateCollege";
+UIStoryboard *storyboard;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -43,29 +45,23 @@
     
     NSLog(@"%f", iOSDeviceScreenSize.height);
     
-    if (iOSDeviceScreenSize.height == 480 || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) //화면세로길이가 480 (3gs,4, 4s) or iPad
+    if (iOSDeviceScreenSize.height == 480 || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) //height 480 (3gs,4, 4s) or iPad
     {
-        // UIStoryboard 생성
-        UIStoryboard *iPhone35Storyboard = [UIStoryboard storyboardWithName:@"StoryBoard_Small" bundle:nil];
-        // 생성한 UIStoryboard에서  initial view controller를 가져온다.
-        UIViewController *initialViewController = [iPhone35Storyboard instantiateInitialViewController];
+        // createUIStoryboard
+        storyboard = [UIStoryboard storyboardWithName:@"StoryBoard_Small" bundle:nil];
+        //  call initial view controller from UIStoryboard
+        UIViewController *initialViewController = [storyboard instantiateInitialViewController];
         
-        // 화면크기로 윈도우 생성
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        
-        // window의 rootViewController를 스토리보드의 initial view controller로 설정
         self.window.rootViewController  = initialViewController;
-        
-        // 윈도우 보이기
         [self.window makeKeyAndVisible];
     }
     
-    if (iOSDeviceScreenSize.height == 568) //화면세로길이가 568 (5)
+    if (iOSDeviceScreenSize.height == 568) //height 568 (5, 5s)
     {
-        //동일
-        UIStoryboard *iPhone4Storyboard = [UIStoryboard storyboardWithName:@"StoryBoard5" bundle:nil];
+        storyboard = [UIStoryboard storyboardWithName:@"StoryBoard5" bundle:nil];
         
-        UIViewController *initialViewController = [iPhone4Storyboard instantiateInitialViewController];
+        UIViewController *initialViewController = [storyboard instantiateInitialViewController];
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window.rootViewController  = initialViewController;
         [self.window makeKeyAndVisible];
@@ -85,8 +81,26 @@
     // Override point for customization after application launch.
     [FBSDKLoginButton class];
     
+    // Notification registration; Let the device know we want to receive push notifications
+    // ref1: http://code.tutsplus.com/tutorials/setting-up-push-notifications-on-ios--cms-21925
+    // ref2: http://stackoverflow.com/questions/24454033/registerforremotenotificationtypes-is-not-supported-in-ios-8-0-and-later
+    // ref3: http://api.shephertz.com/tutorial/Push-Notification-iOS/
+    //-- Set Notification
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
+        // iOS 8 Notifications
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        application.applicationIconBadgeNumber = 0;
+        
+        [application registerForRemoteNotifications];
+    }
+    else {
+        // iOS < 8 Notifications
+        [application registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+        application.applicationIconBadgeNumber = 0;
+    }
+    
     return YES;
-
 }
 
 // To process the response you get from interacting with the Facebook login process, you need to override the application:openURL:sourceApplication:annotation
@@ -132,12 +146,80 @@
 // for notification
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"Did Register for Remote Notifications with Device Token (%@)", deviceToken);
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *device = [deviceToken description];
+    device = [device stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    device = [device stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"device :%@", device);
+    
+    [userDefault setObject:device forKey:@"device_token"];
+    [userDefault synchronize];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSLog(@"Did Fail to Register for Remote Notifications");
     NSLog(@"%@, %@", error, error.localizedDescription);
     
+}
+
+// when receives a notification
+- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    UIApplicationState state = [application applicationState];
+    
+    NSLog(@"userInfo : %@", userInfo);
+    
+    // user tapped notification while app was in background
+    if (state == UIApplicationStateInactive || state == UIApplicationStateBackground) {
+        // go to screen relevant to Notification content
+        NSLog(@"background");
+        
+        // increase badge number
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber: +1];
+    } else {
+        // App is in UIApplicationStateActive (running in foreground)
+
+        //Application is in background - When the notification is clicked on, we will get here
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0]; //Clear notification as we have clicked it, potentially could also be -1 to decrement?
+        
+        // perhaps show an UIAlertView
+        NSLog(@"foreground");
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    /*
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
+    UINavigationController *navController = [tabBarController.viewControllers objectAtIndex:4];
+    
+    if ([title isEqualToString:@"Check"]){ // Check the message, open up a new view
+
+        BOOL isOnScreen = [[navController topViewController] isKindOfClass:[ProfileViewController class]];
+        
+        NSLog(@"isOnScreen : %hhd", isOnScreen);
+        
+        if(isOnScreen){
+            [tabBarController setSelectedIndex:4];
+            ProfileViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ProfileViewController"];
+            [navController pushViewController:vc animated:YES];
+            
+            NSLog(@"vc : %@", vc);
+            
+            //MoreViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"MoreViewController"];
+            //[self presentViewController:viewController animated:YES completion:nil];
+
+        }
+    }
+    else {
+        
+    }
+    */
 }
 
 

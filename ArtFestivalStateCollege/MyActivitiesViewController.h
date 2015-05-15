@@ -17,13 +17,16 @@
     IBOutlet UITableView        *tableViewList;
     IBOutlet UISegmentedControl *myListSegment;
     
+    IBOutlet UIBarButtonItem    *refreshBtn;
 }
 
 @property (nonatomic, retain) NSMutableArray                *myList;
 @property (nonatomic, retain) NSMutableArray                *jsonArray;
 @property (nonatomic, retain) IBOutlet UITableView          *tableViewList;
 @property (nonatomic, retain) IBOutlet UISegmentedControl   *myListSegment;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem      *refreshBtn;
 
 -(IBAction)myListSegmentSelected:(id)sender;
+-(IBAction)refreshBtnPressed:(id)sender;
 
 @end

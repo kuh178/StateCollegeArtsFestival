@@ -28,8 +28,8 @@ NSString *booth_flag = @"A";
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:51.0/255.0 green:164.0/255.0 blue:192.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     [self downloadContent];

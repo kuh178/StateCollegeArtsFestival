@@ -17,6 +17,8 @@
 		FA0A6BCA18DB970F00E706F5 /* art-gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = FA0A6BC918DB970F00E706F5 /* art-gallery.png */; };
 		FA0A6BD018DB97ED00E706F5 /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = FA0A6BCF18DB97ED00E706F5 /* picture.png */; };
 		FA0A6BD518DBC3C900E706F5 /* EventMapViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6BD418DBC3C900E706F5 /* EventMapViewViewController.m */; };
+		FA20E73B1B06282000228CAA /* 2015 Button.png in Resources */ = {isa = PBXBuildFile; fileRef = FA20E73A1B06282000228CAA /* 2015 Button.png */; };
+		FA20E73D1B06307500228CAA /* 2015 Poster_resized.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA20E73C1B06307500228CAA /* 2015 Poster_resized.jpg */; };
 		FA27BDFE1AF7EEE500715ABF /* UserPhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA27BDFD1AF7EEE500715ABF /* UserPhotoListViewController.m */; };
 		FA27BE021AF86A1A00715ABF /* MeetupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA27BE011AF86A1A00715ABF /* MeetupListViewController.m */; };
 		FA27BE051AF86A2A00715ABF /* MeetupCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA27BE041AF86A2A00715ABF /* MeetupCreateViewController.m */; };
@@ -153,6 +155,8 @@
 		FA0A6BCF18DB97ED00E706F5 /* picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture.png; sourceTree = "<group>"; };
 		FA0A6BD318DBC3C900E706F5 /* EventMapViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMapViewViewController.h; sourceTree = "<group>"; };
 		FA0A6BD418DBC3C900E706F5 /* EventMapViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMapViewViewController.m; sourceTree = "<group>"; };
+		FA20E73A1B06282000228CAA /* 2015 Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2015 Button.png"; sourceTree = "<group>"; };
+		FA20E73C1B06307500228CAA /* 2015 Poster_resized.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2015 Poster_resized.jpg"; sourceTree = "<group>"; };
 		FA27BDFC1AF7EEE500715ABF /* UserPhotoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPhotoListViewController.h; sourceTree = "<group>"; };
 		FA27BDFD1AF7EEE500715ABF /* UserPhotoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPhotoListViewController.m; sourceTree = "<group>"; };
 		FA27BE001AF86A1A00715ABF /* MeetupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetupListViewController.h; sourceTree = "<group>"; };
@@ -427,6 +431,8 @@
 		FA6B17821AD06D850086F493 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FA20E73C1B06307500228CAA /* 2015 Poster_resized.jpg */,
+				FA20E73A1B06282000228CAA /* 2015 Button.png */,
 				FA724E641B01C2E600CF0985 /* 1431425444_email.png */,
 				FA724E5C1B01720900CF0985 /* 1431404738_illustration.png */,
 				FA724E5D1B01720900CF0985 /* 1431404708_ticket.png */,
@@ -784,6 +790,7 @@
 				FA446E911956A430007941C6 /* ist_logo.png in Resources */,
 				FA0A6BCA18DB970F00E706F5 /* art-gallery.png in Resources */,
 				FAC3914519514D2100A2ED2D /* 2024_cpfa_button.jpg in Resources */,
+				FA20E73D1B06307500228CAA /* 2015 Poster_resized.jpg in Resources */,
 				FA724E631B01720900CF0985 /* 1431404695_world.png in Resources */,
 				FA8B7FB218DE1CEF001F3B1B /* microphone-7.png in Resources */,
 				FAF6E96118D4D17F00BDD03D /* FB-f-Logo__blue_1024.png in Resources */,
@@ -797,6 +804,7 @@
 				FA446E7519558199007941C6 /* Festival-Map.png in Resources */,
 				FA724E601B01720900CF0985 /* 1431404738_illustration.png in Resources */,
 				FAC391621952D37B00A2ED2D /* medal_gold.png in Resources */,
+				FA20E73B1B06282000228CAA /* 2015 Button.png in Resources */,
 				FA8B7FA418DE173B001F3B1B /* trophy-7.png in Resources */,
 				FA8B7FA218DE172A001F3B1B /* map-paper-7.png in Resources */,
 				FA724E611B01720900CF0985 /* 1431404708_ticket.png in Resources */,
@@ -1026,6 +1034,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
+				PROVISIONING_PROFILE = "1af5df27-0ef6-4c5a-9ae8-ecb62ab2f4b4";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -1062,6 +1071,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
+				PROVISIONING_PROFILE = "da767a4e-e983-4f9a-b6c3-e7f7473871d7";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -1076,8 +1086,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: John Carroll (QR98EQ97WG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: John Carroll (QR98EQ97WG)";
 				FRAMEWORK_SEARCH_PATHS = (
 					/Users/kyungsikhan/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
@@ -1096,7 +1106,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2703f4ff-d925-4b9c-9822-597aa76f6063";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1110,8 +1120,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: John Carroll (J767EA589G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: John Carroll (J767EA589G)";
 				FRAMEWORK_SEARCH_PATHS = (
 					/Users/kyungsikhan/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
@@ -1130,7 +1140,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "cf9f360c-29e0-404d-ac20-de65a80efcbe";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

@@ -36,7 +36,6 @@
     // make the corner of the buttons round
     signinBtn.layer.cornerRadius = 5;
     signinBtn.layer.borderWidth = 1;
-    signinBtn.layer.borderColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0].CGColor;
     
     // top bar
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"Back"

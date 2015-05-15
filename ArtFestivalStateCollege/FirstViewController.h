@@ -17,6 +17,7 @@
     
     IBOutlet UITableView        *tableViewList;
     IBOutlet UIBarButtonItem    *refreshBtn;
+    IBOutlet UIBarButtonItem    *cameraBtn;
     IBOutlet UISegmentedControl *segmentControl;
 }
 
@@ -26,6 +27,7 @@
 
 @property (nonatomic, retain) IBOutlet UITableView          *tableViewList;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem      *refreshBtn;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem      *cameraBtn;
 @property (nonatomic, retain) IBOutlet UISegmentedControl   *segmentControl;
 
 -(IBAction)refreshBtnPressed:(id)sender;

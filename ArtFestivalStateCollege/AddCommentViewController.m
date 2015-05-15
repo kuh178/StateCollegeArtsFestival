@@ -38,8 +38,8 @@
     
     // ios7 handling navigationBar
     // ref : http://stackoverflow.com/questions/19029833/ios-7-navigation-bar-text-and-arrow-color
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:51.0/255.0 green:164.0/255.0 blue:192.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     // make the corner of the buttons round

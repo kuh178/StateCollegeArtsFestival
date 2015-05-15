@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Arts Festival</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
@@ -20,10 +20,10 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Arts Festival would like to use your location.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Arts Festival would like to use your location.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Arts Festival would like to use your location.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Arts Festival would like to use your location.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

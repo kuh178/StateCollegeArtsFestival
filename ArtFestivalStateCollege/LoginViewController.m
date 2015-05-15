@@ -26,6 +26,7 @@
 @synthesize facebookBtn, createAccountBtn, loginBtn;
 
 NSString *userName, *userImage, *userEmail, *datetime;
+NSUserDefaults *userDefault;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,18 +45,19 @@ NSString *userName, *userImage, *userEmail, *datetime;
     self.navigationController.navigationBar.hidden = YES;
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
     
+    // NSUserDefaults
+    userDefault = [NSUserDefaults standardUserDefaults];
+    NSLog(@"device token: %@", [userDefault objectForKey:@"device_token"]);
+    
     // make the corner of the buttons round
     facebookBtn.layer.cornerRadius = 5;
     facebookBtn.layer.borderWidth = 1;
-    facebookBtn.layer.borderColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0].CGColor;
     
     createAccountBtn.layer.cornerRadius = 5;
     createAccountBtn.layer.borderWidth = 1;
-    createAccountBtn.layer.borderColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0].CGColor;
     
     loginBtn.layer.cornerRadius = 5;
     loginBtn.layer.borderWidth = 1;
-    loginBtn.layer.borderColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0].CGColor;
 }
 
 
@@ -64,8 +66,6 @@ NSString *userName, *userImage, *userEmail, *datetime;
     
     self.screenName = @"LoginViewController";
     self.navigationItem.backBarButtonItem.title = @"Back";
-    
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     NSLog(@"logged in? %@", [userDefault objectForKey:@"is_loggedin"]);
     
@@ -199,12 +199,15 @@ NSString *userName, *userImage, *userEmail, *datetime;
 - (void) uploadAccountInfo {
     
     NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
+
+    NSLog(@"device token: %@", [userDefault objectForKey:@"device_token"]);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"user_name"     :[NSString stringWithFormat:@"%@", userName],
                              @"user_image"    :[NSString stringWithFormat:@"%@", userImage],
                              @"user_email"    :[NSString stringWithFormat:@"%@", userEmail],
                              @"datetime"      :[NSString stringWithFormat:@"%@", timeStampValue],
+                             @"device_token"  :[NSString stringWithFormat:@"%@", [userDefault objectForKey:@"device_token"]],
                              @"platform"      :[NSString stringWithFormat:@"1"]};
     
     [manager POST:@"http://community.ist.psu.edu/Festival/upload_account_info.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -213,11 +216,11 @@ NSString *userName, *userImage, *userEmail, *datetime;
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
             
-            NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
             [userDefault setObject:userName forKey:@"user_name"];
             [userDefault setObject:[responseObject objectForKey:@"message"] forKey:@"user_id"];
             [userDefault setObject:[NSString stringWithFormat:@"1"] forKey:@"is_loggedin"]; // 1 means YES; 0 means NO
             [userDefault setObject:userImage forKey:@"user_image"];
+            [userDefault synchronize];
             
             // move to the interest selection page
             ChooseInterestViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseInterestViewController"];

@@ -3,20 +3,26 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "2014_cpfa_button_58_58.png",
+      "filename" : "2015 Button_29_29.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "2014_cpfa_button_80_80.png",
+      "filename" : "2015 Button_40_40.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "2014_cpfa_button_120_120.png",
+      "filename" : "2015 Button_60_60.png",
       "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "2015 Button_180_180.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

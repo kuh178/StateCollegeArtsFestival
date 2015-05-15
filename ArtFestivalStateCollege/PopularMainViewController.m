@@ -27,7 +27,7 @@
 
 @implementation PopularMainViewController
 
-@synthesize eventList, photoList, userList, jsonArray, tableViewList, refreshBtn, segmentControl;
+@synthesize eventList, photoList, userList, jsonArray, tableViewList, segmentControl; //refreshBtn
 
 int popular_flag = PERFORMANCE;
 
@@ -403,6 +403,7 @@ int popular_flag = PERFORMANCE;
 }
 
 
+/*
 -(IBAction)refreshBtnPressed:(id)sender {
     
     if(popular_flag == PERFORMANCE) {
@@ -415,7 +416,8 @@ int popular_flag = PERFORMANCE;
         [self downloadUsers];
     }
 }
-
+*/
+ 
 - (IBAction)segmentPressed:(id)sender {
     UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
     NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;

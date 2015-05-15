@@ -35,7 +35,6 @@
     // make the corner of the buttons round
     loginBtn.layer.cornerRadius = 5;
     loginBtn.layer.borderWidth = 1;
-    loginBtn.layer.borderColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0].CGColor;
     
     // top bar
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"Back"

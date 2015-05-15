@@ -20,7 +20,7 @@
 
 @implementation ArtistsDetailViewController
 
-@synthesize artistImage, artistEmailBtn, artistMoreImageBtn, artistName, artistBooth, artistCategory, artistDescription, artistMap, item;
+@synthesize artistImage, artistEmailBtn, artistMoreImageBtn, artistName, artistBooth, artistCategory, artistAddress, artistDescription, artistMap, item;
 @synthesize view1, view2;
 @synthesize artistFavoriteBtn, artistWebPageBtn;
 
@@ -41,6 +41,9 @@
     // display information
     artistName.text             = [item objectForKey:@"name"];
     artistDescription.text      = [item objectForKey:@"description"];
+    artistAddress.text          = [[item objectForKey:@"description"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    [item objectForKey:@"description"];
     artistBooth.text            = [NSString stringWithFormat:@"(%@)\n%@", [item objectForKey:@"booth"], [item objectForKey:@"location_name"]];
     artistCategory.text         = [item objectForKey:@"discipline_name"];
     

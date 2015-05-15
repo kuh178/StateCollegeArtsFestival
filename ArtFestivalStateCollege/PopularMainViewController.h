@@ -19,7 +19,7 @@
     
     IBOutlet UITableView        *tableViewList;
     
-    IBOutlet UIBarButtonItem    *refreshBtn;
+    //IBOutlet UIBarButtonItem    *refreshBtn;
     
     IBOutlet UISegmentedControl *segmentControl;
 }
@@ -31,11 +31,11 @@
 @property (nonatomic, retain) NSMutableArray                *jsonArray;
 @property (nonatomic, retain) IBOutlet UITableView          *tableViewList;
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem      *refreshBtn;
+//@property (nonatomic, retain) IBOutlet UIBarButtonItem      *refreshBtn;
 
 @property (nonatomic, retain) IBOutlet UISegmentedControl   *segmentControl;
 
--(IBAction)refreshBtnPressed:(id)sender;
+//-(IBAction)refreshBtnPressed:(id)sender;
 -(IBAction)segmentPressed:(id)sender;
 
 @end

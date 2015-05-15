@@ -46,11 +46,9 @@ NSString    *taggedUsers;
     // make the corner of the buttons round
     tagUsersBtn.layer.cornerRadius = 5;
     tagUsersBtn.layer.borderWidth = 1;
-    tagUsersBtn.layer.borderColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0].CGColor;
     
     uploadBtn.layer.cornerRadius = 5;
     uploadBtn.layer.borderWidth = 1;
-    uploadBtn.layer.borderColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0].CGColor;
     
     // check if the device has a camera
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {

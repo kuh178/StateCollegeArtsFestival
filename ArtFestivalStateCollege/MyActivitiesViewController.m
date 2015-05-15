@@ -21,13 +21,14 @@
 
 @implementation MyActivitiesViewController
 
-@synthesize myList, jsonArray, tableViewList, myListSegment;
+@synthesize myList, jsonArray, tableViewList, myListSegment, refreshBtn;
 
-#define MY_EVENTS 1
-#define MY_PHOTOS 2
-#define PEOPLE_LIKE_ME 3
+#define MY_UPDATES 1
+#define MY_EVENTS 2
+#define MY_PHOTOS 3
+#define PEOPLE_LIKE_ME 4
 
-int myType = MY_EVENTS;
+int myType = MY_UPDATES;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,8 +44,8 @@ int myType = MY_EVENTS;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:51.0/255.0 green:164.0/255.0 blue:192.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     [self downloadContent];
@@ -91,7 +92,10 @@ int myType = MY_EVENTS;
     UILabel *eventName           = (UILabel *)[cell viewWithTag:101];
     UILabel *eventDate           = (UILabel *)[cell viewWithTag:102];
     
-    if (myType == MY_EVENTS) {
+    if (myType == MY_UPDATES) {
+        
+    }
+    else if (myType == MY_EVENTS) {
         // event image
         [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
         eventImage.layer.cornerRadius = 4.0f;
@@ -115,7 +119,7 @@ int myType = MY_EVENTS;
         NSString *_date=[_formatter stringFromDate:gmtDate];
         eventDate.text = _date;
     }
-    else { // MY_PHOTOS
+    else if (myType == MY_PHOTOS) { // MY_PHOTOS
         // event image
         [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
         eventImage.layer.cornerRadius = 4.0f;
@@ -141,6 +145,9 @@ int myType = MY_EVENTS;
                 eventDate.text = [NSString stringWithFormat:@"%d likes %d comments", [[item objectForKey:@"like_cnt"] intValue], [[item objectForKey:@"comment_cnt"] intValue]];
             }
         }
+    }
+    else { // people like me
+        
     }
     
     return cell;
@@ -251,18 +258,53 @@ int myType = MY_EVENTS;
     }];
 }
 
+- (void) downloadMyUpdates {
+    
+}
+
 - (void) downloadPeopleLikeMe {
     
 }
 
 - (IBAction)myListSegmentSelected:(id)sender {
-    if (myListSegment.selectedSegmentIndex == 0) { // My Events
+    if (myListSegment.selectedSegmentIndex == 0) { // My Updates
+        myType = MY_UPDATES;
+        
+        [self downloadMyUpdates];
+    }
+    else if (myListSegment.selectedSegmentIndex == 1) { // My Events
         
         myType = MY_EVENTS;
         
         [self downloadContent];
     }
-    else if (myListSegment.selectedSegmentIndex == 1) { // My Photos
+    else if (myListSegment.selectedSegmentIndex == 2) { // My Photos
+        
+        myType = MY_PHOTOS;
+        
+        [self downloadMyPhotos];
+    }
+    else { // People Like Me
+        
+        myType = PEOPLE_LIKE_ME;
+        
+        [self downloadPeopleLikeMe];
+    }
+}
+
+-(IBAction)refreshBtnPressed:(id)sender {
+    if (myListSegment.selectedSegmentIndex == 0) { // My Updates
+        myType = MY_UPDATES;
+        
+        [self downloadMyUpdates];
+    }
+    else if (myListSegment.selectedSegmentIndex == 1) { // My Events
+        
+        myType = MY_EVENTS;
+        
+        [self downloadContent];
+    }
+    else if (myListSegment.selectedSegmentIndex == 2) { // My Photos
         
         myType = MY_PHOTOS;
         

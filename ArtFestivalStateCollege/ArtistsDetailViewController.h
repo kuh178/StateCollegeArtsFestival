@@ -16,6 +16,7 @@
     IBOutlet UILabel            *artistName;
     IBOutlet UILabel            *artistBooth;
     IBOutlet UILabel            *artistCategory;
+    IBOutlet UILabel            *artistAddress;
     IBOutlet UILabel            *artistDescription;
     
     IBOutlet UIButton           *artistMoreImageBtn;
@@ -39,6 +40,7 @@
 @property (nonatomic, retain) IBOutlet UILabel            *artistName;
 @property (nonatomic, retain) IBOutlet UILabel            *artistBooth;
 @property (nonatomic, retain) IBOutlet UILabel            *artistCategory;
+@property (nonatomic, retain) IBOutlet UILabel            *artistAddress;
 @property (nonatomic, retain) IBOutlet UILabel            *artistDescription;
 @property (nonatomic, retain) IBOutlet MKMapView          *artistMap;
 

@@ -140,6 +140,8 @@ int photo_cnt = 0;
     adjustedRegion.span.latitudeDelta  = 0.01;
     [eventMap setRegion:adjustedRegion animated:YES];
     
+    [self tapGestureRecognizerOfficial];
+    
     // check if the event is official one
     if (isOfficial) {
         if ([[item objectForKey:@"button"] intValue] == 1) {
@@ -192,11 +194,35 @@ int photo_cnt = 0;
     [eventButton addGestureRecognizer:singleTap];
 }
 
+- (void) tapGestureRecognizerOfficial {
+    UITapGestureRecognizer *eventImageTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(eventImageTapDetected)];
+    eventImageTap.numberOfTapsRequired = 1;
+    [eventImage setUserInteractionEnabled:YES];
+    [eventImage addGestureRecognizer:eventImageTap];
+}
+
 - (void) tapDetected {
     ProfileViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileViewController"];
     viewController.hidesBottomBarWhenPushed = YES;
     [viewController setUserID:[[item objectForKey:@"user_id"] intValue]];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void) eventImageTapDetected {
+    
+    NSLog(@"here!");
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 150, 150)];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
+    [imageView setContentMode:UIViewContentModeScaleAspectFit];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                        message:[item objectForKey:@"name"]
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"Close", nil];
+    [alertView setValue:imageView forKey:@"accessoryView"];
+    [alertView show];
 }
 
 
