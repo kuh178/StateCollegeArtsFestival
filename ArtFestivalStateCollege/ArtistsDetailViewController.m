@@ -177,7 +177,7 @@
                              @"latitude"    :[NSString stringWithFormat:@"%f", latitude],
                              @"longitude"   :[NSString stringWithFormat:@"%f", longitude]};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/upload_my_favorite_artist.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/upload_my_favorite_artist.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         
@@ -203,7 +203,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"artist_id"    :[NSString stringWithFormat:@"%d", [[item objectForKey:@"id"] intValue]]};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/download_artist_details.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/download_artist_details.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         

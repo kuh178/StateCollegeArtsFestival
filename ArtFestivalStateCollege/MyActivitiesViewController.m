@@ -43,12 +43,11 @@ int myType = MY_UPDATES;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:51.0/255.0 green:164.0/255.0 blue:192.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
-    [self downloadContent];
+    [self downloadMyUpdates];
 }
 
 
@@ -93,7 +92,24 @@ int myType = MY_UPDATES;
     UILabel *eventDate           = (UILabel *)[cell viewWithTag:102];
     
     if (myType == MY_UPDATES) {
+        // my update
+        eventName.text = [item objectForKey:@"message"];
+        eventImage.image = [UIImage imageNamed:@"2015 Button.png"];
         
+        // event datetime
+        // ref: http://stackoverflow.com/questions/1862905/nsdate-convert-date-to-gmt
+        NSTimeInterval _interval=[[item objectForKey:@"datetime"] doubleValue];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+        
+        NSTimeInterval timeZoneOffset = [[NSTimeZone defaultTimeZone] secondsFromGMT];
+        NSTimeInterval gmtTimeInterval = [date timeIntervalSinceReferenceDate] - timeZoneOffset;
+        NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
+        
+        NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
+        [_formatter setLocale:[NSLocale currentLocale]];
+        [_formatter setDateFormat:@"MMM dd, hh:mm a"];
+        NSString *_date=[_formatter stringFromDate:gmtDate];
+        eventDate.text = _date;
     }
     else if (myType == MY_EVENTS) {
         // event image
@@ -156,7 +172,10 @@ int myType = MY_UPDATES;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableDictionary *item = [myList objectAtIndex:indexPath.row];
     
-    if (myType == MY_EVENTS) {
+    if (myType == MY_UPDATES) {
+        
+    }
+    else if (myType == MY_EVENTS) {
         EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
         viewController.hidesBottomBarWhenPushed = YES;
         [viewController setItem:item];
@@ -173,55 +192,76 @@ int myType = MY_UPDATES;
 
 - (void) downloadContent {
 
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    // show download indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"]};
-
-    [manager POST:@"http://community.ist.psu.edu/Festival/download_my_activities.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
-            jsonArray = [NSMutableArray arrayWithCapacity:0];
-            myList = [NSMutableArray arrayWithCapacity:0];
-            [jsonArray addObjectsFromArray:[responseObject objectForKey:@"results"]];
+        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"]};
+        
+        [manager POST:@"http://heounsuk.com/festival/download_my_activities.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"JSON: %@", responseObject);
             
-            if ([jsonArray count] > 0) {
-                // insert new items into table
-                for (int i = 0; i < [jsonArray count]; i++) {
-                    
-                    // get an item
-                    NSDictionary *item = [jsonArray objectAtIndex:i];
-                    [myList addObject:item];
+            if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
+                jsonArray = [NSMutableArray arrayWithCapacity:0];
+                myList = [NSMutableArray arrayWithCapacity:0];
+                [jsonArray addObjectsFromArray:[responseObject objectForKey:@"results"]];
+                
+                if ([jsonArray count] > 0) {
+                    // insert new items into table
+                    for (int i = 0; i < [jsonArray count]; i++) {
+                        
+                        // get an item
+                        NSDictionary *item = [jsonArray objectAtIndex:i];
+                        [myList addObject:item];
+                    }
                 }
+                else {
+                    NSLog(@"No data available");
+                }
+                
+                [tableViewList reloadData];
             }
             else {
-                NSLog(@"No data available");
+                UIAlertView *dialog = [[UIAlertView alloc]init];
+                [dialog setDelegate:self];
+                [dialog setTitle:@"Message"];
+                [dialog setMessage:@"No results found"];
+                [dialog addButtonWithTitle:@"OK"];
+                [dialog show];
             }
             
-            [tableViewList reloadData];
-        }
-        else {
-            UIAlertView *dialog = [[UIAlertView alloc]init];
-            [dialog setDelegate:self];
-            [dialog setTitle:@"Message"];
-            [dialog setMessage:@"No results found"];
-            [dialog addButtonWithTitle:@"OK"];
-            [dialog show];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", operation);
-    }];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", operation);
+        }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        });
+    });
+    
+    
+    
+    // show download indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 - (void) downloadMyPhotos {
+    
+    // show download indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"]};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/download_user_photos.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:@"http://heounsuk.com/festival/download_user_photos.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
@@ -256,10 +296,62 @@ int myType = MY_UPDATES;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", operation);
     }];
+    
+    // show download indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 - (void) downloadMyUpdates {
     
+    // show download indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"]};
+    
+    NSLog(@"user_id: %@", [userDefault objectForKey:@"user_id"]);
+    
+    [manager POST:@"http://heounsuk.com/festival/download_user_updates.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
+            jsonArray = [NSMutableArray arrayWithCapacity:0];
+            myList = [NSMutableArray arrayWithCapacity:0];
+            [jsonArray addObjectsFromArray:[responseObject objectForKey:@"results"]];
+            
+            if ([jsonArray count] > 0) {
+                // insert new items into table
+                for (int i = 0; i < [jsonArray count]; i++) {
+                    
+                    // get an item
+                    NSDictionary *item = [jsonArray objectAtIndex:i];
+                    [myList addObject:item];
+                }
+            }
+            else {
+                NSLog(@"No data available");
+            }
+            
+            [tableViewList reloadData];
+        }
+        else {
+            UIAlertView *dialog = [[UIAlertView alloc]init];
+            [dialog setDelegate:self];
+            [dialog setTitle:@"Message"];
+            [dialog setMessage:@"No results found"];
+            [dialog addButtonWithTitle:@"OK"];
+            [dialog show];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", operation);
+    }];
+    
+    // show download indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 - (void) downloadPeopleLikeMe {

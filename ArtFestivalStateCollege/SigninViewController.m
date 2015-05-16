@@ -80,7 +80,7 @@
     NSDictionary *params = @{@"email"       :emailText.text,
                              @"password"    :passwordText.text};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/login_account.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/login_account.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         

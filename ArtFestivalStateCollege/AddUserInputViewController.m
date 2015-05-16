@@ -154,7 +154,7 @@ NSString    *taggedUsers;
             
             NSLog(@"size of file is %ld", (unsigned long)[imageData length]);
             
-            [manager POST:@"http://community.ist.psu.edu/Festival/upload_user_content.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            [manager POST:@"http://heounsuk.com/festival/upload_user_content.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                 [formData appendPartWithFileData:imageData name:@"image" fileName:@"temp_image.png" mimeType:@"image/jpeg"];
             } success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Success: %@", responseObject);
@@ -296,7 +296,7 @@ NSString    *taggedUsers;
 
 -(void)addItemViewController:(AddUsersViewController *)controller didFinishAddUsers:(NSArray *)array {
 
-    [tagUsersBtn setTitle:[NSString stringWithFormat:@"%d users", [array count]] forState:UIControlStateNormal];
+    [tagUsersBtn setTitle:[NSString stringWithFormat:@"%lu users", (unsigned long)[array count]] forState:UIControlStateNormal];
     
     taggedUsers = @"";
     

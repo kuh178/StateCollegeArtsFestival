@@ -82,6 +82,8 @@ NSString *booth_flag = @"A";
     
     NSMutableArray *imageArr     = [item objectForKey:@"image_url"];
     
+    NSLog(@"%@", imageArr[0]);
+    
     // plan image
     [artistImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", imageArr[0]]]];
     artistImage.layer.cornerRadius = 4.0f;
@@ -106,51 +108,61 @@ NSString *booth_flag = @"A";
 
 - (void) downloadContent {
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://community.ist.psu.edu/Festival/download_artists.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
-            jsonArray = [NSMutableArray arrayWithCapacity:0];
-            artistList = [NSMutableArray arrayWithCapacity:0];
-            artistBoothList = [NSMutableArray arrayWithCapacity:0];
-            [jsonArray addObjectsFromArray:[responseObject objectForKey:@"results"]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager GET:@"http://heounsuk.com/festival/download_artists.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"JSON: %@", responseObject);
             
-            if ([jsonArray count] > 0) {
-                // insert new items into table
-                for (int i = 0; i < [jsonArray count]; i++) {
-                    
-                    // get an item
-                    NSDictionary *item = [jsonArray objectAtIndex:i];
-                    [artistList addObject:item];
+            if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
+                jsonArray = [NSMutableArray arrayWithCapacity:0];
+                artistList = [NSMutableArray arrayWithCapacity:0];
+                artistBoothList = [NSMutableArray arrayWithCapacity:0];
+                [jsonArray addObjectsFromArray:[responseObject objectForKey:@"results"]];
+                
+                if ([jsonArray count] > 0) {
+                    // insert new items into table
+                    for (int i = 0; i < [jsonArray count]; i++) {
+                        
+                        // get an item
+                        NSDictionary *item = [jsonArray objectAtIndex:i];
+                        [artistList addObject:item];
+                    }
                 }
+                else {
+                    NSLog(@"No data available");
+                }
+                
+                
+                for(int i = 0 ; i < [artistList count] ; i++) {
+                    NSMutableDictionary *item = [artistList objectAtIndex:i];
+                    if ([[[item objectForKey:@"booth"] substringToIndex:1] isEqualToString:booth_flag]) {
+                        [artistBoothList addObject:item];
+                    }
+                }
+                
+                [tableViewList reloadData];
             }
             else {
-                NSLog(@"No data available");
+                UIAlertView *dialog = [[UIAlertView alloc]init];
+                [dialog setDelegate:self];
+                [dialog setTitle:@"Message"];
+                [dialog setMessage:@"No results found"];
+                [dialog addButtonWithTitle:@"OK"];
+                [dialog show];
             }
             
-            
-            for(int i = 0 ; i < [artistList count] ; i++) {
-                NSMutableDictionary *item = [artistList objectAtIndex:i];
-                if ([[[item objectForKey:@"booth"] substringToIndex:1] isEqualToString:@"A"]) {
-                    [artistBoothList addObject:item];
-                }
-            }
-            
-            [tableViewList reloadData];
-        }
-        else {
-            UIAlertView *dialog = [[UIAlertView alloc]init];
-            [dialog setDelegate:self];
-            [dialog setTitle:@"Message"];
-            [dialog setMessage:@"No results found"];
-            [dialog addButtonWithTitle:@"OK"];
-            [dialog show];
-        }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        });
+    });
+
 }
 
 -(IBAction)refreshBtnPressed:(id)sender {
@@ -181,8 +193,7 @@ NSString *booth_flag = @"A";
     else if (selectedSegment == 5) { // R
         booth_flag = @"R";
     }
-    
-    
+
     // get the items based on the day
     for (int i = 0 ; i < [artistList count] ; i++) {
         
@@ -191,7 +202,6 @@ NSString *booth_flag = @"A";
         if ([[[item objectForKey:@"booth"] substringToIndex:1] isEqualToString:booth_flag]) {
             [artistBoothList addObject:item];
         }
-
     }
     
     [tableViewList reloadData];

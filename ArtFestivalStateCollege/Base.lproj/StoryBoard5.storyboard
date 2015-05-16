@@ -1223,7 +1223,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="inU-pM-cIb"/>
+                    <navigationItem key="navigationItem" title="Profile" id="inU-pM-cIb">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="kO9-fH-xwd"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="changeProfilePhotoBtn" destination="En7-ij-Pnt" id="4BI-EM-DkZ"/>
                         <outlet property="commentsLabel" destination="AnY-2l-bS4" id="H7T-Sc-syn"/>
@@ -1297,7 +1299,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Photos by ???" id="iL5-JE-4cD"/>
+                    <navigationItem key="navigationItem" title="Photos by ???" id="iL5-JE-4cD">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="t1R-FW-R3m"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I8r-eT-3uq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1937,7 +1941,7 @@
             </objects>
             <point key="canvasLocation" x="229" y="743"/>
         </scene>
-        <!--My List-->
+        <!--My Festival-->
         <scene sceneID="ipq-9Y-Dlu">
             <objects>
                 <viewController storyboardIdentifier="MyActivitiesViewController" id="2qy-Un-lwA" customClass="MyActivitiesViewController" sceneMemberID="viewController">
@@ -2002,7 +2006,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" id="sk4-SO-V3U"/>
-                    <navigationItem key="navigationItem" title="My List" id="phG-kb-pmm">
+                    <navigationItem key="navigationItem" title="My Festival" id="phG-kb-pmm">
                         <barButtonItem key="backBarButtonItem" title="Back" id="GXr-Rw-ceY"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="BqA-An-6Q2"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="mAI-UM-4AC">
@@ -2913,7 +2917,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="What are your interests" id="TPp-ib-zQR"/>
+                    <navigationItem key="navigationItem" title="What are your interests" id="TPp-ib-zQR">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="d3i-Jm-e9r"/>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="interestBtn1" destination="OIV-To-sue" id="JpH-YU-Bkx"/>

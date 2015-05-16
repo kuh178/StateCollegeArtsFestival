@@ -99,7 +99,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"post_id"     :[NSString stringWithFormat:@"%d", [[item objectForKey:@"post_id"] intValue]]};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/download_user_photo_likes_comments.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/download_user_photo_likes_comments.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         
@@ -162,7 +162,7 @@
     NSLog(@"%d", [[item objectForKey:@"post_id"] intValue]);
     NSLog(@"%d", [[userDefault objectForKey:@"user_id"] intValue]);
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/upload_user_content_like.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/upload_user_content_like.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         

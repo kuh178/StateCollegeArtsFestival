@@ -103,7 +103,7 @@
 - (void) downloadContent {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://community.ist.psu.edu/Festival/download_tweets.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:@"http://heounsuk.com/festival/download_tweets.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {

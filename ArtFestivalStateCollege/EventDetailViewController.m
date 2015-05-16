@@ -267,7 +267,7 @@ int photo_cnt = 0;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"event_id"    :[NSString stringWithFormat:@"%d", [[item objectForKey:@"id"] intValue]]};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/download_event_details.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/download_event_details.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         
@@ -306,7 +306,7 @@ int photo_cnt = 0;
                              @"latitude"    :[NSString stringWithFormat:@"%f", latitude],
                              @"longitude"   :[NSString stringWithFormat:@"%f", longitude]};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/upload_my_going.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/upload_my_going.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         
@@ -347,7 +347,7 @@ int photo_cnt = 0;
                              @"latitude"    :[NSString stringWithFormat:@"%f", latitude],
                              @"longitude"   :[NSString stringWithFormat:@"%f", longitude]};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/upload_my_favorite_events.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/upload_my_favorite_events.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         
@@ -376,7 +376,7 @@ int photo_cnt = 0;
     NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"],
                              @"event_id"    :[item objectForKey:@"id"]};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/remove_meetup.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/remove_meetup.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         

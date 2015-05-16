@@ -83,7 +83,7 @@
                              @"password"    :passwordText.text,
                              @"device"      :@"1"};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/create_account.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/create_account.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         
@@ -185,7 +185,7 @@
     NSRegularExpression *regEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
     NSUInteger regExMatches = [regEx numberOfMatchesInString:emailString options:0 range:NSMakeRange(0, [emailString length])];
     
-    NSLog(@"%i", regExMatches);
+    NSLog(@"%lu", (unsigned long)regExMatches);
     if (regExMatches == 0) {
         return NO;
     } else {

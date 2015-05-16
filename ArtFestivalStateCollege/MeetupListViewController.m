@@ -125,8 +125,11 @@
 
 - (void) downloadContent {
     
+    // show download indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://community.ist.psu.edu/Festival/download_meetups.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:@"http://heounsuk.com/festival/download_meetups.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
@@ -146,6 +149,9 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
+    
+    // dismiss download indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 -(IBAction)refreshBtnPressed:(id)sender {

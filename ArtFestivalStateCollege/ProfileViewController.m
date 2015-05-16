@@ -53,7 +53,8 @@ NSMutableArray *userPhotoArray;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.navigationController.navigationItem.backBarButtonItem.title = @"Back";
+    self.screenName = @"ProfileViewController";
+    self.navigationItem.backBarButtonItem.title = @"Back";
     self.hidesBottomBarWhenPushed = YES;
 }
 
@@ -78,7 +79,7 @@ NSMutableArray *userPhotoArray;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"user_id"     :[NSString stringWithFormat:@"%d", userID]};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/download_user_profile.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/download_user_profile.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
@@ -106,7 +107,7 @@ NSMutableArray *userPhotoArray;
             // other stats
             commentsLabel.text = [NSString stringWithFormat:@"%@", [item objectForKey:@"user_comments_cnt"]];
             likesLabel.text = [NSString stringWithFormat:@"%@", [item objectForKey:@"user_likes_cnt"]];
-            photosLabel.text = [NSString stringWithFormat:@"%d", [[item objectForKey:@"user_content"] count]];
+            photosLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[[item objectForKey:@"user_content"] count]];
             
             // preferences
             // change the alpha value of interest btn depending on its value

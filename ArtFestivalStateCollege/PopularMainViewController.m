@@ -183,7 +183,7 @@ int popular_flag = PERFORMANCE;
     }
     else { // flag == USER
         
-        NSLog(@"%d", [userList count]);
+        NSLog(@"%lu", (unsigned long)[userList count]);
         
         // Display items
         NSMutableDictionary *item       = [userList objectAtIndex:indexPath.row];
@@ -285,7 +285,7 @@ int popular_flag = PERFORMANCE;
 - (void) downloadContent {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://community.ist.psu.edu/Festival/download_events_popular.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:@"http://heounsuk.com/festival/download_events_popular.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
@@ -325,7 +325,7 @@ int popular_flag = PERFORMANCE;
 - (void) downloadUserContent {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://community.ist.psu.edu/Festival/download_photos_popular.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:@"http://heounsuk.com/festival/download_photos_popular.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
@@ -365,7 +365,7 @@ int popular_flag = PERFORMANCE;
 - (void) downloadUsers {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://community.ist.psu.edu/Festival/download_users_popular.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:@"http://heounsuk.com/festival/download_users_popular.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {

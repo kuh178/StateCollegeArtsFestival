@@ -154,7 +154,7 @@
                                  @"datetime"    :[NSString stringWithFormat:@"%@", timeStampValue],
                                  @"comment"     :[NSString stringWithFormat:@"%@", commentText.text]};
         
-        [manager POST:@"http://community.ist.psu.edu/Festival/upload_user_content_comment.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [manager POST:@"http://heounsuk.com/festival/upload_user_content_comment.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Success: %@", responseObject);
             

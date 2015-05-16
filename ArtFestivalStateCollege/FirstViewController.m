@@ -140,53 +140,62 @@ int flag = firstDay;
 
 - (void) downloadContent:(int)flag {
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://community.ist.psu.edu/Festival/download_events.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
-            jsonArray = [NSMutableArray arrayWithCapacity:0];
-            eventList = [NSMutableArray arrayWithCapacity:0];
-            eventListDay = [NSMutableArray arrayWithCapacity:0];
-            [jsonArray addObjectsFromArray:[responseObject objectForKey:@"results"]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager GET:@"http://heounsuk.com/festival/download_events.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"JSON: %@", responseObject);
             
-            if ([jsonArray count] > 0) {
-                // insert new items into table
-                for (int i = 0; i < [jsonArray count]; i++) {
-                    
-                    // get an item
-                    NSDictionary *item = [jsonArray objectAtIndex:i];
-                    [eventList addObject:item];
+            if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
+                jsonArray = [NSMutableArray arrayWithCapacity:0];
+                eventList = [NSMutableArray arrayWithCapacity:0];
+                eventListDay = [NSMutableArray arrayWithCapacity:0];
+                [jsonArray addObjectsFromArray:[responseObject objectForKey:@"results"]];
+                
+                if ([jsonArray count] > 0) {
+                    // insert new items into table
+                    for (int i = 0; i < [jsonArray count]; i++) {
+                        
+                        // get an item
+                        NSDictionary *item = [jsonArray objectAtIndex:i];
+                        [eventList addObject:item];
+                    }
                 }
+                else {
+                    NSLog(@"No data available");
+                }
+                
+                // default is the 1st day
+                for (int i = 0 ; i < [eventList count] ; i++) {
+                    
+                    NSMutableDictionary *item = [eventList objectAtIndex:i];
+                    
+                    if ([[item objectForKey:@"day"] intValue] == flag) {
+                        [eventListDay addObject:item];
+                    }
+                }
+                
+                [tableViewList reloadData];
             }
             else {
-                NSLog(@"No data available");
+                UIAlertView *dialog = [[UIAlertView alloc]init];
+                [dialog setDelegate:self];
+                [dialog setTitle:@"Message"];
+                [dialog setMessage:@"No results found"];
+                [dialog addButtonWithTitle:@"OK"];
+                [dialog show];
             }
             
-            // default is the 1st day
-            for (int i = 0 ; i < [eventList count] ; i++) {
-                
-                NSMutableDictionary *item = [eventList objectAtIndex:i];
-                
-                if ([[item objectForKey:@"day"] intValue] == flag) {
-                    [eventListDay addObject:item];
-                }
-            }
-            
-            [tableViewList reloadData];
-        }
-        else {
-            UIAlertView *dialog = [[UIAlertView alloc]init];
-            [dialog setDelegate:self];
-            [dialog setTitle:@"Message"];
-            [dialog setMessage:@"No results found"];
-            [dialog addButtonWithTitle:@"OK"];
-            [dialog show];
-        }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        });
+    });
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -101,7 +101,7 @@
     NSLog(@"%@", [item objectForKey:@"image"]);
     
     // display the number of likes and comments
-    likeCnt.text = [NSString stringWithFormat:@"%d like(s), %d comment(s)", [[item objectForKey:@"like_cnt"] intValue], [[item objectForKey:@"user_comments_array"] count]];
+    likeCnt.text = [NSString stringWithFormat:@"%d like(s), %lu comment(s)", [[item objectForKey:@"like_cnt"] intValue], (unsigned long)[[item objectForKey:@"user_comments_array"] count]];
     
     /**
      * Decompress image on background thread before displaying it to prevent lag
@@ -153,7 +153,7 @@
     NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"],
                              @"event_id"    :[NSString stringWithFormat:@"%d", eventID]};
     
-    [manager POST:@"http://community.ist.psu.edu/Festival/download_event_user_images.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/download_event_user_images.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         

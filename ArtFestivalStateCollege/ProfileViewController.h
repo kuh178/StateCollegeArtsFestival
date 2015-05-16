@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface ProfileViewController : UIViewController {
+@interface ProfileViewController : GAITrackedViewController {
     IBOutlet UIImageView *profileImage;
     IBOutlet UIButton *logoutBtn;
     IBOutlet UIButton *seePhotosBtn;
