@@ -34,7 +34,17 @@
 		FA446E8D195686A2007941C6 /* map_icon_pink.png in Resources */ = {isa = PBXBuildFile; fileRef = FA446E8C195686A2007941C6 /* map_icon_pink.png */; };
 		FA446E911956A430007941C6 /* ist_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FA446E901956A430007941C6 /* ist_logo.png */; };
 		FA48A31E1AD375CC00B21CCE /* ChooseInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48A31D1AD375CC00B21CCE /* ChooseInterestViewController.m */; };
+		FA5193301B07A226009A1CC6 /* 1431810271_40.Cloud-32.png in Resources */ = {isa = PBXBuildFile; fileRef = FA51932C1B07A225009A1CC6 /* 1431810271_40.Cloud-32.png */; };
+		FA5193311B07A226009A1CC6 /* 1431810191_32.ID-Vertical-32.png in Resources */ = {isa = PBXBuildFile; fileRef = FA51932D1B07A225009A1CC6 /* 1431810191_32.ID-Vertical-32.png */; };
+		FA5193321B07A226009A1CC6 /* 1431810154_18.Pictures-Day-32.png in Resources */ = {isa = PBXBuildFile; fileRef = FA51932E1B07A225009A1CC6 /* 1431810154_18.Pictures-Day-32.png */; };
+		FA5193331B07A226009A1CC6 /* 1431810127_33.Thumbs-Up-32.png in Resources */ = {isa = PBXBuildFile; fileRef = FA51932F1B07A226009A1CC6 /* 1431810127_33.Thumbs-Up-32.png */; };
+		FA5193361B07A654009A1CC6 /* 1431811170_15.Pencil-32.png in Resources */ = {isa = PBXBuildFile; fileRef = FA5193341B07A654009A1CC6 /* 1431811170_15.Pencil-32.png */; };
+		FA5193371B07A654009A1CC6 /* 1431811075_25.Camera-Front-32.png in Resources */ = {isa = PBXBuildFile; fileRef = FA5193351B07A654009A1CC6 /* 1431811075_25.Camera-Front-32.png */; };
+		FA51933A1B0A4D3F009A1CC6 /* 2015_button_faceonly.png in Resources */ = {isa = PBXBuildFile; fileRef = FA5193391B0A4D3F009A1CC6 /* 2015_button_faceonly.png */; };
 		FA67962718D6719700A5BECC /* twitter_blue_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = FA67962618D6719700A5BECC /* twitter_blue_bar.png */; };
+		FA6F12A71B13F97100F4ECAA /* MyActivityQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6F12A61B13F97100F4ECAA /* MyActivityQuestionViewController.m */; };
+		FA6F12A91B14C8D500F4ECAA /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6F12A81B14C8D500F4ECAA /* libGoogleAnalyticsServices.a */; };
+		FA6F12AB1B14CA1800F4ECAA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6F12AA1B14CA1800F4ECAA /* libsqlite3.dylib */; };
 		FA724E5B1B01713500CF0985 /* 1431404518_star.png in Resources */ = {isa = PBXBuildFile; fileRef = FA724E5A1B01713500CF0985 /* 1431404518_star.png */; };
 		FA724E601B01720900CF0985 /* 1431404738_illustration.png in Resources */ = {isa = PBXBuildFile; fileRef = FA724E5C1B01720900CF0985 /* 1431404738_illustration.png */; };
 		FA724E611B01720900CF0985 /* 1431404708_ticket.png in Resources */ = {isa = PBXBuildFile; fileRef = FA724E5D1B01720900CF0985 /* 1431404708_ticket.png */; };
@@ -121,7 +131,6 @@
 		FAF6E97B18D4D37800BDD03D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97A18D4D37800BDD03D /* OpenGLES.framework */; };
 		FAF6E97D18D4D38400BDD03D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97C18D4D38400BDD03D /* QuartzCore.framework */; };
 		FAF6E97F18D4D38B00BDD03D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97E18D4D38B00BDD03D /* AdSupport.framework */; };
-		FAF6E98618D4D3DF00BDD03D /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E98518D4D3DF00BDD03D /* libGoogleAnalyticsServices.a */; };
 		FAF6E98A18D4D52000BDD03D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E98918D4D52000BDD03D /* LoginViewController.m */; };
 		FAF6E99318D5582900BDD03D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E99218D5582900BDD03D /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -182,7 +191,18 @@
 		FA446E901956A430007941C6 /* ist_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ist_logo.png; sourceTree = "<group>"; };
 		FA48A31C1AD375CC00B21CCE /* ChooseInterestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseInterestViewController.h; sourceTree = "<group>"; };
 		FA48A31D1AD375CC00B21CCE /* ChooseInterestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseInterestViewController.m; sourceTree = "<group>"; };
+		FA51932C1B07A225009A1CC6 /* 1431810271_40.Cloud-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1431810271_40.Cloud-32.png"; sourceTree = "<group>"; };
+		FA51932D1B07A225009A1CC6 /* 1431810191_32.ID-Vertical-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1431810191_32.ID-Vertical-32.png"; sourceTree = "<group>"; };
+		FA51932E1B07A225009A1CC6 /* 1431810154_18.Pictures-Day-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1431810154_18.Pictures-Day-32.png"; sourceTree = "<group>"; };
+		FA51932F1B07A226009A1CC6 /* 1431810127_33.Thumbs-Up-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1431810127_33.Thumbs-Up-32.png"; sourceTree = "<group>"; };
+		FA5193341B07A654009A1CC6 /* 1431811170_15.Pencil-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1431811170_15.Pencil-32.png"; sourceTree = "<group>"; };
+		FA5193351B07A654009A1CC6 /* 1431811075_25.Camera-Front-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1431811075_25.Camera-Front-32.png"; sourceTree = "<group>"; };
+		FA5193391B0A4D3F009A1CC6 /* 2015_button_faceonly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2015_button_faceonly.png; sourceTree = "<group>"; };
 		FA67962618D6719700A5BECC /* twitter_blue_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_blue_bar.png; sourceTree = "<group>"; };
+		FA6F12A51B13F97100F4ECAA /* MyActivityQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivityQuestionViewController.h; sourceTree = "<group>"; };
+		FA6F12A61B13F97100F4ECAA /* MyActivityQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivityQuestionViewController.m; sourceTree = "<group>"; };
+		FA6F12A81B14C8D500F4ECAA /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		FA6F12AA1B14CA1800F4ECAA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		FA724E5A1B01713500CF0985 /* 1431404518_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1431404518_star.png; sourceTree = "<group>"; };
 		FA724E5C1B01720900CF0985 /* 1431404738_illustration.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1431404738_illustration.png; sourceTree = "<group>"; };
 		FA724E5D1B01720900CF0985 /* 1431404708_ticket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1431404708_ticket.png; sourceTree = "<group>"; };
@@ -301,7 +321,6 @@
 		FAF6E97A18D4D37800BDD03D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		FAF6E97C18D4D38400BDD03D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FAF6E97E18D4D38B00BDD03D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		FAF6E98518D4D3DF00BDD03D /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		FAF6E98818D4D52000BDD03D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		FAF6E98918D4D52000BDD03D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FAF6E98C18D545F000BDD03D /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
@@ -318,12 +337,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA6F12AB1B14CA1800F4ECAA /* libsqlite3.dylib in Frameworks */,
 				FAF6E97B18D4D37800BDD03D /* OpenGLES.framework in Frameworks */,
 				FAF6E97518D4D36200BDD03D /* GLKit.framework in Frameworks */,
 				FAF6E97318D4D35C00BDD03D /* CoreText.framework in Frameworks */,
 				FA0A6BB718DB636F00E706F5 /* AssetsLibrary.framework in Frameworks */,
 				FAF6E99318D5582900BDD03D /* MapKit.framework in Frameworks */,
-				FAF6E98618D4D3DF00BDD03D /* libGoogleAnalyticsServices.a in Frameworks */,
 				FAF6E8C718C6509800BDD03D /* UIKit.framework in Frameworks */,
 				FAF6E8C518C6509800BDD03D /* CoreGraphics.framework in Frameworks */,
 				FAF6E97F18D4D38B00BDD03D /* AdSupport.framework in Frameworks */,
@@ -338,6 +357,7 @@
 				FAF6E96718D4D32C00BDD03D /* ImageIO.framework in Frameworks */,
 				FAF6E96518D4D32600BDD03D /* CFNetwork.framework in Frameworks */,
 				FAF6E96318D4D31700BDD03D /* Social.framework in Frameworks */,
+				FA6F12A91B14C8D500F4ECAA /* libGoogleAnalyticsServices.a in Frameworks */,
 				FAF6E8C318C6509800BDD03D /* Foundation.framework in Frameworks */,
 				ABBDD3DF803F4EE1AFE08F86 /* libPods.a in Frameworks */,
 			);
@@ -431,6 +451,13 @@
 		FA6B17821AD06D850086F493 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FA5193391B0A4D3F009A1CC6 /* 2015_button_faceonly.png */,
+				FA5193341B07A654009A1CC6 /* 1431811170_15.Pencil-32.png */,
+				FA5193351B07A654009A1CC6 /* 1431811075_25.Camera-Front-32.png */,
+				FA51932C1B07A225009A1CC6 /* 1431810271_40.Cloud-32.png */,
+				FA51932D1B07A225009A1CC6 /* 1431810191_32.ID-Vertical-32.png */,
+				FA51932E1B07A225009A1CC6 /* 1431810154_18.Pictures-Day-32.png */,
+				FA51932F1B07A226009A1CC6 /* 1431810127_33.Thumbs-Up-32.png */,
 				FA20E73C1B06307500228CAA /* 2015 Poster_resized.jpg */,
 				FA20E73A1B06282000228CAA /* 2015 Button.png */,
 				FA724E641B01C2E600CF0985 /* 1431425444_email.png */,
@@ -473,6 +500,15 @@
 				FAF6E95E18D4D0E400BDD03D /* 2013_Poster_Lg.jpg */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		FA6F12A41B13F94500F4ECAA /* MyActivityPage */ = {
+			isa = PBXGroup;
+			children = (
+				FA6F12A51B13F97100F4ECAA /* MyActivityQuestionViewController.h */,
+				FA6F12A61B13F97100F4ECAA /* MyActivityQuestionViewController.m */,
+			);
+			name = MyActivityPage;
 			sourceTree = "<group>";
 		};
 		FA8B7FC418EDCE6F001F3B1B /* Maps */ = {
@@ -535,9 +571,10 @@
 		FAF6E8C118C6509800BDD03D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA6F12AA1B14CA1800F4ECAA /* libsqlite3.dylib */,
+				FA6F12A81B14C8D500F4ECAA /* libGoogleAnalyticsServices.a */,
 				FA0A6BB618DB636F00E706F5 /* AssetsLibrary.framework */,
 				FAF6E99218D5582900BDD03D /* MapKit.framework */,
-				FAF6E98518D4D3DF00BDD03D /* libGoogleAnalyticsServices.a */,
 				FAF6E97E18D4D38B00BDD03D /* AdSupport.framework */,
 				FAF6E97C18D4D38400BDD03D /* QuartzCore.framework */,
 				FAF6E97A18D4D37800BDD03D /* OpenGLES.framework */,
@@ -565,6 +602,7 @@
 		FAF6E8C818C6509800BDD03D /* ArtFestivalStateCollege */ = {
 			isa = PBXGroup;
 			children = (
+				FA6F12A41B13F94500F4ECAA /* MyActivityPage */,
 				FA27BDFF1AF86A0E00715ABF /* Meetup */,
 				FA4407B41AD318BD001CEFFC /* Profile */,
 				FAC3914C1952A91E00A2ED2D /* HeatMap */,
@@ -793,12 +831,15 @@
 				FA20E73D1B06307500228CAA /* 2015 Poster_resized.jpg in Resources */,
 				FA724E631B01720900CF0985 /* 1431404695_world.png in Resources */,
 				FA8B7FB218DE1CEF001F3B1B /* microphone-7.png in Resources */,
+				FA5193331B07A226009A1CC6 /* 1431810127_33.Thumbs-Up-32.png in Resources */,
 				FAF6E96118D4D17F00BDD03D /* FB-f-Logo__blue_1024.png in Resources */,
 				FA8B7FCD18F1E816001F3B1B /* thumbs_up.png in Resources */,
+				FA5193321B07A226009A1CC6 /* 1431810154_18.Pictures-Day-32.png in Resources */,
 				FA8B7FB018DE1AE9001F3B1B /* flag-7.png in Resources */,
 				FA8B7FA818DE1789001F3B1B /* photos-default-7.png in Resources */,
 				FA0A6BD018DB97ED00E706F5 /* picture.png in Resources */,
 				FAF6E8DE18C6509800BDD03D /* Images.xcassets in Resources */,
+				FA5193301B07A226009A1CC6 /* 1431810271_40.Cloud-32.png in Resources */,
 				FAF6E8CD18C6509800BDD03D /* InfoPlist.strings in Resources */,
 				FAC391611952D37B00A2ED2D /* medal_bronze.png in Resources */,
 				FA446E7519558199007941C6 /* Festival-Map.png in Resources */,
@@ -811,6 +852,7 @@
 				FA8B7FAC18DE183B001F3B1B /* rss-7.png in Resources */,
 				FA67962718D6719700A5BECC /* twitter_blue_bar.png in Resources */,
 				FAAA6078195EB4E700433679 /* StoryBoard_Small.storyboard in Resources */,
+				FA51933A1B0A4D3F009A1CC6 /* 2015_button_faceonly.png in Resources */,
 				FAC3914B1952A1FC00A2ED2D /* info.png in Resources */,
 				FA724E5B1B01713500CF0985 /* 1431404518_star.png in Resources */,
 				FA8B7FAA18DE17A7001F3B1B /* man-7.png in Resources */,
@@ -822,11 +864,14 @@
 				FAAA6074195E973B00433679 /* festivalmap.pdf in Resources */,
 				FA446E7719560312007941C6 /* message-7.png in Resources */,
 				FA8B7FD518F1E9CF001F3B1B /* website.png in Resources */,
+				FA5193361B07A654009A1CC6 /* 1431811170_15.Pencil-32.png in Resources */,
 				FA724E651B01C2E600CF0985 /* 1431425444_email.png in Resources */,
 				FA8B7FAE18DE18CF001F3B1B /* home-7.png in Resources */,
+				FA5193371B07A654009A1CC6 /* 1431811075_25.Camera-Front-32.png in Resources */,
 				FA446E8D195686A2007941C6 /* map_icon_pink.png in Resources */,
 				FA8B7FDA18F25818001F3B1B /* plus.png in Resources */,
 				FAF6E8D618C6509800BDD03D /* StoryBoard5.storyboard in Resources */,
+				FA5193311B07A226009A1CC6 /* 1431810191_32.ID-Vertical-32.png in Resources */,
 				FAF6E95F18D4D0E400BDD03D /* 2013_Poster_Lg.jpg in Resources */,
 				FAC391601952D37B00A2ED2D /* medal_silver.png in Resources */,
 				FA724E621B01720900CF0985 /* 1431404698_bookmark.png in Resources */,
@@ -919,6 +964,7 @@
 				FAC391551952A93B00A2ED2D /* HeatMapViewController.m in Sources */,
 				FAAA6072195E954300433679 /* FestivalMapWebViewController.m in Sources */,
 				FAF6E90318C6869300BDD03D /* MoreViewController.m in Sources */,
+				FA6F12A71B13F97100F4ECAA /* MyActivityQuestionViewController.m in Sources */,
 				FAF6E90D18C686DA00BDD03D /* UserInputDetailViewController.m in Sources */,
 				FAC39172195414D500A2ED2D /* MyPhotoViewController.m in Sources */,
 				FA78AD571958A04B0000EEC2 /* ArtistsMoreImagesViewController.m in Sources */,
@@ -1098,7 +1144,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/kyungsikhan/Keith/iPhone\\ Dev/ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a",
+					/Users/kyungsikhan/Keith/iPhone,
+					Dev/ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a,
+					"$(PROJECT_DIR)",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1132,7 +1180,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/kyungsikhan/Keith/iPhone\\ Dev/ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a",
+					/Users/kyungsikhan/Keith/iPhone,
+					Dev/ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a,
+					"$(PROJECT_DIR)",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (

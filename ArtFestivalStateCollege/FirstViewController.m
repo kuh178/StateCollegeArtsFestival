@@ -132,7 +132,7 @@ int flag = firstDay;
     
     EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
     viewController.hidesBottomBarWhenPushed = YES;
-    [viewController setItem:item];
+    [viewController setEventID:[[item objectForKey:@"id"]intValue]];
     [viewController setIsOfficial:YES];
     [self.navigationController pushViewController:viewController animated:YES];
     //[self presentViewController:viewController animated:YES completion:nil];
@@ -140,7 +140,13 @@ int flag = firstDay;
 
 - (void) downloadContent:(int)flag {
     
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
+    
+    [indicator startAnimating];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
@@ -177,6 +183,7 @@ int flag = firstDay;
                     }
                 }
                 
+                [indicator stopAnimating];
                 [tableViewList reloadData];
             }
             else {
@@ -193,7 +200,7 @@ int flag = firstDay;
         }];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            // run UI updates
         });
     });
 }

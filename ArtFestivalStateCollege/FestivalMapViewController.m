@@ -139,6 +139,7 @@
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
             locationList = [NSMutableArray arrayWithCapacity:0];
+            [locationList addObjectsFromArray:[responseObject objectForKey:@"results"]];
 
             [self setupMapView];
         }

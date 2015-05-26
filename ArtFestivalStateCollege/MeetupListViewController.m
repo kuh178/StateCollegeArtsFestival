@@ -116,7 +116,7 @@
     
     EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
     viewController.hidesBottomBarWhenPushed = YES;
-    [viewController setItem:item];
+    [viewController setEventID:[[item objectForKey:@"id"] intValue]];
     [viewController setIsOfficial:NO];
     [self.navigationController pushViewController:viewController animated:YES];
 
@@ -126,7 +126,13 @@
 - (void) downloadContent {
     
     // show download indicator
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
+    
+    [indicator startAnimating];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://heounsuk.com/festival/download_meetups.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -151,7 +157,7 @@
     }];
     
     // dismiss download indicator
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [indicator stopAnimating];
 }
 
 -(IBAction)refreshBtnPressed:(id)sender {

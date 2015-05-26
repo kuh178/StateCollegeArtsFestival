@@ -41,11 +41,11 @@
     
     IBOutlet UIBarButtonItem    *eventUserInputAddBtn;
     
-    NSMutableDictionary         *item;
-    
     BOOL isOfficial;
     double latitude;
     double longitude;
+    
+    int                         eventID;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView        *eventImage;
@@ -78,11 +78,11 @@
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem    *eventUserInputAddBtn;
 
-@property (nonatomic, retain) NSMutableDictionary         *item;
-
 @property (nonatomic, assign) double latitude;
 @property (nonatomic, assign) double longitude;
 @property (nonatomic, assign) BOOL isOfficial;
+
+@property (nonatomic, assign) int                         eventID;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *startLocation;

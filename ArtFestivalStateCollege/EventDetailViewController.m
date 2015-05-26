@@ -22,10 +22,14 @@
 
 @implementation EventDetailViewController
 
-@synthesize eventImage, eventButtonImage, eventName, eventDatetime, eventGoingBtn, eventButton, eventWebPageBtn, eventUserInputAddBtn, eventGoingAddBtn, eventUserInputBtn, eventLikeBtn, eventLocationName, eventDescription, eventMap, item, latitude, longitude, isOfficial, eventView1, eventWebImage, eventRemoveBtn, eventEditBtn;
+@synthesize eventImage, eventButtonImage, eventName, eventDatetime, eventGoingBtn, eventButton, eventWebPageBtn, eventUserInputAddBtn, eventGoingAddBtn, eventUserInputBtn, eventLikeBtn, eventLocationName, eventDescription, eventMap, latitude, longitude, isOfficial, eventView1, eventWebImage, eventRemoveBtn, eventEditBtn;
 @synthesize view1, view2, view3, view4;
+@synthesize eventID;
 
 int photo_cnt = 0;
+NSMutableDictionary *item;
+
+UIActivityIndicatorView *indicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -95,96 +99,14 @@ int photo_cnt = 0;
     [_locationManager startUpdatingLocation];
     _startLocation = nil;
     
-    // display information
-    eventName.text          = [item objectForKey:@"name"];
-    eventDescription.text   = [item objectForKey:@"description"];
+    // show indicator
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
     
-    // event datetime
-    // ref: http://stackoverflow.com/questions/1862905/nsdate-convert-date-to-gmt
-    NSTimeInterval _interval=[[item objectForKey:@"datetime"] doubleValue];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
-    
-    NSTimeInterval timeZoneOffset = [[NSTimeZone defaultTimeZone] secondsFromGMT]; // You could also use the systemTimeZone method
-    NSTimeInterval gmtTimeInterval = [date timeIntervalSinceReferenceDate] - timeZoneOffset;
-    NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
-    
-    NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
-    [_formatter setLocale:[NSLocale currentLocale]];
-    [_formatter setDateFormat:@"MMM dd, hh:mm a"];
-    NSString *_date=[_formatter stringFromDate:gmtDate];
-    eventDatetime.text = _date;
-    
-    //[eventGoingBtn setTitle:[NSString stringWithFormat:@"Going (%d)", [[item objectForKey:@"going_user_ary"] count]] forState:UIControlStateNormal];
-    //[eventUserInputBtn setTitle:[NSString stringWithFormat:@"Photos (%d)", [[item objectForKey:@"user_content_cnt"] intValue]] forState:UIControlStateNormal];
-    
-    //self.mediaFocusManager = [[ASMediaFocusManager alloc] init];
-    //self.mediaFocusManager.delegate = self;
-    // Tells which views need to be focusable. You can put your image views in an array and give it to the focus manager.
-    //[self.mediaFocusManager installOnViews:self.imageViews];
-    //[self.mediaFocusManager installOnView:eventImage];
-    
-    [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
-    eventImage.layer.cornerRadius = 4.0f;
-    eventImage.clipsToBounds = YES;
-    
-    // add a push pin on the map
-    CLLocationCoordinate2D loc = CLLocationCoordinate2DMake([[item objectForKey:@"latitude"] doubleValue], [[item objectForKey:@"longitude"] doubleValue]);
-    
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    [annotation setCoordinate:loc];
-    //[annotation setTitle:@"Title"]; //You can set the subtitle too
-    [eventMap addAnnotation:annotation];
-    
-    MKCoordinateRegion adjustedRegion = [eventMap regionThatFits:MKCoordinateRegionMakeWithDistance(loc, 800, 800)];
-    adjustedRegion.span.longitudeDelta  = 0.01;
-    adjustedRegion.span.latitudeDelta  = 0.01;
-    [eventMap setRegion:adjustedRegion animated:YES];
-    
-    [self tapGestureRecognizerOfficial];
-    
-    // check if the event is official one
-    if (isOfficial) {
-        if ([[item objectForKey:@"button"] intValue] == 1) {
-            eventButton.text = @"Button required";
-            eventButtonImage.hidden = NO;
-        }
-        else {
-            eventButton.text = @"Free event";
-            eventButtonImage.hidden = NO;
-            eventButtonImage.alpha = 0.2;
-            
-            eventEditBtn.hidden = YES;
-            eventRemoveBtn.hidden = YES;
-        }
-    }
-    else { // if not official use eventButton text for displaying user_name who posted the event
-        eventButton.text = [item objectForKey:@"user_name"];
-        [eventButtonImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"user_image"]]]];
-        eventButtonImage.layer.cornerRadius = 4.0f;
-        eventButtonImage.clipsToBounds = YES;
-        eventButtonImage.hidden = NO;
-        
-        [self tapGestureRecognizer];
-    }
-    
-    // set location name; if null, just Location
-    if ([[item objectForKey:@"location_name"] isEqual:[NSNull null]]) {
-        eventLocationName.text = @"Location";
-        eventLocationName.hidden = NO;
-    }
-    else {
-        eventLocationName.text = [item objectForKey:@"location_name"];
-        eventLocationName.hidden = NO;
-    }
-    
-    // hide website btn if nothing exists
-    if ([[item objectForKey:@"website"] isEqualToString:@"none"] ||
-        [[item objectForKey:@"website"] isEqual:[NSNull null]] ||
-        [[item objectForKey:@"website"] length] == 0) {
-        eventWebPageBtn.enabled = NO;
-        eventWebImage.alpha = 0.2;
-        eventWebPageBtn.alpha = 0.2;
-    }
+    [indicator startAnimating];
 }
 
 - (void) tapGestureRecognizer {
@@ -265,9 +187,9 @@ int photo_cnt = 0;
 - (void) downloadEventUpdates {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *params = @{@"event_id"    :[NSString stringWithFormat:@"%d", [[item objectForKey:@"id"] intValue]]};
+    NSDictionary *params = @{@"event_id"    :[NSString stringWithFormat:@"%d", eventID]};
     
-    [manager POST:@"http://heounsuk.com/festival/download_event_details.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"http://heounsuk.com/festival/download_event_details_all.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         
@@ -275,14 +197,99 @@ int photo_cnt = 0;
             NSMutableArray *eventInfoItem = [NSMutableArray arrayWithCapacity:0];
             [eventInfoItem addObjectsFromArray:[responseObject objectForKey:@"results"]];
             
-            NSMutableDictionary *eventItem = [eventInfoItem objectAtIndex:0];
+            item = [eventInfoItem objectAtIndex:0];
             
             // update the going and userinput btn texts
-            [eventGoingBtn setTitle:[NSString stringWithFormat:@"     (%lu)", (unsigned long)[[eventItem objectForKey:@"going_user_ary"] count]] forState:UIControlStateNormal];
-            [eventUserInputBtn setTitle:[NSString stringWithFormat:@"     (%d)", [[eventItem objectForKey:@"user_content_cnt"] intValue]] forState:UIControlStateNormal];
-            [eventLikeBtn setTitle:[NSString stringWithFormat:@"     (%d)", [[eventItem objectForKey:@"favorite_cnt"] intValue]] forState:UIControlStateNormal];
+            [eventGoingBtn setTitle:[NSString stringWithFormat:@"     (%lu)", (unsigned long)[[item objectForKey:@"going_user_ary"] count]] forState:UIControlStateNormal];
+            [eventUserInputBtn setTitle:[NSString stringWithFormat:@"     (%d)", [[item objectForKey:@"user_content_cnt"] intValue]] forState:UIControlStateNormal];
+            [eventLikeBtn setTitle:[NSString stringWithFormat:@"     (%d)", [[item objectForKey:@"favorite_cnt"] intValue]] forState:UIControlStateNormal];
             
-            photo_cnt = [[eventItem objectForKey:@"user_content_cnt"] intValue];
+            photo_cnt = [[item objectForKey:@"user_content_cnt"] intValue];
+            
+            
+            // display information
+            eventName.text          = [item objectForKey:@"name"];
+            eventDescription.text   = [item objectForKey:@"description"];
+            
+            // event datetime
+            // ref: http://stackoverflow.com/questions/1862905/nsdate-convert-date-to-gmt
+            NSTimeInterval _interval=[[item objectForKey:@"datetime"] doubleValue];
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+            
+            NSTimeInterval timeZoneOffset = [[NSTimeZone defaultTimeZone] secondsFromGMT]; // You could also use the systemTimeZone method
+            NSTimeInterval gmtTimeInterval = [date timeIntervalSinceReferenceDate] - timeZoneOffset;
+            NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
+            
+            NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
+            [_formatter setLocale:[NSLocale currentLocale]];
+            [_formatter setDateFormat:@"MMM dd, hh:mm a"];
+            NSString *_date=[_formatter stringFromDate:gmtDate];
+            eventDatetime.text = _date;
+            
+            [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
+            eventImage.layer.cornerRadius = 4.0f;
+            eventImage.clipsToBounds = YES;
+            
+            // add a push pin on the map
+            CLLocationCoordinate2D loc = CLLocationCoordinate2DMake([[item objectForKey:@"latitude"] doubleValue], [[item objectForKey:@"longitude"] doubleValue]);
+            
+            MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+            [annotation setCoordinate:loc];
+            //[annotation setTitle:@"Title"]; //You can set the subtitle too
+            [eventMap addAnnotation:annotation];
+            
+            MKCoordinateRegion adjustedRegion = [eventMap regionThatFits:MKCoordinateRegionMakeWithDistance(loc, 800, 800)];
+            adjustedRegion.span.longitudeDelta  = 0.01;
+            adjustedRegion.span.latitudeDelta  = 0.01;
+            [eventMap setRegion:adjustedRegion animated:YES];
+            
+            [self tapGestureRecognizerOfficial];
+            
+            // check if the event is official one
+            if (isOfficial) {
+                if ([[item objectForKey:@"button"] intValue] == 1) {
+                    eventButton.text = @"Button required";
+                    eventButtonImage.hidden = NO;
+                }
+                else {
+                    eventButton.text = @"Free event";
+                    eventButtonImage.hidden = NO;
+                    eventButtonImage.alpha = 0.2;
+                    
+                    eventEditBtn.hidden = YES;
+                    eventRemoveBtn.hidden = YES;
+                }
+            }
+            else { // if not official use eventButton text for displaying user_name who posted the event
+                eventButton.text = [item objectForKey:@"user_name"];
+                eventButton.textColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0];
+                
+                [eventButtonImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"user_image"]]]];
+                eventButtonImage.layer.cornerRadius = 4.0f;
+                eventButtonImage.clipsToBounds = YES;
+                eventButtonImage.hidden = NO;
+                
+                [self tapGestureRecognizer];
+            }
+            
+            // set location name; if null, just Location
+            if ([[item objectForKey:@"location_name"] isEqual:[NSNull null]]) {
+                eventLocationName.text = @"Location";
+                eventLocationName.hidden = NO;
+            }
+            else {
+                eventLocationName.text = [item objectForKey:@"location_name"];
+                eventLocationName.hidden = NO;
+            }
+            
+            // hide website btn if nothing exists
+            if ([[item objectForKey:@"website"] isEqualToString:@"none"] ||
+                [[item objectForKey:@"website"] isEqual:[NSNull null]] ||
+                [[item objectForKey:@"website"] length] == 0) {
+                eventWebPageBtn.enabled = NO;
+                eventWebImage.alpha = 0.2;
+                eventWebPageBtn.alpha = 0.2;
+            }
         }
         else {
             
@@ -291,6 +298,8 @@ int photo_cnt = 0;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
+    
+    [indicator stopAnimating];
 }
 
 - (void) uploadMyGoing {

@@ -108,7 +108,13 @@ NSString *booth_flag = @"A";
 
 - (void) downloadContent {
     
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
+    
+    [indicator startAnimating];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
@@ -142,7 +148,8 @@ NSString *booth_flag = @"A";
                         [artistBoothList addObject:item];
                     }
                 }
-                
+             
+                [indicator stopAnimating];
                 [tableViewList reloadData];
             }
             else {
@@ -159,7 +166,7 @@ NSString *booth_flag = @"A";
         }];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            // ui update
         });
     });
 

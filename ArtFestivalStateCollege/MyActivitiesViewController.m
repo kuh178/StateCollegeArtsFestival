@@ -14,6 +14,7 @@
 #import "UserInputDetailViewController.h"
 #import "UserPhotoListViewController.h"
 #import "UserInputDetailedViewController.h"
+#import "MyActivityQuestionViewController.h"
 
 @interface MyActivitiesViewController ()
 
@@ -28,7 +29,13 @@
 #define MY_PHOTOS 3
 #define PEOPLE_LIKE_ME 4
 
+#define ACTION_NOTHING 0
+#define ACTION_EVENT 1
+#define ACTION_SURVEY 2
+#define ACTION_USER_PHOTO 3
+
 int myType = MY_UPDATES;
+UIActivityIndicatorView *indicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +53,13 @@ int myType = MY_UPDATES;
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:51.0/255.0 green:164.0/255.0 blue:192.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
+    // show download indicator
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
     
     [self downloadMyUpdates];
 }
@@ -94,22 +108,8 @@ int myType = MY_UPDATES;
     if (myType == MY_UPDATES) {
         // my update
         eventName.text = [item objectForKey:@"message"];
-        eventImage.image = [UIImage imageNamed:@"2015 Button.png"];
-        
-        // event datetime
-        // ref: http://stackoverflow.com/questions/1862905/nsdate-convert-date-to-gmt
-        NSTimeInterval _interval=[[item objectForKey:@"datetime"] doubleValue];
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
-        
-        NSTimeInterval timeZoneOffset = [[NSTimeZone defaultTimeZone] secondsFromGMT];
-        NSTimeInterval gmtTimeInterval = [date timeIntervalSinceReferenceDate] - timeZoneOffset;
-        NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
-        
-        NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
-        [_formatter setLocale:[NSLocale currentLocale]];
-        [_formatter setDateFormat:@"MMM dd, hh:mm a"];
-        NSString *_date=[_formatter stringFromDate:gmtDate];
-        eventDate.text = _date;
+        eventImage.image = [UIImage imageNamed:@"2015_button_faceonly.png"];
+        eventDate.hidden = YES;
     }
     else if (myType == MY_EVENTS) {
         // event image
@@ -173,12 +173,31 @@ int myType = MY_UPDATES;
     NSMutableDictionary *item = [myList objectAtIndex:indexPath.row];
     
     if (myType == MY_UPDATES) {
-        
+        if ([[item objectForKey:@"action"] intValue] == ACTION_EVENT) {
+            EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
+            viewController.hidesBottomBarWhenPushed = YES;
+            [viewController setEventID:[[item objectForKey:@"special_id"] intValue]];
+            [viewController setIsOfficial:YES];
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+        else if ([[item objectForKey:@"action"] intValue] == ACTION_SURVEY) {
+            MyActivityQuestionViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MyActivityQuestionViewController"];
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+        else if ([[item objectForKey:@"action"] intValue] == ACTION_USER_PHOTO) {
+            /*
+            UserInputDetailedViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserInputDetailedViewController"];
+            viewController.hidesBottomBarWhenPushed = YES;
+            [viewController setItem:item];
+            [self.navigationController pushViewController:viewController animated:YES];
+             */
+        }
     }
     else if (myType == MY_EVENTS) {
         EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
         viewController.hidesBottomBarWhenPushed = YES;
-        [viewController setItem:item];
+        [viewController setEventID:[[item objectForKey:@"id"] intValue]];
         [viewController setIsOfficial:YES];
         [self.navigationController pushViewController:viewController animated:YES];
     }
@@ -191,13 +210,9 @@ int myType = MY_UPDATES;
 }
 
 - (void) downloadContent {
+    
+    [indicator startAnimating];
 
-    // show download indicator
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
         NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
@@ -226,6 +241,7 @@ int myType = MY_UPDATES;
                     NSLog(@"No data available");
                 }
                 
+                [indicator stopAnimating];
                 [tableViewList reloadData];
             }
             else {
@@ -244,17 +260,11 @@ int myType = MY_UPDATES;
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         });
     });
-    
-    
-    
-    // show download indicator
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 - (void) downloadMyPhotos {
     
-    // show download indicator
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [indicator startAnimating];
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
@@ -282,6 +292,7 @@ int myType = MY_UPDATES;
                 NSLog(@"No data available");
             }
             
+            [indicator stopAnimating];
             [tableViewList reloadData];
         }
         else {
@@ -296,15 +307,11 @@ int myType = MY_UPDATES;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", operation);
     }];
-    
-    // show download indicator
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 - (void) downloadMyUpdates {
     
-    // show download indicator
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [indicator startAnimating];
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
@@ -333,7 +340,8 @@ int myType = MY_UPDATES;
             else {
                 NSLog(@"No data available");
             }
-            
+
+            [indicator stopAnimating];
             [tableViewList reloadData];
         }
         else {
@@ -349,9 +357,6 @@ int myType = MY_UPDATES;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", operation);
     }];
-    
-    // show download indicator
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 - (void) downloadPeopleLikeMe {
@@ -360,6 +365,7 @@ int myType = MY_UPDATES;
 
 - (IBAction)myListSegmentSelected:(id)sender {
     if (myListSegment.selectedSegmentIndex == 0) { // My Updates
+        
         myType = MY_UPDATES;
         
         [self downloadMyUpdates];
@@ -385,27 +391,16 @@ int myType = MY_UPDATES;
 }
 
 -(IBAction)refreshBtnPressed:(id)sender {
-    if (myListSegment.selectedSegmentIndex == 0) { // My Updates
-        myType = MY_UPDATES;
-        
+    if (myType == MY_UPDATES) { // My Updates
         [self downloadMyUpdates];
     }
-    else if (myListSegment.selectedSegmentIndex == 1) { // My Events
-        
-        myType = MY_EVENTS;
-        
+    else if (myType == MY_EVENTS) { // My Events
         [self downloadContent];
     }
-    else if (myListSegment.selectedSegmentIndex == 2) { // My Photos
-        
-        myType = MY_PHOTOS;
-        
+    else if (myType == MY_PHOTOS) { // My Photos
         [self downloadMyPhotos];
     }
-    else { // People Like Me
-        
-        myType = PEOPLE_LIKE_ME;
-        
+    else if (myType == PEOPLE_LIKE_ME) { // People Like Me
         [self downloadPeopleLikeMe];
     }
 }

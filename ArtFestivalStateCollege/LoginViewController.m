@@ -25,6 +25,8 @@
 
 @synthesize facebookBtn, createAccountBtn, loginBtn;
 
+#define LOGIN_PAGE 1
+
 NSString *userName, *userImage, *userEmail, *datetime;
 NSUserDefaults *userDefault;
 
@@ -224,6 +226,7 @@ NSUserDefaults *userDefault;
             
             // move to the interest selection page
             ChooseInterestViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseInterestViewController"];
+            viewController.previousViewController = LOGIN_PAGE;
             [self presentViewController:viewController animated:YES completion:nil];
             
         }

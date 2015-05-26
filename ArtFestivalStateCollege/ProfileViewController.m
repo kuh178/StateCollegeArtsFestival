@@ -11,6 +11,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "UserPhotoListViewController.h"
+#import "ChooseInterestViewController.h"
 
 @interface ProfileViewController ()
 
@@ -23,7 +24,9 @@
 @synthesize photosLabel, commentsLabel, likesLabel, uniqueUsersLabel;
 @synthesize userID;
 
-@synthesize interestBtn1, interestBtn2, interestBtn3, interestBtn4, interestBtn5;
+@synthesize interestBtn1, interestBtn2, interestBtn3, interestBtn4, interestBtn5, interestBtn6, interestBtn7;
+
+#define PROFILE_PAGE 2
 
 NSString *username;
 NSString *email;
@@ -82,6 +85,7 @@ NSMutableArray *userPhotoArray;
     [manager POST:@"http://heounsuk.com/festival/download_user_profile.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
+
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
             NSMutableArray *jsonArray = [NSMutableArray arrayWithCapacity:0];
             userPhotoArray = [NSMutableArray arrayWithCapacity:0];
@@ -117,6 +121,8 @@ NSMutableArray *userPhotoArray;
             int interest3 = [[preferences objectForKey:@"interest_3"] intValue];
             int interest4 = [[preferences objectForKey:@"interest_4"] intValue];
             int interest5 = [[preferences objectForKey:@"interest_5"] intValue];
+            int interest6 = [[preferences objectForKey:@"interest_6"] intValue];
+            int interest7 = [[preferences objectForKey:@"interest_7"] intValue];
             
             if (interest1 == 0) {
                 interestBtn1.alpha = 0.3;
@@ -132,6 +138,12 @@ NSMutableArray *userPhotoArray;
             }
             if (interest5 == 0) {
                 interestBtn5.alpha = 0.3;
+            }
+            if (interest6 == 0) {
+                interestBtn6.alpha = 0.3;
+            }
+            if (interest7 == 0) {
+                interestBtn7.alpha = 0.3;
             }
 
         }
@@ -197,6 +209,14 @@ NSMutableArray *userPhotoArray;
         UserPhotoListViewController *viewController = (UserPhotoListViewController *)[segue destinationViewController];
         viewController.photoList = userPhotoArray;
         viewController.username = username;
+    }
+    else if ([[segue identifier] isEqualToString: @"ChooseInterestViewController"]) {
+        
+        ChooseInterestViewController *viewController = (ChooseInterestViewController *)[segue destinationViewController];
+        viewController.previousViewController = PROFILE_PAGE;
+    }
+    else {
+        
     }
 }
 

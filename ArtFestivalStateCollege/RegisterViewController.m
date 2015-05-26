@@ -19,6 +19,8 @@
 
 @synthesize usernameText, emailText, passwordText, passwordAgainText, signinBtn, topBar;
 
+#define LOGIN_PAGE 1
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -98,6 +100,7 @@
             
             // move to the interest selection page
             ChooseInterestViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseInterestViewController"];
+            viewController.previousViewController = LOGIN_PAGE;
             [self presentViewController:viewController animated:YES completion:nil];
         }
         else {

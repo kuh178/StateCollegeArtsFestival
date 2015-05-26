@@ -30,6 +30,7 @@
 @synthesize eventList, photoList, userList, jsonArray, tableViewList, segmentControl; //refreshBtn
 
 int popular_flag = PERFORMANCE;
+UIActivityIndicatorView *indicator;
 
 - (void)viewDidLoad
 {
@@ -42,9 +43,15 @@ int popular_flag = PERFORMANCE;
     
     // ios7 handling navigationBar
     // ref : http://stackoverflow.com/questions/19029833/ios-7-navigation-bar-text-and-arrow-color
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:51.0/255.0 green:164.0/255.0 blue:192.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
     
     [self downloadContent];
 }
@@ -248,7 +255,6 @@ int popular_flag = PERFORMANCE;
         NSMutableDictionary *item = [eventList objectAtIndex:indexPath.row];
         EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
         viewController.hidesBottomBarWhenPushed = YES;
-        [viewController setItem:item];
         [self.navigationController pushViewController:viewController animated:YES];
         //[self presentViewController:viewController animated:YES completion:nil];
     }
@@ -284,6 +290,8 @@ int popular_flag = PERFORMANCE;
 
 - (void) downloadContent {
     
+    [indicator startAnimating];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://heounsuk.com/festival/download_events_popular.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
@@ -306,6 +314,7 @@ int popular_flag = PERFORMANCE;
                 NSLog(@"No data available");
             }
             
+            [indicator stopAnimating];
             [tableViewList reloadData];
         }
         else {
@@ -323,6 +332,8 @@ int popular_flag = PERFORMANCE;
 }
 
 - (void) downloadUserContent {
+    
+    [indicator startAnimating];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://heounsuk.com/festival/download_photos_popular.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -346,6 +357,7 @@ int popular_flag = PERFORMANCE;
                 NSLog(@"No data available");
             }
             
+            [indicator stopAnimating];
             [tableViewList reloadData];
         }
         else {
@@ -363,6 +375,8 @@ int popular_flag = PERFORMANCE;
 }
 
 - (void) downloadUsers {
+    
+    [indicator startAnimating];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://heounsuk.com/festival/download_users_popular.php" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -386,6 +400,7 @@ int popular_flag = PERFORMANCE;
                 NSLog(@"No data available");
             }
             
+            [indicator stopAnimating];
             [tableViewList reloadData];
         }
         else {

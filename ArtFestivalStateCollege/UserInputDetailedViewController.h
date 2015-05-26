@@ -18,6 +18,7 @@
     IBOutlet UIButton       *audioBtn;
     IBOutlet UIButton       *likePhotoBtn;
     IBOutlet UIButton       *addCommentBtn;
+    IBOutlet UIButton       *removeBtn;
     IBOutlet UITextView     *commentText;
     
     NSMutableDictionary     *item;
@@ -32,6 +33,7 @@
 @property (nonatomic, retain)     IBOutlet UIButton         *audioBtn;
 @property (nonatomic, retain)     IBOutlet UIButton         *likePhotoBtn;
 @property (nonatomic, retain)     IBOutlet UIButton         *addCommentBtn;
+@property (nonatomic, retain)     IBOutlet UIButton         *removeBtn;
 @property (nonatomic, retain)     IBOutlet UITextView       *commentText;
 
 @property (nonatomic, retain)     NSMutableDictionary       *item;
@@ -40,5 +42,6 @@
 - (IBAction)audioBtnPressed:(id)sender;
 - (IBAction)likePhotoBtnPressed:(id)sender;
 - (IBAction)addCommentBtnPressed:(id)sender;
+- (IBAction)removeBtnPressed:(id)sender;
 
 @end

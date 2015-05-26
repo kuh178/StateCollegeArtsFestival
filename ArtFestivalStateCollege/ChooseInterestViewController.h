@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChooseInterestViewController : UIViewController {
+@interface ChooseInterestViewController : UIViewController <UIActionSheetDelegate> {
     IBOutlet UIButton *submitBtn;
     
     IBOutlet UISegmentedControl *interestBtn1;
@@ -16,6 +16,13 @@
     IBOutlet UISegmentedControl *interestBtn3;
     IBOutlet UISegmentedControl *interestBtn4;
     IBOutlet UISegmentedControl *interestBtn5;
+    IBOutlet UISegmentedControl *interestBtn6;
+    IBOutlet UISegmentedControl *interestBtn7;
+    
+    IBOutlet UIButton           *ageBtn;
+    IBOutlet UIButton           *genderBtn;
+    
+    int                         previousViewController;
     
 }
 
@@ -25,7 +32,16 @@
 @property (nonatomic, retain) IBOutlet UISegmentedControl *interestBtn3;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *interestBtn4;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *interestBtn5;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *interestBtn6;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *interestBtn7;
+
+@property (nonatomic, retain) IBOutlet UIButton           *ageBtn;
+@property (nonatomic, retain) IBOutlet UIButton           *genderBtn;
+
+@property (nonatomic, assign) int                         previousViewController;
 
 -(IBAction)submitBtnPressed:(id)sender;
+-(IBAction)ageBtnPressed:(id)sender;
+-(IBAction)genderBtnPressed:(id)sender;
 
 @end

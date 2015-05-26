@@ -28,6 +28,8 @@
     IBOutlet UIButton *interestBtn3;
     IBOutlet UIButton *interestBtn4;
     IBOutlet UIButton *interestBtn5;
+    IBOutlet UIButton *interestBtn6;
+    IBOutlet UIButton *interestBtn7;
     
     int userID;
 }
@@ -50,6 +52,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *interestBtn3;
 @property (nonatomic, retain) IBOutlet UIButton *interestBtn4;
 @property (nonatomic, retain) IBOutlet UIButton *interestBtn5;
+@property (nonatomic, retain) IBOutlet UIButton *interestBtn6;
+@property (nonatomic, retain) IBOutlet UIButton *interestBtn7;
 
 @property (nonatomic, assign) int userID;
 

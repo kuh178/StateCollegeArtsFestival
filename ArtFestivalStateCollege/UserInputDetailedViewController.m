@@ -18,7 +18,8 @@
 
 @implementation UserInputDetailedViewController
 
-@synthesize image, userImage, username, datetime, item, commentArray, audioBtn, likePhotoBtn, commentText, addCommentBtn;
+@synthesize image, userImage, username, datetime, item, commentArray, audioBtn, likePhotoBtn, commentText, addCommentBtn, removeBtn;
+NSUserDefaults *userDefault;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +34,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    userDefault = [NSUserDefaults standardUserDefaults];
     
     // image
     CALayer *layer = image.layer;
@@ -51,12 +54,13 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
             image.clipsToBounds = YES;
+            image.layer.cornerRadius = 5;
         });
     });
     
     // user image
     [userImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"user_image"]]]];
-    userImage.layer.cornerRadius = 4.0f;
+    userImage.layer.cornerRadius = 5;
     userImage.clipsToBounds = YES;
     
     // user name
@@ -73,6 +77,22 @@
     
     // comment
     commentText.text = [item objectForKey:@"comment"];
+    commentText.layer.cornerRadius = 5;
+    commentText.layer.borderWidth = 1.0;
+    
+    // removeBtn
+    if ([[item objectForKey:@"user_id"] intValue] == [[userDefault objectForKey:@"user_id"] intValue]) {
+        removeBtn.hidden = NO;
+        removeBtn.enabled = YES;
+        removeBtn.layer.cornerRadius = 5;
+        removeBtn.layer.borderWidth = 1.0;
+    }
+    else {
+        removeBtn.hidden = YES;
+        removeBtn.enabled = NO;
+    }
+    
+    NSLog(@"item : %@", item);
 }
 
 - (void)didReceiveMemoryWarning
@@ -141,16 +161,7 @@
     }];
 }
 
-- (IBAction)audioBtnPressed:(id)sender {
-    
-}
-
-- (IBAction)likePhotoBtnPressed:(id)sender {
-    [self addLike];
-}
-
 - (void) addLike {
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
     
@@ -197,6 +208,40 @@
     }];
 }
 
+- (void) removePhoto {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"],
+                             @"post_id"     :[NSString stringWithFormat:@"%d", [[item objectForKey:@"post_id"] intValue]]};
+    
+    [manager POST:@"http://heounsuk.com/festival/remove_user_content.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+        
+        if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
+            
+            UIAlertView *dialog = [[UIAlertView alloc]init];
+            [dialog setDelegate:nil];
+            [dialog setTitle:@"Message"];
+            [dialog setMessage:@"Photo removed"];
+            [dialog addButtonWithTitle:@"OK"];
+            [dialog show];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            UIAlertView *dialog = [[UIAlertView alloc]init];
+            [dialog setDelegate:nil];
+            [dialog setTitle:@"Message"];
+            [dialog setMessage:[responseObject objectForKey:@"message"]];
+            [dialog addButtonWithTitle:@"OK"];
+            [dialog show];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
@@ -204,8 +249,8 @@
         
         
     }
-    else { // else (e.g., Cancel)
-        
+    else if ([title isEqualToString:@"Remove"]){
+        [self removePhoto];
     }
 }
 
@@ -219,10 +264,21 @@
     }
 }
 
+- (IBAction)audioBtnPressed:(id)sender {
+    
+}
+
+- (IBAction)likePhotoBtnPressed:(id)sender {
+    [self addLike];
+}
+
 - (IBAction)addCommentBtnPressed:(id)sender {
     
 }
 
-
+- (IBAction)removeBtnPressed:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remove this photo? This cannot be undone" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
+    [alert show];
+}
 
 @end
