@@ -15,11 +15,16 @@
 
 @implementation MyActivityQuestionViewController
 
-@synthesize openQuestionText, segmentQuestion1, segmentQuestion2, submitBtn;
+@synthesize openQuestionText, segmentQuestion1, segmentQuestion2, submitBtn, surveyID;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // button border
+    submitBtn.layer.borderWidth = 1.0;
+    submitBtn.layer.cornerRadius = 5;
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -48,8 +53,11 @@
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
     
+    NSLog(@"surveyID: %d", surveyID);
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"user_id"         :[userDefault objectForKey:@"user_id"],
+                             @"survey_id"       :[NSString stringWithFormat:@"%d", surveyID],
                              @"open_quesiton"   :openQuestionText.text,
                              @"datetime"        :timeStampValue,
                              @"question1"       :[NSString stringWithFormat:@"%d", segmentQuestion1.selectedSegmentIndex+1],
@@ -79,7 +87,7 @@
 }
 
 - (IBAction)submitBtnPressed:(id)sender {
-    if ([openQuestionText.text isEqual:[NSNull null]]) {
+    if (![openQuestionText.text isEqual:[NSNull null]]) {
         [self submitAnswers];
     }
     else {

@@ -222,5 +222,26 @@ UIStoryboard *storyboard;
     */
 }
 
+- (void) setupNotification:(UIApplication *)application {
+    // Notification registration; Let the device know we want to receive push notifications
+    // ref1: http://code.tutsplus.com/tutorials/setting-up-push-notifications-on-ios--cms-21925
+    // ref2: http://stackoverflow.com/questions/24454033/registerforremotenotificationtypes-is-not-supported-in-ios-8-0-and-later
+    // ref3: http://api.shephertz.com/tutorial/Push-Notification-iOS/
+    //-- Set Notification
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
+        // iOS 8 Notifications
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        application.applicationIconBadgeNumber = 0;
+        
+        [application registerForRemoteNotifications];
+    }
+    else {
+        // iOS < 8 Notifications
+        [application registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+        application.applicationIconBadgeNumber = 0;
+    }
+}
+
 
 @end

@@ -12,6 +12,7 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "UserPhotoListViewController.h"
 #import "ChooseInterestViewController.h"
+#import "AppDelegate.h"
 
 @interface ProfileViewController ()
 
@@ -174,7 +175,6 @@ NSMutableArray *userPhotoArray;
         [userDefault synchronize];
         
         // move to the login page
-        
         LoginViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         //[self presentViewController:viewController animated:NO completion:nil];
         viewController.hidesBottomBarWhenPushed = YES;

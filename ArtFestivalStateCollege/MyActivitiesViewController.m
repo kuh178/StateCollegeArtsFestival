@@ -182,16 +182,15 @@ UIActivityIndicatorView *indicator;
         }
         else if ([[item objectForKey:@"action"] intValue] == ACTION_SURVEY) {
             MyActivityQuestionViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MyActivityQuestionViewController"];
+            [viewController setSurveyID:[[item objectForKey:@"id"] intValue]]; // passing the survey ID
             viewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:viewController animated:YES];
         }
         else if ([[item objectForKey:@"action"] intValue] == ACTION_USER_PHOTO) {
-            /*
             UserInputDetailedViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserInputDetailedViewController"];
             viewController.hidesBottomBarWhenPushed = YES;
-            [viewController setItem:item];
+            [viewController setItem:[item objectForKey:@"photo_info"]];
             [self.navigationController pushViewController:viewController animated:YES];
-             */
         }
     }
     else if (myType == MY_EVENTS) {
