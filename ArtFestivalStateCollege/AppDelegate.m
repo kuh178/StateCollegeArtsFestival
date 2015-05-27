@@ -11,6 +11,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "ProfileViewController.h"
+#import <Parse/Parse.h>
 //#import <GoogleMaps/GoogleMaps.h>
 
 
@@ -36,6 +37,11 @@ UIStoryboard *storyboard;
     
     // Optional: set Logger to VERBOSE for debug information.
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    //initilize parse and blooth
+    [Parse setApplicationId:@"8kF8pk05dWxFLAmSOQjrG4ecbLABu0hx8wTwjY92"
+                  clientKey:@"cngCLXl0J9kMzzvrciQFgcXwgRsnaUgxQjsigBLy"];
+    
     
     // Initialize tracker.
     id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-52154939-1"];
