@@ -21,7 +21,7 @@ static double const UpdateTimer = 10.0;
 static NSString * const CurrentEventId = @"tnI4e7GLkp";
 
 //change this for event
-static NSString * const userInfo = @"This is a test";
+static NSString * const userInfo = @"I was logged from the arts fest app";
 
 //Notes
 static NSString * const lastBeaconSeenUpdate = @"lastSeenBeaconUpdate";

@@ -12,6 +12,8 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "ProfileViewController.h"
 #import <Parse/Parse.h>
+#import "BloothLocationServices.h"
+
 //#import <GoogleMaps/GoogleMaps.h>
 
 
@@ -42,6 +44,7 @@ UIStoryboard *storyboard;
     [Parse setApplicationId:@"8kF8pk05dWxFLAmSOQjrG4ecbLABu0hx8wTwjY92"
                   clientKey:@"cngCLXl0J9kMzzvrciQFgcXwgRsnaUgxQjsigBLy"];
     
+    [BloothLocationServices sharedManager];
     
     // Initialize tracker.
     id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-52154939-1"];
