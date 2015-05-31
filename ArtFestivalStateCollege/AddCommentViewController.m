@@ -20,7 +20,9 @@
 
 @implementation AddCommentViewController
 
-@synthesize item, userCommentsArray, tableViewList, addBtn, commentText;
+@synthesize item, userCommentsArray, tableViewList, addBtn, commentText, removeBtn;
+
+int selectedIndex = 0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,7 +48,10 @@
     addBtn.layer.cornerRadius = 5;
     addBtn.layer.borderWidth = 1;
     addBtn.layer.borderColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0].CGColor;
-
+    
+    // hide a barbutton
+    removeBtn.style = UIBarButtonItemStylePlain;
+    removeBtn.enabled = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -122,15 +127,22 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //NSMutableDictionary *item = [commentList objectAtIndex:indexPath.row];
+    NSMutableDictionary *cItem = [userCommentsArray objectAtIndex:indexPath.row];
+    selectedIndex = indexPath.row;
     
-    //[self performSegueWithIdentifier:@"EventDetailViewController" sender:item];
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
-    //EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
-    //viewController.hidesBottomBarWhenPushed = YES;
-    //[viewController setItem:item];
-    //[self.navigationController pushViewController:viewController animated:YES];
-    //[self presentViewController:viewController animated:YES completion:nil];
+    if ([[cItem objectForKey:@"user_id"]intValue] == [[userDefault objectForKey:@"user_id"]intValue]) {
+        
+        NSLog(@"HERE");
+        
+        removeBtn.style = UIBarButtonItemStyleBordered; // show
+        removeBtn.enabled = YES;
+    }
+    else {
+        removeBtn.style = UIBarButtonItemStylePlain; // hide
+        removeBtn.enabled = NO;
+    }
 }
 
 -(IBAction)addBtnPressed:(id)sender {
@@ -249,6 +261,59 @@
     self.view.frame = rect;
     
     [UIView commitAnimations];
+}
+
+-(IBAction)removeBtnPressed:(id)sender {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remove this comment?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if ([title isEqualToString:@"Remove"]){ // Remove
+        
+        NSMutableDictionary *cItem = [userCommentsArray objectAtIndex:selectedIndex];
+        
+        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+        
+        NSLog(@"%@ %@ %@", [userDefault objectForKey:@"user_id"], [cItem objectForKey:@"comment_id"], [cItem objectForKey:@"post_id"]);
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"],
+                                 @"comment_id"  :[NSString stringWithFormat:@"%d", [[cItem objectForKey:@"comment_id"] intValue]],
+                                 @"post_id"     :[NSString stringWithFormat:@"%d", [[cItem objectForKey:@"post_id"] intValue]]};
+        
+        [manager POST:@"http://heounsuk.com/festival/remove_user_content_comment.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Success: %@", responseObject);
+            
+            if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
+                
+                // receive a list of comments from the server
+                userCommentsArray = [NSMutableArray arrayWithCapacity:0];
+                userCommentsArray = [responseObject objectForKey:@"user_comments_array"];
+                
+                [tableViewList reloadData];
+            }
+            else {
+                UIAlertView *dialog = [[UIAlertView alloc]init];
+                [dialog setDelegate:nil];
+                [dialog setTitle:@"Message"];
+                [dialog setMessage:[responseObject objectForKey:@"message"]];
+                [dialog addButtonWithTitle:@"OK"];
+                [dialog show];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        
+    }
+    else {
+        
+    }
 }
 
 @end

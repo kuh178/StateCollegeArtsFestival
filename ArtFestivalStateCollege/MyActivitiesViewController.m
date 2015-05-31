@@ -15,6 +15,7 @@
 #import "UserPhotoListViewController.h"
 #import "UserInputDetailedViewController.h"
 #import "MyActivityQuestionViewController.h"
+#import "ProfileViewController.h"
 
 @interface MyActivitiesViewController ()
 
@@ -162,7 +163,16 @@ UIActivityIndicatorView *indicator;
             }
         }
     }
-    else { // people like me
+    else if (myType == PEOPLE_LIKE_ME) { // PEOPLE_LIKE_ME
+        // event image
+        [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image"]]]];
+        eventImage.layer.cornerRadius = 4.0f;
+        eventImage.clipsToBounds = YES;
+        
+        // event question
+        eventName.text = [item objectForKey:@"name"];
+    }
+    else {
         
     }
     
@@ -183,6 +193,7 @@ UIActivityIndicatorView *indicator;
         else if ([[item objectForKey:@"action"] intValue] == ACTION_SURVEY) {
             MyActivityQuestionViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MyActivityQuestionViewController"];
             [viewController setSurveyID:[[item objectForKey:@"id"] intValue]]; // passing the survey ID
+            [viewController setQAry:[item objectForKey:@"survey_questions"]];
             viewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:viewController animated:YES];
         }
@@ -200,10 +211,16 @@ UIActivityIndicatorView *indicator;
         [viewController setIsOfficial:YES];
         [self.navigationController pushViewController:viewController animated:YES];
     }
-    else {
+    else if (myType == MY_PHOTOS){
         UserInputDetailedViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserInputDetailedViewController"];
         viewController.hidesBottomBarWhenPushed = YES;
         [viewController setItem:item];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    else if (myType == PEOPLE_LIKE_ME) {
+        ProfileViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileViewController"];
+        viewController.hidesBottomBarWhenPushed = YES;
+        [viewController setUserID:[[item objectForKey:@"id"]intValue]];
         [self.navigationController pushViewController:viewController animated:YES];
     }
 }
@@ -234,6 +251,7 @@ UIActivityIndicatorView *indicator;
                         // get an item
                         NSDictionary *item = [jsonArray objectAtIndex:i];
                         [myList addObject:item];
+        
                     }
                 }
                 else {
@@ -359,7 +377,52 @@ UIActivityIndicatorView *indicator;
 }
 
 - (void) downloadPeopleLikeMe {
+    [indicator startAnimating];
     
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"]};
+    
+    NSLog(@"user_id: %@", [userDefault objectForKey:@"user_id"]);
+    
+    [manager POST:@"http://heounsuk.com/festival/download_my_people.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
+            jsonArray = [NSMutableArray arrayWithCapacity:0];
+            myList = [NSMutableArray arrayWithCapacity:0];
+            [jsonArray addObjectsFromArray:[responseObject objectForKey:@"results"]];
+            
+            if ([jsonArray count] > 0) {
+                // insert new items into table
+                for (int i = 0; i < [jsonArray count]; i++) {
+                    
+                    // get an item
+                    NSDictionary *item = [jsonArray objectAtIndex:i];
+                    [myList addObject:item];
+                }
+            }
+            else {
+                NSLog(@"No data available");
+            }
+            
+            [indicator stopAnimating];
+            [tableViewList reloadData];
+        }
+        else {
+            UIAlertView *dialog = [[UIAlertView alloc]init];
+            [dialog setDelegate:self];
+            [dialog setTitle:@"Message"];
+            [dialog setMessage:@"No results found"];
+            [dialog addButtonWithTitle:@"OK"];
+            [dialog show];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", operation);
+    }];
 }
 
 - (IBAction)myListSegmentSelected:(id)sender {

@@ -15,7 +15,8 @@
 
 @implementation MyActivityQuestionViewController
 
-@synthesize openQuestionText, segmentQuestion1, segmentQuestion2, submitBtn, surveyID;
+@synthesize question1Label, question2Label, question3Label;
+@synthesize openQuestionText, segmentQuestion1, segmentQuestion2, submitBtn, surveyID, qAry;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,6 +25,10 @@
     // button border
     submitBtn.layer.borderWidth = 1.0;
     submitBtn.layer.cornerRadius = 5;
+    
+    question1Label.text = [[qAry objectAtIndex:0] objectForKey:@"survey_question"];
+    question2Label.text = [[qAry objectAtIndex:1] objectForKey:@"survey_question"];
+    question3Label.text = [[qAry objectAtIndex:2] objectForKey:@"survey_question"];
     
 }
 

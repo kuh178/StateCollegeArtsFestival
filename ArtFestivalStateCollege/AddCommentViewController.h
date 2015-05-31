@@ -17,6 +17,7 @@
     IBOutlet UITableView        *tableViewList;
     IBOutlet UIButton           *addBtn;
     IBOutlet UITextField        *commentText;
+    IBOutlet UIBarButtonItem    *removeBtn;
 }
 
 @property (nonatomic, retain) NSMutableDictionary           *item;
@@ -25,8 +26,10 @@
 @property (nonatomic, retain) IBOutlet UITableView          *tableViewList;
 @property (nonatomic, retain) IBOutlet UIButton             *addBtn;
 @property (nonatomic, retain) IBOutlet UITextField          *commentText;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem      *removeBtn;
 
 -(IBAction)addBtnPressed:(id)sender;
+-(IBAction)removeBtnPressed:(id)sender;
 
 
 @end

@@ -23,6 +23,11 @@
     IBOutlet UILabel *uniqueUsersLabel;
     IBOutlet UILabel *userNameLabel;
     
+    IBOutlet UILabel *photosTextLabel;
+    IBOutlet UILabel *commentsTextLabel;
+    IBOutlet UILabel *likesTextLabel;
+    IBOutlet UILabel *uniqueUsersTextLabel;
+    
     IBOutlet UIButton *interestBtn1;
     IBOutlet UIButton *interestBtn2;
     IBOutlet UIButton *interestBtn3;
@@ -46,6 +51,11 @@
 @property (nonatomic, retain) IBOutlet UILabel *commentsLabel;
 @property (nonatomic, retain) IBOutlet UILabel *likesLabel;
 @property (nonatomic, retain) IBOutlet UILabel *uniqueUsersLabel;
+
+@property (nonatomic, retain) IBOutlet UILabel *photosTextLabel;
+@property (nonatomic, retain) IBOutlet UILabel *commentsTextLabel;
+@property (nonatomic, retain) IBOutlet UILabel *likesTextLabel;
+@property (nonatomic, retain) IBOutlet UILabel *uniqueUsersTextLabel;
 
 @property (nonatomic, retain) IBOutlet UIButton *interestBtn1;
 @property (nonatomic, retain) IBOutlet UIButton *interestBtn2;

@@ -80,10 +80,12 @@
 - (void) uploadMyGoing {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *params = @{@"name"        :usernameText.text,
-                             @"email"       :emailText.text,
-                             @"password"    :passwordText.text,
-                             @"device"      :@"1"};
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSDictionary *params = @{@"name"            :usernameText.text,
+                             @"email"           :emailText.text,
+                             @"password"        :passwordText.text,
+                             @"device_token"    :[NSString stringWithFormat:@"%@", [userDefault objectForKey:@"device_token"]],
+                             @"device"          :@"1"};
     
     [manager POST:@"http://heounsuk.com/festival/create_account.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -91,8 +93,6 @@
         
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
             // move to the main page
-            
-            NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
             [userDefault setObject:usernameText.text forKey:@"user_name"];
             [userDefault setObject:[responseObject objectForKey:@"user_id"] forKey:@"user_id"];
             [userDefault setObject:[NSString stringWithFormat:@"1"] forKey:@"is_loggedin"]; // 1 means YES; 0 means NO

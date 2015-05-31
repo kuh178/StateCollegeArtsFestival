@@ -19,6 +19,9 @@
     IBOutlet UILabel            *eventDatetime;
     IBOutlet UILabel            *eventButton;
     IBOutlet UILabel            *eventLocationName;
+    IBOutlet UILabel            *eventAttendLabel;
+    IBOutlet UILabel            *eventFavoriteLabel;
+    
     IBOutlet UIButton           *eventGoingBtn;
     IBOutlet UIButton           *eventUserInputBtn;
     IBOutlet UIButton           *eventWebPageBtn;
@@ -56,6 +59,8 @@
 @property (nonatomic, retain) IBOutlet UILabel            *eventDatetime;
 @property (nonatomic, retain) IBOutlet UILabel            *eventLocationName;
 @property (nonatomic, retain) IBOutlet UILabel            *eventButton;
+@property (nonatomic, retain) IBOutlet UILabel            *eventAttendLabel;
+@property (nonatomic, retain) IBOutlet UILabel            *eventFavoriteLabel;
 
 @property (nonatomic, retain) IBOutlet UIButton           *eventGoingBtn;
 @property (nonatomic, retain) IBOutlet UIButton           *eventUserInputBtn;

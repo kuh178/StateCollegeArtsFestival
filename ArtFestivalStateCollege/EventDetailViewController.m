@@ -16,19 +16,25 @@
 #import "QuartzCore/QuartzCore.h"
 #import "ProfileViewController.h"
 
+#define ADD_ATTEND 0;
+#define REMOVE_ATTEND 1;
+#define ADD_FAVORITE 0;
+#define REMOVE_FAVORITE 1;
+
 @interface EventDetailViewController ()
 @property (nonatomic, assign) BOOL statusBarHidden;
 @end
 
 @implementation EventDetailViewController
 
-@synthesize eventImage, eventButtonImage, eventName, eventDatetime, eventGoingBtn, eventButton, eventWebPageBtn, eventUserInputAddBtn, eventGoingAddBtn, eventUserInputBtn, eventLikeBtn, eventLocationName, eventDescription, eventMap, latitude, longitude, isOfficial, eventView1, eventWebImage, eventRemoveBtn, eventEditBtn;
+@synthesize eventImage, eventButtonImage, eventName, eventDatetime, eventGoingBtn, eventButton, eventWebPageBtn, eventUserInputAddBtn, eventGoingAddBtn, eventUserInputBtn, eventLikeBtn, eventLocationName, eventDescription, eventMap, latitude, longitude, isOfficial, eventView1, eventWebImage, eventRemoveBtn, eventEditBtn, eventAttendLabel, eventFavoriteLabel;
 @synthesize view1, view2, view3, view4;
 @synthesize eventID;
 
 int photo_cnt = 0;
+int attend_flag = ADD_ATTEND;
+int favorite_flag = ADD_FAVORITE;
 NSMutableDictionary *item;
-
 UIActivityIndicatorView *indicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -199,6 +205,43 @@ UIActivityIndicatorView *indicator;
             
             item = [eventInfoItem objectAtIndex:0];
             
+            // get a list of going users
+            NSMutableArray *goingArray = [NSMutableArray arrayWithCapacity:0];
+            NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+            
+            goingArray = [item objectForKey:@"going_user_ary"];
+            for (int i = 0; i < [goingArray count]; i++) {
+                NSDictionary *goingItem = [goingArray objectAtIndex:i];
+                
+                // if this user already added "attend" to this event, change the color and text of button
+                if ([[goingItem objectForKey:@"user_id"] intValue] == [[userDefault objectForKey:@"user_id"] intValue]) {
+                    
+                    [eventGoingBtn setBackgroundColor:[UIColor colorWithRed:181.0/255.0 green:224.0/255.0 blue:110.0/255.0 alpha:0.7]];
+                    [eventAttendLabel setText:@"UnAttend"];
+                    attend_flag = REMOVE_ATTEND;
+                    
+                    break;
+                }
+            }
+            
+            // get a list of favorite users
+            NSMutableArray *favArray = [NSMutableArray arrayWithCapacity:0];
+            
+            favArray = [item objectForKey:@"favorite_user_ary"];
+            for (int i = 0; i < [goingArray count]; i++) {
+                NSDictionary *favItem = [goingArray objectAtIndex:i];
+                
+                // if this user already added "attend" to this event, change the color and text of button
+                if ([[favItem objectForKey:@"user_id"] intValue] == [[userDefault objectForKey:@"user_id"] intValue]) {
+                    
+                    [eventLikeBtn setBackgroundColor:[UIColor colorWithRed:181.0/255.0 green:224.0/255.0 blue:110.0/255.0 alpha:0.7]];
+                    [eventFavoriteLabel setText:@"UnFavorite"];
+                    favorite_flag = REMOVE_FAVORITE;
+                    
+                    break;
+                }
+            }
+            
             // update the going and userinput btn texts
             [eventGoingBtn setTitle:[NSString stringWithFormat:@"     (%lu)", (unsigned long)[[item objectForKey:@"going_user_ary"] count]] forState:UIControlStateNormal];
             [eventUserInputBtn setTitle:[NSString stringWithFormat:@"     (%d)", [[item objectForKey:@"user_content_cnt"] intValue]] forState:UIControlStateNormal];
@@ -206,8 +249,7 @@ UIActivityIndicatorView *indicator;
             
             photo_cnt = [[item objectForKey:@"user_content_cnt"] intValue];
             
-            
-            // display information
+            // name and description
             eventName.text          = [item objectForKey:@"name"];
             eventDescription.text   = [item objectForKey:@"description"];
             
@@ -313,21 +355,24 @@ UIActivityIndicatorView *indicator;
                              @"event_id"    :[item objectForKey:@"id"],
                              @"datetime"    :[NSString stringWithFormat:@"%@", timeStampValue],
                              @"latitude"    :[NSString stringWithFormat:@"%f", latitude],
-                             @"longitude"   :[NSString stringWithFormat:@"%f", longitude]};
+                             @"longitude"   :[NSString stringWithFormat:@"%f", longitude],
+                             @"flag"        :[NSString stringWithFormat:@"%d", attend_flag]};
     
     [manager POST:@"http://heounsuk.com/festival/upload_my_going.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
-            //UIAlertView *dialog = [[UIAlertView alloc]init];
-            //[dialog setDelegate:self];
-            //[dialog setTitle:@"Message"];
-            //[dialog setMessage:@"Succesfully added"];
-            //[dialog addButtonWithTitle:@"OK"];
-            //[dialog show];
+           [self downloadEventUpdates];
             
-            [self downloadEventUpdates];
+            // update attend_flag
+            if (attend_flag == 0) { // if attend_flag == ADD_ATTEND
+                attend_flag = REMOVE_ATTEND;
+            }
+            else {
+                attend_flag = ADD_ATTEND;
+            }
+            
         }
         else {
             UIAlertView *dialog = [[UIAlertView alloc]init];
@@ -354,7 +399,8 @@ UIActivityIndicatorView *indicator;
                              @"event_id"    :[item objectForKey:@"id"],
                              @"datetime"    :[NSString stringWithFormat:@"%@", timeStampValue],
                              @"latitude"    :[NSString stringWithFormat:@"%f", latitude],
-                             @"longitude"   :[NSString stringWithFormat:@"%f", longitude]};
+                             @"longitude"   :[NSString stringWithFormat:@"%f", longitude],
+                             @"flag"        :[NSString stringWithFormat:@"%d", favorite_flag]};
     
     [manager POST:@"http://heounsuk.com/festival/upload_my_favorite_events.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -362,6 +408,14 @@ UIActivityIndicatorView *indicator;
         
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
             [self downloadEventUpdates];
+            
+            // update favorite_flag
+            if (favorite_flag == 0) { // if favorite_flag == ADD_FAVORITE
+                favorite_flag = REMOVE_FAVORITE;
+            }
+            else {
+                favorite_flag = ADD_FAVORITE;
+            }
         }
         else {
             UIAlertView *dialog = [[UIAlertView alloc]init];

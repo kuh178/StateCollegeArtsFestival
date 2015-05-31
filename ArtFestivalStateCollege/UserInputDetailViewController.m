@@ -64,6 +64,12 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.title = @"Details";
+    self.navigationItem.backBarButtonItem.title = @"Back";
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -250,8 +250,8 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Favorites" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gk8-SY-Xhk">
-                                        <rect key="frame" x="160" y="3" width="64" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Favorite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gk8-SY-Xhk">
+                                        <rect key="frame" x="156" y="3" width="72" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -342,11 +342,13 @@
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="eventAttendLabel" destination="Gwe-PF-CLr" id="JOF-1N-vyi"/>
                         <outlet property="eventButton" destination="xWT-Im-07f" id="rEw-pY-daH"/>
                         <outlet property="eventButtonImage" destination="Mxa-9d-0XA" id="xq4-tY-Ig3"/>
                         <outlet property="eventDatetime" destination="Vft-52-2EL" id="SmT-uI-khA"/>
                         <outlet property="eventDescription" destination="6VA-vk-jWm" id="3wF-Eu-rSb"/>
                         <outlet property="eventEditBtn" destination="yCt-sr-ALD" id="EXz-aR-r4g"/>
+                        <outlet property="eventFavoriteLabel" destination="Gk8-SY-Xhk" id="3gP-7L-OXy"/>
                         <outlet property="eventGoingAddBtn" destination="OHk-DU-LAI" id="Opm-FF-V1J"/>
                         <outlet property="eventGoingBtn" destination="ft0-vn-kI7" id="IOy-2e-0dH"/>
                         <outlet property="eventImage" destination="yX9-0D-TQe" id="9wx-lT-OEC"/>
@@ -888,12 +890,18 @@
                     </view>
                     <navigationItem key="navigationItem" title="Comments" id="grx-95-aO0">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Yhb-fo-YMV"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="2E9-Cv-fst">
+                            <connections>
+                                <action selector="removeBtnPressed:" destination="4mr-N0-3hL" id="gTC-dh-gbC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addBtn" destination="oF8-TZ-AgE" id="D0e-H9-Jyz"/>
                         <outlet property="commentText" destination="fDH-wO-bhf" id="Aas-Bc-pcv"/>
+                        <outlet property="removeBtn" destination="2E9-Cv-fst" id="Dug-TG-B1z"/>
                         <outlet property="tableViewList" destination="dqi-iK-7vD" id="PHR-IA-Gbf"/>
                     </connections>
                 </viewController>
@@ -1060,7 +1068,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRM-yb-qYv">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRM-yb-qYv">
                                         <rect key="frame" x="10" y="28" width="25" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1242,6 +1250,7 @@
                     <connections>
                         <outlet property="changeProfilePhotoBtn" destination="En7-ij-Pnt" id="4BI-EM-DkZ"/>
                         <outlet property="commentsLabel" destination="AnY-2l-bS4" id="H7T-Sc-syn"/>
+                        <outlet property="commentsTextLabel" destination="r2m-UZ-8JQ" id="Ou2-81-UsK"/>
                         <outlet property="interestBtn1" destination="KDv-M1-Gvf" id="ksD-le-jcv"/>
                         <outlet property="interestBtn2" destination="2bv-i0-K07" id="8Yn-ne-EvP"/>
                         <outlet property="interestBtn3" destination="nSg-6P-ISd" id="Dqv-mr-R1S"/>
@@ -1250,11 +1259,14 @@
                         <outlet property="interestBtn6" destination="ArQ-Dl-Vwr" id="muG-31-GaD"/>
                         <outlet property="interestBtn7" destination="DCk-Ad-X1p" id="byB-3D-EcO"/>
                         <outlet property="likesLabel" destination="T2l-q8-4GB" id="wpt-IX-tUG"/>
+                        <outlet property="likesTextLabel" destination="2Xr-2s-b0S" id="xC1-1q-k5Q"/>
                         <outlet property="logoutBtn" destination="80X-2s-wJX" id="6xn-Ne-d8u"/>
                         <outlet property="photosLabel" destination="eRM-yb-qYv" id="4r6-nH-vWx"/>
+                        <outlet property="photosTextLabel" destination="N5z-Z3-2ca" id="4m9-Q9-2WB"/>
                         <outlet property="profileImage" destination="Rm5-td-SBx" id="uc5-0G-eA9"/>
                         <outlet property="seePhotosBtn" destination="p6u-d6-tKy" id="kTq-FZ-Zhn"/>
                         <outlet property="uniqueUsersLabel" destination="FfP-DA-ERp" id="xAZ-s7-w8G"/>
+                        <outlet property="uniqueUsersTextLabel" destination="716-qO-Q4K" id="01G-xM-wbJ"/>
                         <outlet property="updateBtn" destination="gcA-vJ-OcN" id="KlG-3n-uch"/>
                         <outlet property="userNameLabel" destination="J7X-36-5gm" id="Mqg-La-tuD"/>
                     </connections>
@@ -2039,6 +2051,9 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="openQuestionText" destination="kNl-4A-D1A" id="x1e-5u-MoT"/>
+                        <outlet property="question1Label" destination="y6I-M3-oLU" id="zPu-ZC-CXW"/>
+                        <outlet property="question2Label" destination="dxs-Er-Mid" id="AS8-9U-iUf"/>
+                        <outlet property="question3Label" destination="PHu-Y8-nTY" id="K5e-ZU-r78"/>
                         <outlet property="segmentQuestion1" destination="Rrg-c8-Y9J" id="GiT-yj-lRj"/>
                         <outlet property="segmentQuestion2" destination="bip-qE-YXV" id="C40-Q9-X85"/>
                         <outlet property="submitBtn" destination="B9w-1b-XoQ" id="yrR-st-WGp"/>
@@ -2115,9 +2130,9 @@
                                 <rect key="frame" x="-5" y="64" width="331" height="29"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
-                                    <segment title="Updates"/>
-                                    <segment title="Events"/>
-                                    <segment title="Photos"/>
+                                    <segment title="My News"/>
+                                    <segment title="My Events"/>
+                                    <segment title="My Photos"/>
                                     <segment title="People"/>
                                 </segments>
                                 <color key="tintColor" red="0.15166696199999999" green="0.4997225341" blue="0.58652020029999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -3128,7 +3143,7 @@
         <image name="1431811170_15.Pencil-32.png" width="32" height="32"/>
         <image name="2015 Button.png" width="675" height="675"/>
         <image name="2015 Poster_resized.jpg" width="639" height="959"/>
-        <image name="2015_button_faceonly.png" width="150" height="150"/>
+        <image name="2015_button_faceonly.png" width="300" height="300"/>
         <image name="FB-f-Logo__blue_1024.png" width="1024" height="1024"/>
         <image name="art-gallery.png" width="38" height="38"/>
         <image name="compass_256_256.png" width="256" height="256"/>
@@ -3153,10 +3168,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fz2-k7-1Cn"/>
         <segue reference="a1A-Jh-8dw"/>
+        <segue reference="fz2-k7-1Cn"/>
+        <segue reference="i6v-Wb-Krn"/>
         <segue reference="Tez-Jf-lLx"/>
-        <segue reference="1BB-rZ-rDp"/>
         <segue reference="2Un-AD-2C6"/>
     </inferredMetricsTieBreakers>
 </document>

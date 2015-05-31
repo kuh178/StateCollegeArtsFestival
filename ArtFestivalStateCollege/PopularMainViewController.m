@@ -254,6 +254,7 @@ UIActivityIndicatorView *indicator;
     if(popular_flag == PERFORMANCE) {
         NSMutableDictionary *item = [eventList objectAtIndex:indexPath.row];
         EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
+        [viewController setEventID:[[item objectForKey:@"id"] intValue]];
         viewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:viewController animated:YES];
         //[self presentViewController:viewController animated:YES completion:nil];

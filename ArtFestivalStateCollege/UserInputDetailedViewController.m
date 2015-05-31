@@ -71,7 +71,7 @@ NSUserDefaults *userDefault;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
     NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
     [_formatter setLocale:[NSLocale currentLocale]];
-    [_formatter setDateFormat:@"YYYY, MMMM dd"];
+    [_formatter setDateFormat:@"MMMM dd, YYYY"];
     NSString *_date=[_formatter stringFromDate:date];
     datetime.text = _date;
     

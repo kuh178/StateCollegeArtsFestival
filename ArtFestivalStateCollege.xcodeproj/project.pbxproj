@@ -25,6 +25,7 @@
 		FA27BE081AF86A3400715ABF /* MeetupEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA27BE071AF86A3400715ABF /* MeetupEditViewController.m */; };
 		FA27BE0B1AF86A3F00715ABF /* MeetupDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA27BE0A1AF86A3F00715ABF /* MeetupDetailViewController.m */; };
 		FA27BE0D1AF93C3300715ABF /* people-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA27BE0C1AF93C3300715ABF /* people-7.png */; };
+		FA3B86901B1760BC00450ACE /* 2015_button_faceonly.png in Resources */ = {isa = PBXBuildFile; fileRef = FA3B868F1B1760BC00450ACE /* 2015_button_faceonly.png */; };
 		FA4407B71AD318D9001CEFFC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4407B61AD318D9001CEFFC /* ProfileViewController.m */; };
 		FA446E7319556D44007941C6 /* MapPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA446E7219556D44007941C6 /* MapPhotosViewController.m */; };
 		FA446E7519558199007941C6 /* Festival-Map.png in Resources */ = {isa = PBXBuildFile; fileRef = FA446E7419558199007941C6 /* Festival-Map.png */; };
@@ -40,7 +41,6 @@
 		FA5193331B07A226009A1CC6 /* 1431810127_33.Thumbs-Up-32.png in Resources */ = {isa = PBXBuildFile; fileRef = FA51932F1B07A226009A1CC6 /* 1431810127_33.Thumbs-Up-32.png */; };
 		FA5193361B07A654009A1CC6 /* 1431811170_15.Pencil-32.png in Resources */ = {isa = PBXBuildFile; fileRef = FA5193341B07A654009A1CC6 /* 1431811170_15.Pencil-32.png */; };
 		FA5193371B07A654009A1CC6 /* 1431811075_25.Camera-Front-32.png in Resources */ = {isa = PBXBuildFile; fileRef = FA5193351B07A654009A1CC6 /* 1431811075_25.Camera-Front-32.png */; };
-		FA51933A1B0A4D3F009A1CC6 /* 2015_button_faceonly.png in Resources */ = {isa = PBXBuildFile; fileRef = FA5193391B0A4D3F009A1CC6 /* 2015_button_faceonly.png */; };
 		FA67962718D6719700A5BECC /* twitter_blue_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = FA67962618D6719700A5BECC /* twitter_blue_bar.png */; };
 		FA6F12A71B13F97100F4ECAA /* MyActivityQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6F12A61B13F97100F4ECAA /* MyActivityQuestionViewController.m */; };
 		FA6F12A91B14C8D500F4ECAA /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6F12A81B14C8D500F4ECAA /* libGoogleAnalyticsServices.a */; };
@@ -177,6 +177,7 @@
 		FA27BE091AF86A3F00715ABF /* MeetupDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetupDetailViewController.h; sourceTree = "<group>"; };
 		FA27BE0A1AF86A3F00715ABF /* MeetupDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetupDetailViewController.m; sourceTree = "<group>"; };
 		FA27BE0C1AF93C3300715ABF /* people-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "people-7.png"; sourceTree = "<group>"; };
+		FA3B868F1B1760BC00450ACE /* 2015_button_faceonly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2015_button_faceonly.png; sourceTree = "<group>"; };
 		FA4407B51AD318D9001CEFFC /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		FA4407B61AD318D9001CEFFC /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		FA446E7119556D44007941C6 /* MapPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPhotosViewController.h; sourceTree = "<group>"; };
@@ -197,7 +198,6 @@
 		FA51932F1B07A226009A1CC6 /* 1431810127_33.Thumbs-Up-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1431810127_33.Thumbs-Up-32.png"; sourceTree = "<group>"; };
 		FA5193341B07A654009A1CC6 /* 1431811170_15.Pencil-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1431811170_15.Pencil-32.png"; sourceTree = "<group>"; };
 		FA5193351B07A654009A1CC6 /* 1431811075_25.Camera-Front-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1431811075_25.Camera-Front-32.png"; sourceTree = "<group>"; };
-		FA5193391B0A4D3F009A1CC6 /* 2015_button_faceonly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2015_button_faceonly.png; sourceTree = "<group>"; };
 		FA67962618D6719700A5BECC /* twitter_blue_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_blue_bar.png; sourceTree = "<group>"; };
 		FA6F12A51B13F97100F4ECAA /* MyActivityQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivityQuestionViewController.h; sourceTree = "<group>"; };
 		FA6F12A61B13F97100F4ECAA /* MyActivityQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivityQuestionViewController.m; sourceTree = "<group>"; };
@@ -451,7 +451,7 @@
 		FA6B17821AD06D850086F493 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				FA5193391B0A4D3F009A1CC6 /* 2015_button_faceonly.png */,
+				FA3B868F1B1760BC00450ACE /* 2015_button_faceonly.png */,
 				FA5193341B07A654009A1CC6 /* 1431811170_15.Pencil-32.png */,
 				FA5193351B07A654009A1CC6 /* 1431811075_25.Camera-Front-32.png */,
 				FA51932C1B07A225009A1CC6 /* 1431810271_40.Cloud-32.png */,
@@ -852,7 +852,7 @@
 				FA8B7FAC18DE183B001F3B1B /* rss-7.png in Resources */,
 				FA67962718D6719700A5BECC /* twitter_blue_bar.png in Resources */,
 				FAAA6078195EB4E700433679 /* StoryBoard_Small.storyboard in Resources */,
-				FA51933A1B0A4D3F009A1CC6 /* 2015_button_faceonly.png in Resources */,
+				FA3B86901B1760BC00450ACE /* 2015_button_faceonly.png in Resources */,
 				FAC3914B1952A1FC00A2ED2D /* info.png in Resources */,
 				FA724E5B1B01713500CF0985 /* 1431404518_star.png in Resources */,
 				FA8B7FAA18DE17A7001F3B1B /* man-7.png in Resources */,

@@ -26,6 +26,7 @@
 @synthesize userID;
 
 @synthesize interestBtn1, interestBtn2, interestBtn3, interestBtn4, interestBtn5, interestBtn6, interestBtn7;
+@synthesize photosTextLabel, commentsTextLabel, likesTextLabel, uniqueUsersTextLabel;
 
 #define PROFILE_PAGE 2
 
@@ -51,6 +52,20 @@ NSMutableArray *userPhotoArray;
 
     changeProfilePhotoBtn.layer.cornerRadius = 5;
     changeProfilePhotoBtn.layer.borderWidth = 1;
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    if (userID == [[userDefault objectForKey:@"user_id"]intValue]) {
+        updateBtn.hidden = NO;
+        updateBtn.enabled = YES;
+        logoutBtn.hidden = NO;
+        logoutBtn.enabled = YES;
+    }
+    else {
+        updateBtn.hidden = YES;
+        updateBtn.enabled = NO;
+        logoutBtn.hidden = YES;
+        logoutBtn.enabled = NO;
+    }
     
     [self downloadProfile];
 }
@@ -110,9 +125,48 @@ NSMutableArray *userPhotoArray;
             profileImage.layer.cornerRadius = 4.0f;
             profileImage.clipsToBounds = YES;
             // other stats
-            commentsLabel.text = [NSString stringWithFormat:@"%@", [item objectForKey:@"user_comments_cnt"]];
-            likesLabel.text = [NSString stringWithFormat:@"%@", [item objectForKey:@"user_likes_cnt"]];
-            photosLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[[item objectForKey:@"user_content"] count]];
+            
+            int userCommentsCnt = [[item objectForKey:@"user_comments_cnt"] intValue];
+            int userLikesCnt = [[item objectForKey:@"user_likes_cnt"] intValue];
+            int userPhotosCnt = [[item objectForKey:@"user_content"] count];
+            int userTaggedUsersCnt = [[item objectForKey:@"tagged_user"]count];
+            
+            if (userCommentsCnt <= 1) {
+                commentsLabel.text = [NSString stringWithFormat:@"%d", userCommentsCnt];
+                commentsTextLabel.text = @"comment";
+            }
+            else {
+                commentsLabel.text = [NSString stringWithFormat:@"%d", userCommentsCnt];
+                commentsTextLabel.text = @"comments";
+            }
+            
+            if (userLikesCnt <= 1) {
+                likesLabel.text = [NSString stringWithFormat:@"%d", userLikesCnt];
+                likesTextLabel.text = @"like";
+            }
+            else {
+                likesLabel.text = [NSString stringWithFormat:@"%d", userLikesCnt];
+                likesTextLabel.text = @"likes";
+            }
+            
+            if (userPhotosCnt <= 1) {
+                photosLabel.text = [NSString stringWithFormat:@"%d", userPhotosCnt];
+                photosTextLabel.text = @"photo";
+            }
+            else {
+                photosLabel.text = [NSString stringWithFormat:@"%d", userPhotosCnt];
+                photosTextLabel.text = @"photos";
+            }
+            
+            if (userTaggedUsersCnt <= 1) {
+                uniqueUsersLabel.text = [NSString stringWithFormat:@"%d", userTaggedUsersCnt];
+                uniqueUsersTextLabel.text = @"unique user";
+            }
+            else {
+                uniqueUsersLabel.text = [NSString stringWithFormat:@"%d", userTaggedUsersCnt];
+                uniqueUsersTextLabel.text = @"unique users";
+            }
+
             
             // preferences
             // change the alpha value of interest btn depending on its value
@@ -168,11 +222,17 @@ NSMutableArray *userPhotoArray;
         
         // remove all keys in NSUserDefaults
         NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+        NSString *deviceToken = [userDefault objectForKey:@"device_token"];
+        
         NSDictionary * dict = [userDefault dictionaryRepresentation];
         for (id key in dict) {
             [userDefault removeObjectForKey:key];
         }
         [userDefault synchronize];
+        
+        // add a device token again to userDefault
+        // this device token should be removed
+        [userDefault setObject:deviceToken forKey:@"device_token"];
         
         // move to the login page
         LoginViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
