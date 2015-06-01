@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "048B27948B4D49A9DAF639FF"
+               BlueprintIdentifier = "53E9F71A1BFE65BCC54BA75C"
                BuildableName = "libPods-CCHMapClusterController.a"
                BlueprintName = "Pods-CCHMapClusterController"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "048B27948B4D49A9DAF639FF"
+            BlueprintIdentifier = "53E9F71A1BFE65BCC54BA75C"
             BuildableName = "libPods-CCHMapClusterController.a"
             BlueprintName = "Pods-CCHMapClusterController"
             ReferencedContainer = "container:Pods.xcodeproj">

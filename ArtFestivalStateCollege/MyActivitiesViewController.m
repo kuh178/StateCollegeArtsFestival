@@ -34,6 +34,7 @@
 #define ACTION_EVENT 1
 #define ACTION_SURVEY 2
 #define ACTION_USER_PHOTO 3
+#define ACTION_YO 4
 
 int myType = MY_UPDATES;
 UIActivityIndicatorView *indicator;
@@ -110,7 +111,9 @@ UIActivityIndicatorView *indicator;
         // my update
         eventName.text = [item objectForKey:@"message"];
         eventImage.image = [UIImage imageNamed:@"2015_button_faceonly.png"];
-        eventDate.hidden = YES;
+        
+        double timestamp = [[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]] doubleValue];
+        eventDate.text = [self dailyLanguage:(timestamp-[[item objectForKey:@"datetime"] doubleValue])];
     }
     else if (myType == MY_EVENTS) {
         // event image
@@ -144,7 +147,7 @@ UIActivityIndicatorView *indicator;
         
         // event question
         eventName.text = [item objectForKey:@"comment"];
-  
+        
         // event count
         if ([[item objectForKey:@"like_cnt"] intValue] <= 1) {
             if ([[item objectForKey:@"comment_cnt"] intValue] <= 1) {
@@ -164,19 +167,54 @@ UIActivityIndicatorView *indicator;
         }
     }
     else if (myType == PEOPLE_LIKE_ME) { // PEOPLE_LIKE_ME
-        // event image
+        // user_image
         [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image"]]]];
         eventImage.layer.cornerRadius = 4.0f;
         eventImage.clipsToBounds = YES;
-        
-        // event question
+    
+        // user name
         eventName.text = [item objectForKey:@"name"];
+        
+        // hide datetime
+        eventDate.text = [NSString stringWithFormat:@"%3.1f%% matching", [[item objectForKey:@"matching_result"] doubleValue] * 100.0];
     }
     else {
         
     }
     
     return cell;
+}
+
+-(NSString*)dailyLanguage:(NSTimeInterval) overdueTimeInterval{
+    
+    overdueTimeInterval = overdueTimeInterval -4*3600;
+    
+    if (overdueTimeInterval<0)
+        overdueTimeInterval*=-1;
+    
+    NSInteger minutes = round(overdueTimeInterval)/60;
+    NSInteger hours   = minutes/60;
+    NSInteger days    = hours/24;
+    NSInteger months  = days/30;
+    NSInteger years   = months/12;
+    
+    NSString* overdueMessage;
+    
+    if (years>0){
+        overdueMessage = [NSString stringWithFormat:@"%d %@", (years), (years==1?@"year ago":@"years ago")];
+    }else if (months>0){
+        overdueMessage = [NSString stringWithFormat:@"%d %@", (months), (months==1?@"month ago":@"months ago")];
+    }else if (days>0){
+        overdueMessage = [NSString stringWithFormat:@"%d %@", (days), (days==1?@"day ago":@"days ago")];
+    }else if (hours>0){
+        overdueMessage = [NSString stringWithFormat:@"%d %@", (hours), (hours==1?@"hour ago":@"hours ago")];
+    }else if (minutes>0){
+        overdueMessage = [NSString stringWithFormat:@"%d %@", (minutes), (minutes==1?@"minute ago":@"minutes ago")];
+    }else if (overdueTimeInterval<60){
+        overdueMessage = [NSString stringWithFormat:@"a few seconds ago"];
+    }
+    
+    return overdueMessage;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -201,6 +239,12 @@ UIActivityIndicatorView *indicator;
             UserInputDetailedViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserInputDetailedViewController"];
             viewController.hidesBottomBarWhenPushed = YES;
             [viewController setItem:[item objectForKey:@"photo_info"]];
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+        else if ([[item objectForKey:@"action"] intValue] == ACTION_YO) {
+            ProfileViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileViewController"];
+            viewController.hidesBottomBarWhenPushed = YES;
+            [viewController setUserID:[[item objectForKey:@"special_id"]intValue]];
             [self.navigationController pushViewController:viewController animated:YES];
         }
     }

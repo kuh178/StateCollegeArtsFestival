@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B0AA6BA26E9FB38189FB0023"
+               BlueprintIdentifier = "54617BEAFD7ADC6014AE95AA"
                BuildableName = "libPods-NHBalancedFlowLayout.a"
                BlueprintName = "Pods-NHBalancedFlowLayout"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B0AA6BA26E9FB38189FB0023"
+            BlueprintIdentifier = "54617BEAFD7ADC6014AE95AA"
             BuildableName = "libPods-NHBalancedFlowLayout.a"
             BlueprintName = "Pods-NHBalancedFlowLayout"
             ReferencedContainer = "container:Pods.xcodeproj">

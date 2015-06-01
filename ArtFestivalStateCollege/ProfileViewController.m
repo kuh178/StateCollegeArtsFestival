@@ -13,6 +13,7 @@
 #import "UserPhotoListViewController.h"
 #import "ChooseInterestViewController.h"
 #import "AppDelegate.h"
+#import "PNChart.h"
 
 @interface ProfileViewController ()
 
@@ -23,7 +24,10 @@
 @synthesize profileImage, logoutBtn, seePhotosBtn, updateBtn, userNameLabel;
 @synthesize changeProfilePhotoBtn;
 @synthesize photosLabel, commentsLabel, likesLabel, uniqueUsersLabel;
+@synthesize moreBtn;
+@synthesize viewGraph1, viewGraph2;
 @synthesize userID;
+@synthesize yoBtn;
 
 @synthesize interestBtn1, interestBtn2, interestBtn3, interestBtn4, interestBtn5, interestBtn6, interestBtn7;
 @synthesize photosTextLabel, commentsTextLabel, likesTextLabel, uniqueUsersTextLabel;
@@ -53,20 +57,28 @@ NSMutableArray *userPhotoArray;
     changeProfilePhotoBtn.layer.cornerRadius = 5;
     changeProfilePhotoBtn.layer.borderWidth = 1;
     
+    yoBtn.layer.cornerRadius = 5;
+    yoBtn.layer.borderWidth = 1;
+    
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     if (userID == [[userDefault objectForKey:@"user_id"]intValue]) {
-        updateBtn.hidden = NO;
-        updateBtn.enabled = YES;
         logoutBtn.hidden = NO;
         logoutBtn.enabled = YES;
+        
+        moreBtn.style = UIBarButtonItemStyleBordered;
+        moreBtn.enabled = true;
+        moreBtn.title = @"More";
     }
     else {
-        updateBtn.hidden = YES;
-        updateBtn.enabled = NO;
         logoutBtn.hidden = YES;
         logoutBtn.enabled = NO;
+        
+        moreBtn.style = UIBarButtonItemStylePlain;
+        moreBtn.enabled = false;
+        moreBtn.title = nil;
     }
     
+    [self tapGestureRecognizer];
     [self downloadProfile];
 }
 
@@ -92,9 +104,52 @@ NSMutableArray *userPhotoArray;
 }
 */
 
+- (void) tapGestureRecognizer {
+    UITapGestureRecognizer *photoTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(photoTapDetected)];
+    photoTap.numberOfTapsRequired = 1;
+    [photosTextLabel setUserInteractionEnabled:YES];
+    [photosTextLabel addGestureRecognizer:photoTap];
+    
+    UITapGestureRecognizer *likeTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(likeTapDetected)];
+    photoTap.numberOfTapsRequired = 1;
+    [likesTextLabel setUserInteractionEnabled:YES];
+    [likesTextLabel addGestureRecognizer:likeTap];
+    
+    UITapGestureRecognizer *commentTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(commentTapDetected)];
+    photoTap.numberOfTapsRequired = 1;
+    [commentsTextLabel setUserInteractionEnabled:YES];
+    [commentsTextLabel addGestureRecognizer:commentTap];
+    
+    UITapGestureRecognizer *userTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(userTapDetected)];
+    photoTap.numberOfTapsRequired = 1;
+    [uniqueUsersTextLabel setUserInteractionEnabled:YES];
+    [uniqueUsersTextLabel addGestureRecognizer:userTap];
+}
+
+- (void) photoTapDetected {
+    UserPhotoListViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserPhotoListViewController"];
+    viewController.photoList = userPhotoArray;
+    viewController.username = username;
+    viewController.hidesBottomBarWhenPushed = YES;
+    [viewController.navigationController setNavigationBarHidden:YES];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void) likeTapDetected {
+
+}
+
+- (void) commentTapDetected {
+
+}
+
+- (void) userTapDetected {
+
+}
+
 - (void) downloadProfile {
     
-    //NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"user_id"     :[NSString stringWithFormat:@"%d", userID]};
     
@@ -166,8 +221,57 @@ NSMutableArray *userPhotoArray;
                 uniqueUsersLabel.text = [NSString stringWithFormat:@"%d", userTaggedUsersCnt];
                 uniqueUsersTextLabel.text = @"unique users";
             }
-
             
+            // chart
+            double matching_result = [[NSString stringWithFormat:@"%3.1f", [[item objectForKey:@"matching_result"] doubleValue] * 100.0] doubleValue];
+            if (userID == [[userDefault objectForKey:@"user_id"] intValue]) {
+                matching_result = 100.0;
+            }
+            
+            PNCircleChart * circleChart = [[PNCircleChart alloc]initWithFrame:CGRectMake(5.0, 2.0, 95.0, 95.0)
+                                                                        total:[NSNumber numberWithDouble:100.0]
+                                                                      current:[NSNumber numberWithDouble:matching_result]
+                                                                    clockwise:YES];
+            circleChart.backgroundColor = [UIColor whiteColor];
+            [circleChart setStrokeColor:PNGreen];
+            [circleChart strokeChart];
+            [viewGraph1 addSubview:circleChart];
+            
+            double matching_preference  = [[item objectForKey:@"matching_preference"] doubleValue];
+            double matching_event       = [[item objectForKey:@"matching_event"] doubleValue];
+            double matching_artist      = [[item objectForKey:@"matching_artist"] doubleValue];
+            double matching_photo       = [[item objectForKey:@"matching_photo"] doubleValue];
+            
+            double matching_preference_ratio    = matching_preference / (matching_preference + matching_event + matching_artist + matching_photo) * 100;
+            double matching_event_ratio         = matching_event / (matching_preference + matching_event + matching_artist + matching_photo) * 100;
+            double matching_artist_ratio        = matching_artist / (matching_preference + matching_event + matching_artist + matching_photo) * 100;
+            double matching_photo_ratio         = matching_photo / (matching_preference + matching_event + matching_artist + matching_photo) * 100;
+       
+            NSMutableArray *items = [NSMutableArray arrayWithCapacity:0];
+            
+            if (matching_preference != 0.0) {
+                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_preference_ratio color:PNRed description:@"Interest"]];
+            }
+            
+            if (matching_event != 0.0) {
+                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_event_ratio color:PNGreen description:@"Event"]];
+            }
+
+            if (matching_artist != 0.0) {
+                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_artist_ratio color:PNBrown description:@"Artist"]];
+            }
+            
+            if (matching_photo != 0.0) {
+                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_photo_ratio color:PNBlue description:@"Photo"]];
+            }
+            
+            PNPieChart *pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(5.0, 2.0, 95.0, 95.0) items:items];
+            pieChart.descriptionTextColor = [UIColor whiteColor];
+            pieChart.descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:11.0];
+            [pieChart strokeChart];
+            [viewGraph2 addSubview:pieChart];
+            
+
             // preferences
             // change the alpha value of interest btn depending on its value
             NSMutableDictionary *preferences = [item objectForKey:@"user_preferences"];
@@ -218,8 +322,10 @@ NSMutableArray *userPhotoArray;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) { // Logout
-        
+    
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if ([title isEqualToString:@"Logout"]){ // Attending
         // remove all keys in NSUserDefaults
         NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
         NSString *deviceToken = [userDefault objectForKey:@"device_token"];
@@ -236,7 +342,6 @@ NSMutableArray *userPhotoArray;
         
         // move to the login page
         LoginViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        //[self presentViewController:viewController animated:NO completion:nil];
         viewController.hidesBottomBarWhenPushed = YES;
         [viewController.navigationController setNavigationBarHidden:YES];
         [self.navigationController pushViewController:viewController animated:YES];
@@ -244,7 +349,14 @@ NSMutableArray *userPhotoArray;
         // [self.navigationController pushViewController:viewController animated:YES];
         
     }
-    else { // Cancel
+    else if ([title isEqualToString:@"Interest update"]){ // Interest update
+        
+        ChooseInterestViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseInterestViewController"];
+        viewController.previousViewController = PROFILE_PAGE;
+        viewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    else if ([title isEqualToString:@"Change profile photo"]){ // Change profile photo
         
     }
 }
@@ -262,25 +374,45 @@ NSMutableArray *userPhotoArray;
     
 }
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString: @"UserPhotoListViewController"]) {
-        
-        UserPhotoListViewController *viewController = (UserPhotoListViewController *)[segue destinationViewController];
-        viewController.photoList = userPhotoArray;
-        viewController.username = username;
-    }
-    else if ([[segue identifier] isEqualToString: @"ChooseInterestViewController"]) {
-        
-        ChooseInterestViewController *viewController = (ChooseInterestViewController *)[segue destinationViewController];
-        viewController.previousViewController = PROFILE_PAGE;
-    }
-    else {
-        
-    }
+- (IBAction)changeProfilePhotoBtnPressed:(id)sender {
+    
 }
 
-- (IBAction)changeProfilePhotoBtnPressed:(id)sender {
+- (IBAction)moreBtnPressed:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Choose the option"
+                                                    message:@""
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"Interest update", @"Change profile photo", nil];
+    [alert show];
+}
+
+- (IBAction)yoBtnPressed:(id)sender {
+    // send a yo message
+    
+    NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"send_user_id"     :[NSString stringWithFormat:@"%d", [[userDefault objectForKey:@"user_id"] intValue]],
+                             @"receive_user_id"  :[NSString stringWithFormat:@"%d", userID],
+                             @"datetime"         :[NSString stringWithFormat:@"%@", timeStampValue]};
+    
+    [manager POST:@"http://heounsuk.com/festival/upload_yo_message.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+        
+        if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
+            // yo sent
+        }
+        else {
+            // failed to send a yo message
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
     
 }
 

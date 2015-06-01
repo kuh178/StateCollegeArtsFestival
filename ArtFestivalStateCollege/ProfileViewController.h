@@ -36,6 +36,13 @@
     IBOutlet UIButton *interestBtn6;
     IBOutlet UIButton *interestBtn7;
     
+    IBOutlet UIView   *viewGraph1;
+    IBOutlet UIView   *viewGraph2;
+    
+    IBOutlet UIBarButtonItem *moreBtn;
+    IBOutlet UIButton *yoBtn;
+    
+    
     int userID;
 }
 
@@ -65,11 +72,19 @@
 @property (nonatomic, retain) IBOutlet UIButton *interestBtn6;
 @property (nonatomic, retain) IBOutlet UIButton *interestBtn7;
 
+@property (nonatomic, retain) IBOutlet UIView   *viewGraph1;
+@property (nonatomic, retain) IBOutlet UIView   *viewGraph2;
+
+@property (nonatomic, retain) IBOutlet UIButton *yoBtn;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *moreBtn;
+
 @property (nonatomic, assign) int userID;
 
 - (IBAction)changeProfilePhotoBtnPressed:(id)sender;
 - (IBAction)updateBtnPressed:(id)sender;
 - (IBAction)seePhotosBtnPressed:(id)sender;
 - (IBAction)logoutBtnPressed:(id)sender;
+- (IBAction)moreBtnPressed:(id)sender;
+- (IBAction)yoBtnPressed:(id)sender;
 
 @end
