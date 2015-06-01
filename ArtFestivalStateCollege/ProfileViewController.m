@@ -228,7 +228,7 @@ NSMutableArray *userPhotoArray;
                 matching_result = 100.0;
             }
             
-            PNCircleChart * circleChart = [[PNCircleChart alloc]initWithFrame:CGRectMake(5.0, 2.0, 95.0, 95.0)
+            PNCircleChart * circleChart = [[PNCircleChart alloc]initWithFrame:CGRectMake(5.0, 2.0, 120.0, 120.0)
                                                                         total:[NSNumber numberWithDouble:100.0]
                                                                       current:[NSNumber numberWithDouble:matching_result]
                                                                     clockwise:YES];
@@ -250,22 +250,22 @@ NSMutableArray *userPhotoArray;
             NSMutableArray *items = [NSMutableArray arrayWithCapacity:0];
             
             if (matching_preference != 0.0) {
-                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_preference_ratio color:PNRed description:@"Interest"]];
+                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_preference_ratio color:PNRed description:@"Interests"]];
             }
             
             if (matching_event != 0.0) {
-                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_event_ratio color:PNGreen description:@"Event"]];
+                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_event_ratio color:PNGreen description:@"Events"]];
             }
 
             if (matching_artist != 0.0) {
-                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_artist_ratio color:PNBrown description:@"Artist"]];
+                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_artist_ratio color:PNBrown description:@"Artists"]];
             }
             
             if (matching_photo != 0.0) {
-                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_photo_ratio color:PNBlue description:@"Photo"]];
+                [items addObject:[PNPieChartDataItem dataItemWithValue:matching_photo_ratio color:PNBlue description:@"Photos"]];
             }
             
-            PNPieChart *pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(5.0, 2.0, 95.0, 95.0) items:items];
+            PNPieChart *pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(5.0, 2.0, 120.0, 120.0) items:items];
             pieChart.descriptionTextColor = [UIColor whiteColor];
             pieChart.descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:11.0];
             [pieChart strokeChart];
@@ -359,11 +359,10 @@ NSMutableArray *userPhotoArray;
     else if ([title isEqualToString:@"Change profile photo"]){ // Change profile photo
         
     }
-}
-
-- (IBAction)logoutBtnPressed:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Proceed to logout?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Logout", nil];
-    [alert show];
+    else if ([title isEqualToString:@"Logout"]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Proceed to logout?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Logout", nil];
+        [alert show];
+    }
 }
 
 - (IBAction)updateBtnPressed:(id)sender {
@@ -383,7 +382,7 @@ NSMutableArray *userPhotoArray;
                                                     message:@""
                                                    delegate:self
                                           cancelButtonTitle:@"Cancel"
-                                          otherButtonTitles:@"Interest update", @"Change profile photo", nil];
+                                          otherButtonTitles:@"Interest update", @"Change profile photo", @"Logout", nil];
     [alert show];
 }
 
