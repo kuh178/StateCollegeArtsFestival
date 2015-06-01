@@ -11,6 +11,9 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "ProfileViewController.h"
+#import <Parse/Parse.h>
+#import "BloothLocationServices.h"
+
 //#import <GoogleMaps/GoogleMaps.h>
 
 
@@ -36,6 +39,13 @@ UIStoryboard *storyboard;
     
     // Optional: set Logger to VERBOSE for debug information.
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    //initilize parse and blooth
+    [Parse setApplicationId:@"8kF8pk05dWxFLAmSOQjrG4ecbLABu0hx8wTwjY92"
+                  clientKey:@"cngCLXl0J9kMzzvrciQFgcXwgRsnaUgxQjsigBLy"];
+    
+    // we want to push this back until we know the user is logged in
+    [BloothLocationServices sharedManager];
     
     // Initialize tracker.
     id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-52154939-1"];
@@ -99,6 +109,8 @@ UIStoryboard *storyboard;
          (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
         application.applicationIconBadgeNumber = 0;
     }
+    
+    
     
     return YES;
 }
@@ -189,6 +201,16 @@ UIStoryboard *storyboard;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil];
         [alert show];
     }
+}
+
+//local notifs
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    // If the application is in the foreground, we will notify the user of the region's state via an alert.
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notification.alertBody message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
+    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
