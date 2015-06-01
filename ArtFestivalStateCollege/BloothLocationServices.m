@@ -54,9 +54,9 @@
 
 - (void)setupLocationManager
 {
-    [NSTimer scheduledTimerWithTimeInterval:UpdateTimer  //secs constant
+    [NSTimer scheduledTimerWithTimeInterval:UpdateTimer  
                                      target:self
-                                   selector:@selector(lastBeaconSeenUpdate) //update lastSeenbeacon every secs
+                                   selector:@selector(lastBeaconSeenUpdate)
                                    userInfo:nil
                                     repeats:YES];
     
@@ -76,9 +76,9 @@
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
-    //check to see if bluetooth is enabled
+    
     [self detectBluetooth];
-    //[self getBeaconsAtEvent];
+    //[self getBeaconsAtEvent]; //DEBUG to refresh the region info not on timer
     
     if([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedAlways || [CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]] == NO){
         
@@ -90,14 +90,14 @@
         
         if(![CLLocationManager locationServicesEnabled])
         {
-            //You need to enable Location Services
+            
             NSLog(@"Location Services disabled");
             NSString *message = @"Location Services Disabled! Blooth Events uses location services to provide exclusive offers while to users based on their location at the conference! Please enable Location services in Settings to get the full experience.";
             [self locationServicesNotAuthed:message];
         }
         if(![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]])
         {
-            //Region monitoring is not available for this Class;
+            
             NSLog(@"Region Monitoring not available");
             NSString *message = @"iBeacon features not available on this device!";
             [self locationServicesNotAuthed:message];
@@ -105,7 +105,7 @@
         if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied ||
            [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted  )
         {
-            //You need to authorize Location Services for the app
+            
             NSLog(@"App not authorized");
             NSString *message = @"Location Services not authorized! Blooth Events uses location services to provide exclusive offers while to users based on their location at the conference! Please enable Location services in Settings to get the full experience.";
             [self locationServicesNotAuthed:message];
@@ -114,7 +114,7 @@
     NSDate *date = [[NSUserDefaults standardUserDefaults] objectForKey:@"bloothLastBeaconUpdate"];
     NSLog(@"%@", date);
     
-    //update region info every 24
+    
     if ( date == nil ){
         NSDate *now = [NSDate date];
         [[NSUserDefaults standardUserDefaults] setObject:now forKey:@"bloothLastBeaconUpdate"];
@@ -125,7 +125,7 @@
         NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date toDate:now options:0];
         NSInteger hour = [components hour];
         
-        if (hour >= 24){ //check if this is actually 24 hours
+        if (hour >= 24){
             [self getBeaconsAtEvent];
         }
     }
@@ -142,7 +142,7 @@
     [query whereKey:@"eventId" equalTo:CurrentEventId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error){
-            //NSArray* realObjects = [objects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K LIKE %@",@"eventId",CurrentEventId]];
+            
             
             for (PFObject *object in objects){
                 
@@ -152,7 +152,7 @@
                 NSString *greetingString = [object objectForKey:@"greetingString"];
                 NSString *exitString = [object objectForKey:@"exitString"];
                 
-                //create new beacon object with PFObject(region) info
+               
                 Beacon *b = [[Beacon new]
                              initWithName:identifier
                              commonName:(NSString *)commonName
@@ -162,7 +162,7 @@
         
                 [_returnedBeaconObjects addObject:b];
                 
-                //add regions to NSMutableDictionary for for the software filter of local notifs
+                
                 NSMutableDictionary *regionInfo = [NSMutableDictionary new];
                 [regionInfo setObject:b.greetingString forKey:@"greetingString"];
                 [regionInfo setObject:b.exitString forKey:@"exitString"];
@@ -171,10 +171,10 @@
             }
             NSLog(@"@%@",_beaconNotifications);
             
-            //persist the local notif dictionary
+            
             [[NSUserDefaults standardUserDefaults] setObject:_beaconNotifications forKey:@"beaconNotifications"];
            
-            //send the beacon objects to function to create the regions to monitor
+            
             NSArray *objectsToSend = self.returnedBeaconObjects;
             NSLog(@"%@", objectsToSend); //log beacon objects
             [self createRegionsToMonitor:objectsToSend];
@@ -185,9 +185,9 @@
 
 
 
-    lastBeacons = [NSMutableDictionary new]; //clear the ranged lastBeaconDictionary
-    activeRegions = [NSMutableDictionary new]; // clear the active regions dictionary
-    lastSeenBeacon = nil; //reset the last seen beacon
+    lastBeacons = [NSMutableDictionary new];
+    activeRegions = [NSMutableDictionary new];
+    lastSeenBeacon = nil;
     
 }
 
@@ -200,7 +200,7 @@
     
     [self startMonitoringForRegions:[NSArray arrayWithArray:workArray]];
 }
-//helper method to create the regions to monitor
+
 
 - (CLBeaconRegion *)beaconRegionWithObject:(Beacon *)beacon {
     CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beacon.uuid
@@ -208,7 +208,7 @@
     return beaconRegion;
 }
 
-//function to start Corelocation monitoring
+
 - (void) startMonitoringForRegions:(NSArray*)regions{
    
     NSLog(@"Starting to monitor: %@ ", regions);
@@ -218,7 +218,7 @@
         region.notifyOnEntry=YES;
         region.notifyOnExit =YES;
         [self.locationManager startMonitoringForRegion:region];
-        //[self.locationManager startRangingBeaconsInRegion:region];
+        
     }
     
     NSLog(@"%@",self.locationManager.monitoredRegions);
@@ -256,7 +256,7 @@
     
     if (status != kCLAuthorizationStatusAuthorizedAlways){
         NSString *message = @"Location Services Disabled! Blooth Events uses location services to provide exclusive offers to users based on their location at the conference! Please enable Location services in Settings to get the full experience.";
-        [self locationServicesNotAuthed:message]; //DENUG fix alert view
+        [self locationServicesNotAuthed:message];
     }
     
     //detect if the user has enabled incognito mode
@@ -266,7 +266,7 @@
         [self incognitoPressed];         //incognito mode
         return;
     }
-    //detect if bluetooth is on
+    
     [self detectBluetooth];
 }
 
@@ -274,10 +274,10 @@
          didEnterRegion:(CLBeaconRegion *)region{
     NSLog(@"%@", region);
     
-    //call to send the local notification for the region
+    
     [self regionUpdate];
     [self sendEntryLocalNotificationforBeacon:region.identifier];
-    //call to update ist user Table
+    
     [self.locationManager startRangingBeaconsInRegion:region];
 }
 - (void) locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLBeaconRegion *)region{
@@ -290,7 +290,7 @@
 - (void)locationManager:(CLLocationManager *)manager
           didExitRegion:(CLBeaconRegion *)region{
 
-    //update the array of hashed beacon
+    
     [self.locationManager stopRangingBeaconsInRegion:region];
     [activeRegions removeObjectForKey:region.identifier];
    // [self sendExitLocalNotificationforBeacon:region.identifier];
@@ -310,12 +310,9 @@
         [activeRegions setObject:regionID forKey:now];
         [self regionUpdate];
 
-        //add region to seenRegions and update timestamp
     
         NSLog(@"%@", activeRegions);
-        //call the function to find the closest beacon and/or send a notification
         
-        //update the user object
         
     }else if(state == CLRegionStateOutside || CLRegionStateUnknown){
         NSLog(@"We are not in a region");
@@ -337,7 +334,7 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
 }
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
-   // filter the array out for any beacons that are far or unknown and compare to the last seen beacon in order to determine if an update is needed -85 rssi value might work better
+   
     
     NSPredicate *predicateIrrelevantBeacons = [NSPredicate predicateWithFormat:@"(self.accuracy != -1) AND (self.proximity != %d)", CLProximityUnknown];
     NSArray *relevantBeacons = [beacons filteredArrayUsingPredicate: predicateIrrelevantBeacons];
@@ -360,7 +357,7 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
         
     }
 }
-//helper method to resove identifer from UUID
+
 - (NSString *)beaconIdentifierFromUUID:(NSUUID *)beacon {
     NSSet *regions = self.locationManager.monitoredRegions;
     NSString *beaconRegion = [NSString new];
@@ -385,7 +382,7 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
         return;
     }
     
-    /* this method will look at the the rssi of the ranged beacon dictionary and use the value to determine the closest beacon. It will then see if there is any interaction associated with that particular beacon in the region it will then decipher if it is a picture video or weblink and take action. */
+    
     
    NSMutableArray *arrayToSort = [NSMutableArray new];
     
@@ -412,14 +409,13 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
         
         lastSeenBeacon = closestBeacon;
 
-        //web service
-        //send to notification center
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:lastBeaconSeenUpdate
                                                             object:@"lastSeenBeaconUpdate"
                                                           userInfo:nil];
 
     }
-    /* TODO download the beacon interaction and hash the identifier and major and minors. Then find the beacons that have interactions */
+   
     lastBeacons = [NSMutableDictionary new];
 }
 - (NSArray*)sortBeacons:(NSArray *)arrayToSort {
@@ -433,34 +429,27 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
     //check if the array is empty
     BOOL isEmpty = ([activeRegions count] == 0);
    
-    if (isEmpty != true){ //active regions keys are dates
+    if (isEmpty != true){
         
-        //sort the dates by ascending order
+        
         NSArray *sorted = [[activeRegions allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             return [[activeRegions objectForKey:obj1] compare:[activeRegions objectForKey:obj2]];
         }];
         
-        //flip array to put the most recent regions on top
+        
         NSArray* finalArray = [[sorted reverseObjectEnumerator] allObjects];
         NSString *lastActiveRegion = [activeRegions objectForKey:finalArray[0]];
         NSLog(@"%@", finalArray);
         
-        //check if there are any updates to the currentRegion
+        
         if (![lastActiveRegion isEqualToString:currentRegion]){
             currentRegion = lastActiveRegion;
-            //activeRegions = [NSMutableDictionary new];
             [[NSNotificationCenter defaultCenter] postNotificationName:regionUpdate
                                                                 object:@"regionUpdate"
                                                               userInfo:nil];
         }
         
     }
-}
-//this method is to refresh the active region dictionary. Needs to be implemented still
-- (void) regionRefresh {
-    
-    [activeRegions removeAllObjects];
-
 }
 
 
@@ -471,7 +460,7 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
     
     if ([note.object isEqualToString:@"regionUpdate"]){
     [PFCloud callFunctionInBackground:@"checkIn"
-                       withParameters:@{@"userInfo": userInfo, @"regionID": currentRegion, @"eventId": CurrentEventId, @"timeStamp": now}
+                       withParameters:@{@"userInfo": [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"], @"regionID": currentRegion, @"eventId": CurrentEventId, @"timeStamp": now}
                                 block:^(NSString *response, NSError *error) {
                                     if (!error) {
                                         NSLog(@"%@", response);
@@ -479,11 +468,14 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
                                         NSLog(@"%@", error.localizedDescription);
                                     }
                                 }];
+        
+        //call to PSU backend
+        
     }
     
     if ([note.object isEqualToString:@"lastSeenBeaconUpdate"]){
         [PFCloud callFunctionInBackground:@"checkIn"
-                           withParameters:@{@"userInfo": userInfo, @"regionID": lastSeenBeacon, @"eventId": CurrentEventId, @"timeStamp": now}
+                           withParameters:@{@"userInfo": [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"], @"regionID": lastSeenBeacon, @"eventId": CurrentEventId, @"timeStamp": now}
                                     block:^(NSString *response, NSError *error) {
                                         if (!error) {
                                             NSLog(@"%@", response);
@@ -491,6 +483,7 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
                                             NSLog(@"%@", error.localizedDescription);
                                         }
                                     }];
+        //call to PSU backend
     }
     
 }
