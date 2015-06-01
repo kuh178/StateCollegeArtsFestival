@@ -413,6 +413,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C71D01661B1CC70D0051ED9C /* BloothLocationServices */ = {
+			isa = PBXGroup;
+			children = (
+				C7A828DC1B156CC2003DD26E /* Beacon.h */,
+				C7A828DD1B156CC2003DD26E /* Beacon.m */,
+				C7A828D81B156CBA003DD26E /* BloothLocationServices.h */,
+				C7A828D91B156CBA003DD26E /* BloothLocationServices.m */,
+				C7A828DA1B156CBA003DD26E /* BloothConstants.h */,
+			);
+			name = BloothLocationServices;
+			sourceTree = "<group>";
+		};
 		C7A828C11B156B84003DD26E /* parse-library-1.7.4 */ = {
 			isa = PBXGroup;
 			children = (
@@ -659,11 +671,7 @@
 		FAF6E8C818C6509800BDD03D /* ArtFestivalStateCollege */ = {
 			isa = PBXGroup;
 			children = (
-				C7A828DC1B156CC2003DD26E /* Beacon.h */,
-				C7A828DD1B156CC2003DD26E /* Beacon.m */,
-				C7A828D81B156CBA003DD26E /* BloothLocationServices.h */,
-				C7A828D91B156CBA003DD26E /* BloothLocationServices.m */,
-				C7A828DA1B156CBA003DD26E /* BloothConstants.h */,
+				C71D01661B1CC70D0051ED9C /* BloothLocationServices */,
 				FA6F12A41B13F94500F4ECAA /* MyActivityPage */,
 				FA27BDFF1AF86A0E00715ABF /* Meetup */,
 				FA4407B41AD318BD001CEFFC /* Profile */,
