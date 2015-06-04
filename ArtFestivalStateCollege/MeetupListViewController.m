@@ -11,6 +11,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AFHTTPRequestOperationManager.h"
 #import "EventDetailViewController.h"
+#import "MeetupCreateViewController.h"
 
 @interface MeetupListViewController ()
 
@@ -34,7 +35,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.navigationController.navigationItem.backBarButtonItem.title = @"Back";
-    //self.hidesBottomBarWhenPushed = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -111,13 +111,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableDictionary *item = [eventList objectAtIndex:indexPath.row];
-    
-    //[self performSegueWithIdentifier:@"EventDetailViewController" sender:item];
-    
+   
     EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
     viewController.hidesBottomBarWhenPushed = YES;
     [viewController setEventID:[[item objectForKey:@"id"] intValue]];
     [viewController setIsOfficial:NO];
+    [viewController setUserID:[[item objectForKey:@"user_id"] intValue]];
+    [viewController setUserImage:[item objectForKey:@"user_image"]];
+    [viewController setUserName:[item objectForKey:@"user_name"]];
     [self.navigationController pushViewController:viewController animated:YES];
 
     //[self presentViewController:viewController animated:YES completion:nil];
@@ -170,6 +171,14 @@
     }
     else { // filter by location
         
+    }
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString: @"MeetupCreateViewController"]) {
+        MeetupCreateViewController *viewController = (MeetupCreateViewController *)[segue destinationViewController];
+        viewController.hidesBottomBarWhenPushed = YES;
     }
 }
 

@@ -12,6 +12,7 @@
 #import <UIKit/UIKit.h>
 #import "BloothConstants.h"
 #import <Parse/Parse.h>
+#import "AFHTTPRequestOperationManager.h"
 
 @interface BloothLocationServices () <CLLocationManagerDelegate>
 
@@ -280,6 +281,7 @@
     
     [self.locationManager startRangingBeaconsInRegion:region];
 }
+
 - (void) locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLBeaconRegion *)region{
      
  
@@ -335,7 +337,6 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
    
-    
     NSPredicate *predicateIrrelevantBeacons = [NSPredicate predicateWithFormat:@"(self.accuracy != -1) AND (self.proximity != %d)", CLProximityUnknown];
     NSArray *relevantBeacons = [beacons filteredArrayUsingPredicate: predicateIrrelevantBeacons];
     // call helper2
@@ -469,11 +470,33 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
                                     }
                                 }];
         
-        //call to PSU backend
+        // call to PSU backend
+        NSLog(@"Sending a regionUpdate to PSU server");
+        NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
         
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *params = @{@"user_id"         :[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"]],
+                                 @"datetime"        :[NSString stringWithFormat:@"%@", timeStampValue],
+                                 @"bt_region_id"    :currentRegion,
+                                 @"bt_event_id"     :CurrentEventId,
+                                 @"bt_type"         :@"regionUpdate"
+                                 };
+        
+        [manager POST:@"http://heounsuk.com/festival/upload_user_location.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
+                NSLog(@"location uploaded");
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        // location update completed
     }
     
     if ([note.object isEqualToString:@"lastSeenBeaconUpdate"]){
+        
+        NSLog(@"lastSeenBeaconUpdate");
+        
         [PFCloud callFunctionInBackground:@"checkIn"
                            withParameters:@{@"userInfo": [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"], @"regionID": lastSeenBeacon, @"eventId": CurrentEventId, @"timeStamp": now}
                                     block:^(NSString *response, NSError *error) {
@@ -483,9 +506,28 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
                                             NSLog(@"%@", error.localizedDescription);
                                         }
                                     }];
-        //call to PSU backend
+        // call to PSU backend
+        NSLog(@"Sending a regionUpdate to PSU server");
+        NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *params = @{@"user_id"         :[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"]],
+                                 @"datetime"        :[NSString stringWithFormat:@"%@", timeStampValue],
+                                 @"bt_region_id"    :currentRegion,
+                                 @"bt_event_id"     :CurrentEventId,
+                                 @"bt_type"         :@"lastSeenBeaconUpdate"
+                                 };
+        
+        [manager POST:@"http://heounsuk.com/festival/upload_user_location.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
+                NSLog(@"location uploaded");
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        // location update completed
     }
-    
 }
 
 #pragma mark notAuthorized

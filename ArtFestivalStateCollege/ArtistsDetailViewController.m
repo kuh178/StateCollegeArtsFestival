@@ -20,7 +20,7 @@
 
 @implementation ArtistsDetailViewController
 
-@synthesize artistImage, artistEmailBtn, artistMoreImageBtn, artistName, artistBooth, artistCategory, artistAddress, artistDescription, artistMap, item;
+@synthesize artistImage, artistFavoriteImage, artistEmailBtn, artistMoreImageBtn, artistName, artistBooth, artistCategory, artistAddress, artistDescription, artistMap, item;
 @synthesize view1, view2;
 @synthesize artistFavoriteBtn, artistWebPageBtn;
 
@@ -199,16 +199,39 @@
 }
 
 - (void) downloadArtistUpdates {
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"artist_id"    :[NSString stringWithFormat:@"%d", [[item objectForKey:@"id"] intValue]]};
-    
     [manager POST:@"http://heounsuk.com/festival/download_artist_details.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
-            [artistFavoriteBtn setTitle:[NSString stringWithFormat:@"     (%lu)", (unsigned long)[[responseObject objectForKey:@"favorite_cnt"] intValue]] forState:UIControlStateNormal];
+            NSMutableArray *itemAry = [[NSMutableArray alloc]initWithCapacity:0];
+            itemAry = [[responseObject objectForKey:@"results"] objectForKey:@"favorite_user_ary"];
+            int itemAryCnt = [itemAry count];
+            
+            NSLog(@"itemAryCnt: %d", itemAryCnt);
+            
+            [artistFavoriteBtn setTitle:[NSString stringWithFormat:@"     (%d)", itemAryCnt] forState:UIControlStateNormal];
+            
+            BOOL favoriteAdded = NO;
+            for (int i = 0; i < itemAryCnt; i++) {
+                NSDictionary *dic = [itemAry objectAtIndex:i];
+                if ([[userDefault objectForKey:@"user_id"] intValue] == [[dic objectForKey:@"user_id"] intValue]) {
+                    favoriteAdded = YES;
+                    break;
+                }
+            }
+            
+            if (favoriteAdded) {
+                [artistFavoriteImage setImage:[UIImage imageNamed:@"star_selected.png"]];
+            }
+            else {
+                [artistFavoriteImage setImage:[UIImage imageNamed:@"star_normal.png"]];
+            }
+            
         }
         else {
             

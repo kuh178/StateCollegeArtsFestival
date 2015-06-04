@@ -14,6 +14,8 @@
     IBOutlet UIImageView        *eventImage;
     IBOutlet UIImageView        *eventButtonImage;
     IBOutlet UIImageView        *eventWebImage;
+    IBOutlet UIImageView        *eventAttendImage;
+    IBOutlet UIImageView        *eventFavoriteImage;
     
     IBOutlet UILabel            *eventName;
     IBOutlet UILabel            *eventDatetime;
@@ -42,11 +44,15 @@
     
     IBOutlet MKMapView          *eventMap;
     
-    IBOutlet UIBarButtonItem    *eventUserInputAddBtn;
+    IBOutlet UIBarButtonItem    *moreBtn;
     
     BOOL isOfficial;
     double latitude;
     double longitude;
+    
+    NSString                    *userName;
+    NSString                    *userImage;
+    int                         userID;
     
     int                         eventID;
 }
@@ -54,6 +60,8 @@
 @property (nonatomic, retain) IBOutlet UIImageView        *eventImage;
 @property (nonatomic, retain) IBOutlet UIImageView        *eventButtonImage;
 @property (nonatomic, retain) IBOutlet UIImageView        *eventWebImage;
+@property (nonatomic, retain) IBOutlet UIImageView        *eventAttendImage;
+@property (nonatomic, retain) IBOutlet UIImageView        *eventFavoriteImage;
 
 @property (nonatomic, retain) IBOutlet UILabel            *eventName;
 @property (nonatomic, retain) IBOutlet UILabel            *eventDatetime;
@@ -81,11 +89,15 @@
 @property (nonatomic, retain) IBOutlet UITextView         *eventDescription;
 @property (nonatomic, retain) IBOutlet MKMapView          *eventMap;
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem    *eventUserInputAddBtn;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem    *moreBtn;
 
 @property (nonatomic, assign) double latitude;
 @property (nonatomic, assign) double longitude;
 @property (nonatomic, assign) BOOL isOfficial;
+
+@property (nonatomic, retain) NSString                    *userName;
+@property (nonatomic, retain) NSString                    *userImage;
+@property (nonatomic, assign) int                         userID;
 
 @property (nonatomic, assign) int                         eventID;
 
@@ -97,6 +109,7 @@
 - (IBAction)eventGoingAddBtnPressed:(id)sender;
 - (IBAction)eventLikeBtnPressed:(id)sender;
 //- (IBAction)eventUserInputAddBtnPressed:(id)sender;
+- (IBAction)moreBtnPressed:(id)sender;
 
 - (IBAction)eventRemoveBtnPressed:(id)sender;
 

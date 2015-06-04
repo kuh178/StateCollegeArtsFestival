@@ -151,7 +151,8 @@ NSMutableArray *userPhotoArray;
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *params = @{@"user_id"     :[NSString stringWithFormat:@"%d", userID]};
+    NSDictionary *params = @{@"user_id"     :[NSString stringWithFormat:@"%d", userID],
+                             @"my_user_id"  :[NSString stringWithFormat:@"%d", [[userDefault objectForKey:@"user_id"] intValue]]};
     
     [manager POST:@"http://heounsuk.com/festival/download_user_profile.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -363,6 +364,9 @@ NSMutableArray *userPhotoArray;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Proceed to logout?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Logout", nil];
         [alert show];
     }
+    else if ([title isEqualToString:@"What is Wave?"]){
+        // show a dialog explaining the meaning of WAVE
+    }
 }
 
 - (IBAction)updateBtnPressed:(id)sender {
@@ -382,7 +386,7 @@ NSMutableArray *userPhotoArray;
                                                     message:@""
                                                    delegate:self
                                           cancelButtonTitle:@"Cancel"
-                                          otherButtonTitles:@"Interest update", @"Change profile photo", @"Logout", nil];
+                                          otherButtonTitles:@"Interest update", @"Change profile photo", @"What is Wave?", @"Logout", nil];
     [alert show];
 }
 

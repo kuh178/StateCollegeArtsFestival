@@ -18,6 +18,7 @@
     IBOutlet MKMapView          *mapView;
     IBOutlet UIBarButtonItem    *submitBtn;
     IBOutlet UIImageView        *addPhotoImage;
+    IBOutlet UIButton           *myLocationBtn;
     
     LocationAnnotation *annotation;
     CLLocationManager *locationManager;
@@ -32,11 +33,14 @@
 @property (nonatomic, retain) IBOutlet MKMapView            *mapView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem      *submitBtn;
 @property (nonatomic, retain) IBOutlet UIImageView          *addPhotoImage;
+@property (nonatomic, retain) IBOutlet UIButton             *myLocationBtn;
 
 @property (nonatomic, assign) double selectedLocLatitude;
 @property (nonatomic, assign) double selectedLocLongitude;
 
+
 -(IBAction)submitBtnPressed:(id)sender;
+-(IBAction)myLocationBtnPressed:(id)sender;
 
 
 @end

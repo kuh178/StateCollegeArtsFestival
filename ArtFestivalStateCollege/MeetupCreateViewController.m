@@ -20,6 +20,7 @@
 
 @synthesize meetupWhatText, meetupWhenPicker, mapView, submitBtn, addPhotoImage;
 @synthesize selectedLocLatitude, selectedLocLongitude;
+@synthesize myLocationBtn;
 
 NSData      *imageData;
 UIImage     *chosenImage;
@@ -272,8 +273,7 @@ UIImage     *chosenImage;
 }
 
 -(void)handleLongPress:(UITapGestureRecognizer *)tap{
-    
-    NSLog(@"TappedGesture");
+
     if (tap.state != UIGestureRecognizerStateBegan) {
         return;
     }
@@ -305,6 +305,10 @@ UIImage     *chosenImage;
         return NO;
     }
     return YES;
+}
+
+-(IBAction)myLocationBtnPressed:(id)sender {
+    [mapView setCenterCoordinate:mapView.userLocation.location.coordinate animated:YES];
 }
 
 

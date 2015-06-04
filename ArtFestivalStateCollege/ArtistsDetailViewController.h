@@ -13,6 +13,7 @@
 @interface ArtistsDetailViewController : GAITrackedViewController {
 
     IBOutlet UIImageView        *artistImage;
+    IBOutlet UIImageView        *artistFavoriteImage;
     IBOutlet UILabel            *artistName;
     IBOutlet UILabel            *artistBooth;
     IBOutlet UILabel            *artistCategory;
@@ -37,6 +38,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView        *artistImage;
+@property (nonatomic, retain) IBOutlet UIImageView        *artistFavoriteImage;
 @property (nonatomic, retain) IBOutlet UILabel            *artistName;
 @property (nonatomic, retain) IBOutlet UILabel            *artistBooth;
 @property (nonatomic, retain) IBOutlet UILabel            *artistCategory;

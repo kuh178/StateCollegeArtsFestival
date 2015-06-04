@@ -13,7 +13,6 @@
 
 @interface AddUserInputViewController : GAITrackedViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate, AddUsersViewControllerDelegate, CLLocationManagerDelegate> {
     IBOutlet UIImageView        *imageView;
-    IBOutlet UIBarButtonItem    *takePhotoBtn;
 
     IBOutlet UIButton           *uploadBtn;
     IBOutlet UIButton           *tagUsersBtn;
@@ -29,7 +28,6 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView      *imageView;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem  *takePhotoBtn;
 @property (nonatomic, retain) IBOutlet UIButton         *uploadBtn;
 @property (nonatomic, retain) IBOutlet UIButton         *tagUsersBtn;
 
@@ -44,8 +42,6 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *startLocation;
 
--(IBAction)takePhotoBtnPress:(id)sender;
--(IBAction)addVoiceBtnPress:(id)sender;
 -(IBAction)uploadBtnPress:(id)sender;
 -(IBAction)tagUsersBtnPress:(id)sender;
 

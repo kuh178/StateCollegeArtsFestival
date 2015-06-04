@@ -10,6 +10,7 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "AddCommentViewController.h"
+#import "ProfileViewController.h"
 #import "JSON.h"
 
 @interface UserInputDetailedViewController ()
@@ -18,7 +19,7 @@
 
 @implementation UserInputDetailedViewController
 
-@synthesize image, userImage, username, datetime, item, commentArray, audioBtn, likePhotoBtn, commentText, addCommentBtn, removeBtn;
+@synthesize image, userImage, username, datetime, item, commentArray, audioBtn, likePhotoBtn, commentText, addCommentBtn, removeBtn, moreBtn, favoriteImage;
 NSUserDefaults *userDefault;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -47,7 +48,6 @@ NSUserDefaults *userDefault;
     [layer setShadowRadius:2.0];
     [image setClipsToBounds:NO];
    
-
     // image
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -62,6 +62,9 @@ NSUserDefaults *userDefault;
     [userImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"user_image"]]]];
     userImage.layer.cornerRadius = 5;
     userImage.clipsToBounds = YES;
+    // when user image pressed
+    [self tapGestureRecognizer];
+    [self tapGestureRecognizerFavorite];
     
     // user name
     username.text = [item objectForKey:@"user_name"];
@@ -114,6 +117,31 @@ NSUserDefaults *userDefault;
     [self downloadLikesComments];
 }
 
+- (void) tapGestureRecognizer {
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [userImage setUserInteractionEnabled:YES];
+    [userImage addGestureRecognizer:singleTap];
+}
+
+- (void) tapDetected {
+    ProfileViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileViewController"];
+    viewController.hidesBottomBarWhenPushed = YES;
+    [viewController setUserID:[[item objectForKey:@"user_id"] intValue]];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void) tapGestureRecognizerFavorite {
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDetectedFavorite)];
+    singleTap.numberOfTapsRequired = 1;
+    [favoriteImage setUserInteractionEnabled:YES];
+    [favoriteImage addGestureRecognizer:singleTap];
+}
+
+- (void) tapDetectedFavorite {
+    [self addOrRemoveLike];
+}
+
 - (void)downloadLikesComments {
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -124,9 +152,11 @@ NSUserDefaults *userDefault;
         NSLog(@"Success: %@", responseObject);
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
-         
-            int numLikes = [[responseObject objectForKey:@"user_likes_array"] count];
-            int numComments = [[responseObject objectForKey:@"user_comments_array"] count];
+            
+            int numLikes = (int)[[responseObject objectForKey:@"user_likes_array"] count];
+            int numComments = (int)[[responseObject objectForKey:@"user_comments_array"] count];
+            
+            [self checkUserLikedThisPhoto:[responseObject objectForKey:@"user_likes_array"]];
             
             // num likes
             if (numLikes <= 1) {
@@ -161,7 +191,7 @@ NSUserDefaults *userDefault;
     }];
 }
 
-- (void) addLike {
+- (void) addOrRemoveLike {
     
     NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
     
@@ -179,19 +209,16 @@ NSUserDefaults *userDefault;
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
             
-            UIAlertView *dialog = [[UIAlertView alloc]init];
-            [dialog setDelegate:nil];
-            [dialog setTitle:@"Message"];
-            [dialog setMessage:@"Like added"];
-            [dialog addButtonWithTitle:@"OK"];
-            [dialog show];
+            int numLikes = (int)[[responseObject objectForKey:@"user_likes_array"] count];
             
-            if (([[item objectForKey:@"like_cnt"] intValue] + 1) <= 1) {
-                [likePhotoBtn setTitle:[NSString stringWithFormat:@"%d like",[[item objectForKey:@"like_cnt"] intValue] + 1] forState:UIControlStateNormal];
+            if (numLikes <= 1) {
+                [likePhotoBtn setTitle:[NSString stringWithFormat:@"%d like", numLikes] forState:UIControlStateNormal];
             }
             else {
-                [likePhotoBtn setTitle:[NSString stringWithFormat:@"%d likes",[[item objectForKey:@"like_cnt"] intValue] + 1] forState:UIControlStateNormal];
+                [likePhotoBtn setTitle:[NSString stringWithFormat:@"%d likes", numLikes] forState:UIControlStateNormal];
             }
+            
+            [self checkUserLikedThisPhoto:[responseObject objectForKey:@"user_likes_array"]];
             
         }
         else {
@@ -242,6 +269,26 @@ NSUserDefaults *userDefault;
     }];
 }
 
+- (void)checkUserLikedThisPhoto:(NSArray *)likeArray{
+    
+    BOOL userLikedPhoto = NO;
+    
+    for (int i = 0; i < [likeArray count]; i++) {
+        NSDictionary *likeItem = [likeArray objectAtIndex:i];
+        if ([[likeItem objectForKey:@"user_id"]intValue] == [[userDefault objectForKey:@"user_id"]intValue]) {
+            userLikedPhoto = YES;
+            break;
+        }
+    }
+    
+    if (userLikedPhoto) {
+        [favoriteImage setImage:[UIImage imageNamed:@"star_selected.png"]];
+    }
+    else {
+        [favoriteImage setImage:[UIImage imageNamed:@"star_normal.png"]];
+    }
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
@@ -269,7 +316,7 @@ NSUserDefaults *userDefault;
 }
 
 - (IBAction)likePhotoBtnPressed:(id)sender {
-    [self addLike];
+    [self addOrRemoveLike];
 }
 
 - (IBAction)addCommentBtnPressed:(id)sender {
@@ -279,6 +326,10 @@ NSUserDefaults *userDefault;
 - (IBAction)removeBtnPressed:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remove this photo? This cannot be undone" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
     [alert show];
+}
+
+- (IBAction)moreBtnPressed:(id)sender {
+    
 }
 
 @end

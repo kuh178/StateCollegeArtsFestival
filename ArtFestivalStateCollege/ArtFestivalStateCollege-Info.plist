@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.blooth.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>edu.psu.ist.hci.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -39,12 +39,12 @@
 	<string>Arts Festival would like to use your location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Arts Festival would like to use your location.</string>
-	<key>UIMainStoryboardFile</key>
-	<string>StoryBoard5</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
 	</array>
+	<key>UIMainStoryboardFile</key>
+	<string>StoryBoard5</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

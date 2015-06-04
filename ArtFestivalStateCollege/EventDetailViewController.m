@@ -27,9 +27,11 @@
 
 @implementation EventDetailViewController
 
-@synthesize eventImage, eventButtonImage, eventName, eventDatetime, eventGoingBtn, eventButton, eventWebPageBtn, eventUserInputAddBtn, eventGoingAddBtn, eventUserInputBtn, eventLikeBtn, eventLocationName, eventDescription, eventMap, latitude, longitude, isOfficial, eventView1, eventWebImage, eventRemoveBtn, eventEditBtn, eventAttendLabel, eventFavoriteLabel;
+@synthesize eventImage, eventButtonImage, eventName, eventDatetime, eventGoingBtn, eventButton, eventWebPageBtn, moreBtn, eventGoingAddBtn, eventUserInputBtn, eventLikeBtn, eventLocationName, eventDescription, eventMap, latitude, longitude, isOfficial, eventView1, eventWebImage, eventRemoveBtn, eventEditBtn, eventAttendLabel, eventFavoriteLabel;
 @synthesize view1, view2, view3, view4;
 @synthesize eventID;
+@synthesize eventAttendImage, eventFavoriteImage;
+@synthesize userID, userImage, userName;
 
 int photo_cnt = 0;
 int attend_flag = ADD_ATTEND;
@@ -52,22 +54,6 @@ UIActivityIndicatorView *indicator;
 	// Do any additional setup after loading the view.
     
     // button rounded corner
-    eventGoingBtn.layer.borderColor = [[UIColor blackColor] CGColor];
-    eventGoingBtn.layer.borderWidth = 1.0;
-    eventGoingBtn.layer.cornerRadius = 5;
-    
-    eventUserInputBtn.layer.borderColor = [[UIColor blackColor] CGColor];
-    eventUserInputBtn.layer.borderWidth = 1.0;
-    eventUserInputBtn.layer.cornerRadius = 5;
-    
-    eventWebPageBtn.layer.borderColor = [[UIColor blackColor] CGColor];
-    eventWebPageBtn.layer.borderWidth = 1.0;
-    eventWebPageBtn.layer.cornerRadius = 5;
-    
-    eventLikeBtn.layer.borderColor = [[UIColor blackColor] CGColor];
-    eventLikeBtn.layer.borderWidth = 1.0;
-    eventLikeBtn.layer.cornerRadius = 5;
-    
     eventEditBtn.layer.borderColor = [[UIColor blackColor] CGColor];
     eventEditBtn.layer.borderWidth = 1.0;
     eventEditBtn.layer.cornerRadius = 5;
@@ -98,6 +84,26 @@ UIActivityIndicatorView *indicator;
     view4.layer.cornerRadius = 5;
     view4.layer.borderWidth = 1.0;
     
+    // hide the more button if this item is official event
+    if (isOfficial) {
+        moreBtn.style = UIBarButtonItemStylePlain;
+        moreBtn.enabled = false;
+    }
+    else {
+        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+        
+        // hide the more button if this meetup item is not created by this user
+        if ([[userDefault objectForKey:@"user_id"] intValue] == userID) {
+            moreBtn.style = UIBarButtonItemStyleBordered;
+            moreBtn.enabled = true;
+            
+        } else {
+            moreBtn.style = UIBarButtonItemStylePlain;
+            moreBtn.enabled = false;
+        }
+    }
+    
+    
     // set up location manager
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -111,7 +117,6 @@ UIActivityIndicatorView *indicator;
     indicator.center = self.view.center;
     [self.view addSubview:indicator];
     [indicator bringSubviewToFront:self.view];
-    
     [indicator startAnimating];
 }
 
@@ -129,17 +134,28 @@ UIActivityIndicatorView *indicator;
     [eventImage addGestureRecognizer:eventImageTap];
 }
 
+- (void) tapGestureRecognizerEventAttend {
+    UITapGestureRecognizer *eventImageTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(eventAttendImageDetected)];
+    eventImageTap.numberOfTapsRequired = 1;
+    [eventAttendImage setUserInteractionEnabled:YES];
+    [eventAttendImage addGestureRecognizer:eventImageTap];
+}
+
+- (void) tapGestureRecognizerEventFavorite {
+    UITapGestureRecognizer *eventImageTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(eventFavoriteImageDetected)];
+    eventImageTap.numberOfTapsRequired = 1;
+    [eventFavoriteImage setUserInteractionEnabled:YES];
+    [eventFavoriteImage addGestureRecognizer:eventImageTap];
+}
+
 - (void) tapDetected {
     ProfileViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileViewController"];
     viewController.hidesBottomBarWhenPushed = YES;
-    [viewController setUserID:[[item objectForKey:@"user_id"] intValue]];
+    [viewController setUserID:userID];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void) eventImageTapDetected {
-    
-    NSLog(@"here!");
-    
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 150, 150)];
     [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
     [imageView setContentMode:UIViewContentModeScaleAspectFit];
@@ -151,6 +167,14 @@ UIActivityIndicatorView *indicator;
                                               otherButtonTitles:@"Close", nil];
     [alertView setValue:imageView forKey:@"accessoryView"];
     [alertView show];
+}
+
+- (void) eventAttendImageDetected {
+    [self uploadMyAttend];
+}
+
+- (void) eventFavoriteImageDetected {
+    [self uploadMyFavorite];
 }
 
 
@@ -209,45 +233,74 @@ UIActivityIndicatorView *indicator;
             NSMutableArray *goingArray = [NSMutableArray arrayWithCapacity:0];
             NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
             
+            attend_flag = ADD_ATTEND;
             goingArray = [item objectForKey:@"going_user_ary"];
             for (int i = 0; i < [goingArray count]; i++) {
                 NSDictionary *goingItem = [goingArray objectAtIndex:i];
                 
                 // if this user already added "attend" to this event, change the color and text of button
                 if ([[goingItem objectForKey:@"user_id"] intValue] == [[userDefault objectForKey:@"user_id"] intValue]) {
-                    
-                    [eventGoingBtn setBackgroundColor:[UIColor colorWithRed:181.0/255.0 green:224.0/255.0 blue:110.0/255.0 alpha:0.7]];
-                    [eventAttendLabel setText:@"UnAttend"];
                     attend_flag = REMOVE_ATTEND;
-                    
                     break;
                 }
             }
+            if (attend_flag == 0) { // ADD_ATTEND
+                [eventAttendImage setImage:[UIImage imageNamed:@"running_normal.png"]];
+            }
+            else { // REMOVE_ATTEND
+                [eventAttendImage setImage:[UIImage imageNamed:@"running_selected.png"]];
+            }
+            // end going
             
             // get a list of favorite users
             NSMutableArray *favArray = [NSMutableArray arrayWithCapacity:0];
             
+            favorite_flag = ADD_FAVORITE;
             favArray = [item objectForKey:@"favorite_user_ary"];
-            for (int i = 0; i < [goingArray count]; i++) {
-                NSDictionary *favItem = [goingArray objectAtIndex:i];
+            for (int i = 0; i < [favArray count]; i++) {
+                NSDictionary *favItem = [favArray objectAtIndex:i];
                 
-                // if this user already added "attend" to this event, change the color and text of button
+                // if this user already added "favorite" to this event, change the color and text of button
                 if ([[favItem objectForKey:@"user_id"] intValue] == [[userDefault objectForKey:@"user_id"] intValue]) {
-                    
-                    [eventLikeBtn setBackgroundColor:[UIColor colorWithRed:181.0/255.0 green:224.0/255.0 blue:110.0/255.0 alpha:0.7]];
-                    [eventFavoriteLabel setText:@"UnFavorite"];
                     favorite_flag = REMOVE_FAVORITE;
-                    
                     break;
                 }
             }
+            if (favorite_flag == 0) { // ADD_FAVORITE
+                [eventFavoriteImage setImage:[UIImage imageNamed:@"star_normal.png"]];
+            }
+            else { // REMOVE_FAVORITE
+                [eventFavoriteImage setImage:[UIImage imageNamed:@"star_selected.png"]];
+            }
+            // end favorite
             
+            
+            int attendCnt = [[item objectForKey:@"going_user_ary"] count];
+            int favoriteCtn = [[item objectForKey:@"favorite_cnt"] intValue];
+            int photoCnt = [[item objectForKey:@"user_content_cnt"] intValue];
             // update the going and userinput btn texts
-            [eventGoingBtn setTitle:[NSString stringWithFormat:@"     (%lu)", (unsigned long)[[item objectForKey:@"going_user_ary"] count]] forState:UIControlStateNormal];
-            [eventUserInputBtn setTitle:[NSString stringWithFormat:@"     (%d)", [[item objectForKey:@"user_content_cnt"] intValue]] forState:UIControlStateNormal];
-            [eventLikeBtn setTitle:[NSString stringWithFormat:@"     (%d)", [[item objectForKey:@"favorite_cnt"] intValue]] forState:UIControlStateNormal];
             
-            photo_cnt = [[item objectForKey:@"user_content_cnt"] intValue];
+            if (attendCnt <= 1) {
+                [eventGoingBtn setTitle:[NSString stringWithFormat:@"%d attend", attendCnt] forState:UIControlStateNormal];
+            }
+            else {
+                [eventGoingBtn setTitle:[NSString stringWithFormat:@"%d attends", attendCnt] forState:UIControlStateNormal];
+            }
+            
+            if (favoriteCtn <= 1) {
+                [eventLikeBtn setTitle:[NSString stringWithFormat:@"%d favorite", favoriteCtn] forState:UIControlStateNormal];
+            }
+            else {
+                [eventLikeBtn setTitle:[NSString stringWithFormat:@"%d favorites", favoriteCtn] forState:UIControlStateNormal];
+            }
+            
+            if (photoCnt <= 1) {
+                [eventUserInputBtn setTitle:[NSString stringWithFormat:@"%d photo", photoCnt] forState:UIControlStateNormal];
+            }
+            else {
+                [eventUserInputBtn setTitle:[NSString stringWithFormat:@"%d photos", photoCnt] forState:UIControlStateNormal];
+            }
+            
             
             // name and description
             eventName.text          = [item objectForKey:@"name"];
@@ -277,7 +330,7 @@ UIActivityIndicatorView *indicator;
             
             MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
             [annotation setCoordinate:loc];
-            //[annotation setTitle:@"Title"]; //You can set the subtitle too
+            [eventMap removeAnnotations:[eventMap annotations]];
             [eventMap addAnnotation:annotation];
             
             MKCoordinateRegion adjustedRegion = [eventMap regionThatFits:MKCoordinateRegionMakeWithDistance(loc, 800, 800)];
@@ -285,7 +338,10 @@ UIActivityIndicatorView *indicator;
             adjustedRegion.span.latitudeDelta  = 0.01;
             [eventMap setRegion:adjustedRegion animated:YES];
             
+            // start touchGestureEvent
             [self tapGestureRecognizerOfficial];
+            [self tapGestureRecognizerEventAttend];
+            [self tapGestureRecognizerEventFavorite];
             
             // check if the event is official one
             if (isOfficial) {
@@ -303,10 +359,10 @@ UIActivityIndicatorView *indicator;
                 }
             }
             else { // if not official use eventButton text for displaying user_name who posted the event
-                eventButton.text = [item objectForKey:@"user_name"];
+                eventButton.text = userName;
                 eventButton.textColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0];
                 
-                [eventButtonImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"user_image"]]]];
+                [eventButtonImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", userImage]]];
                 eventButtonImage.layer.cornerRadius = 4.0f;
                 eventButtonImage.clipsToBounds = YES;
                 eventButtonImage.hidden = NO;
@@ -344,7 +400,7 @@ UIActivityIndicatorView *indicator;
     [indicator stopAnimating];
 }
 
-- (void) uploadMyGoing {
+- (void) uploadMyAttend {
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
@@ -408,14 +464,6 @@ UIActivityIndicatorView *indicator;
         
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
             [self downloadEventUpdates];
-            
-            // update favorite_flag
-            if (favorite_flag == 0) { // if favorite_flag == ADD_FAVORITE
-                favorite_flag = REMOVE_FAVORITE;
-            }
-            else {
-                favorite_flag = ADD_FAVORITE;
-            }
         }
         else {
             UIAlertView *dialog = [[UIAlertView alloc]init];
@@ -461,65 +509,48 @@ UIActivityIndicatorView *indicator;
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
     if ([title isEqualToString:@"Attending"]){ // Attending
-        [self uploadMyGoing];
+        [self uploadMyAttend];
     }
     else if ([title isEqualToString:@"Favorite"]){ // Favorite
         [self uploadMyFavorite];
     }
+    else if ([title isEqualToString:@"Remove this event"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Are you sure you want to remove this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
+        [alert show];
+    }
     else if ([title isEqualToString:@"Remove"]) {
         [self removeEvent];
+    }
+    else if ([title isEqualToString:@"Edit this event"]) {
+        
     }
 }
 
 
 - (IBAction)eventGoingBtnPressed:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Attending this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Attending", nil];
-    [alert show];
+    [self uploadMyAttend];
 }
 
 - (IBAction)eventUserInputBtnPressed:(id)sender {
-    
-    //UserInputDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserInputDetailViewController"];
-    //viewController.hidesBottomBarWhenPushed = YES;
-    //[viewController setEventID:[[item objectForKey:@"id"] intValue]];
-    //[self.navigationController pushViewController:viewController animated:YES];
-    //[self performSegueWithIdentifier:@"UserInputDetailViewController" sender:[item objectForKey:@"id"]];
 }
 
 - (IBAction)eventGoingAddBtnPressed:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Attending this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Attending", nil];
-    [alert show];
 }
 
 - (IBAction)eventLikeBtnPressed:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Add this event as your favorite?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Favorite", nil];
-    [alert show];
-}
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    if ([identifier isEqualToString: @"UserInputDetailViewController"]) {
-        
-        if (photo_cnt == 0) {
-            UIAlertView *dialog = [[UIAlertView alloc]init];
-            [dialog setDelegate:nil];
-            [dialog setTitle:@"Message"];
-            [dialog setMessage:@"No photos available"];
-            [dialog addButtonWithTitle:@"OK"];
-            [dialog show];
-            
-            return NO;
-        }
-        else {
-            return YES;
-        }
-    }
-    else {
-        return YES;
-    }
+    [self uploadMyFavorite];
 }
 
 - (IBAction)eventRemoveBtnPressed:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Remove this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
+    
+}
+
+- (IBAction)moreBtnPressed:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Choose the option"
+                                                    message:@""
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"Edit this event", @"Remove this event", nil];
     [alert show];
 }
 

@@ -106,6 +106,7 @@ UIActivityIndicatorView *indicator;
     UIImageView *eventImage      = (UIImageView *)[cell viewWithTag:100];
     UILabel *eventName           = (UILabel *)[cell viewWithTag:101];
     UILabel *eventDate           = (UILabel *)[cell viewWithTag:102];
+    UIImageView *yoImage         = (UIImageView *)[cell viewWithTag:103];
     
     if (myType == MY_UPDATES) {
         // my update
@@ -114,6 +115,13 @@ UIActivityIndicatorView *indicator;
         
         double timestamp = [[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]] doubleValue];
         eventDate.text = [self dailyLanguage:(timestamp-[[item objectForKey:@"datetime"] doubleValue])];
+        
+        if ([[item objectForKey:@"action"] intValue] == ACTION_YO) {
+            yoImage.hidden = NO;
+        }
+        else {
+            yoImage.hidden = YES;
+        }
     }
     else if (myType == MY_EVENTS) {
         // event image
@@ -138,6 +146,14 @@ UIActivityIndicatorView *indicator;
         [_formatter setDateFormat:@"MMM dd, hh:mm a"];
         NSString *_date=[_formatter stringFromDate:gmtDate];
         eventDate.text = _date;
+        
+        // if it is a meet-up event, show a small icon
+        if ([[item objectForKey:@"is_meetup"] intValue] == 1) {
+            yoImage.hidden = NO;
+        }
+        else {
+            yoImage.hidden = YES;
+        }
     }
     else if (myType == MY_PHOTOS) { // MY_PHOTOS
         // event image
@@ -165,6 +181,9 @@ UIActivityIndicatorView *indicator;
                 eventDate.text = [NSString stringWithFormat:@"%d likes %d comments", [[item objectForKey:@"like_cnt"] intValue], [[item objectForKey:@"comment_cnt"] intValue]];
             }
         }
+        
+        // hide yo image
+        yoImage.hidden = YES;
     }
     else if (myType == PEOPLE_LIKE_ME) { // PEOPLE_LIKE_ME
         // user_image
@@ -177,6 +196,9 @@ UIActivityIndicatorView *indicator;
         
         // hide datetime
         eventDate.text = [NSString stringWithFormat:@"%3.1f%% matching", [[item objectForKey:@"matching_result"] doubleValue] * 100.0];
+        
+        // hide yo image
+        yoImage.hidden = YES;
     }
     else {
         
@@ -249,11 +271,24 @@ UIActivityIndicatorView *indicator;
         }
     }
     else if (myType == MY_EVENTS) {
-        EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
-        viewController.hidesBottomBarWhenPushed = YES;
-        [viewController setEventID:[[item objectForKey:@"id"] intValue]];
-        [viewController setIsOfficial:YES];
-        [self.navigationController pushViewController:viewController animated:YES];
+        if ([[item objectForKey:@"is_meetup"] intValue] == 0) {
+            EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
+            viewController.hidesBottomBarWhenPushed = YES;
+            [viewController setEventID:[[item objectForKey:@"id"] intValue]];
+            [viewController setIsOfficial:YES];
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+        else {
+            // if it is A meetup item, pass meetup_user_id, meetup_user_name, meetup_user_image
+            EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
+            viewController.hidesBottomBarWhenPushed = YES;
+            [viewController setEventID:[[item objectForKey:@"id"] intValue]];
+            [viewController setIsOfficial:NO];
+            [viewController setUserID:[[item objectForKey:@"meetup_user_id"] intValue]];
+            [viewController setUserName:[item objectForKey:@"meetup_user_name"]];
+            [viewController setUserImage:[item objectForKey:@"meetup_user_image"]];
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
     }
     else if (myType == MY_PHOTOS){
         UserInputDetailedViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserInputDetailedViewController"];

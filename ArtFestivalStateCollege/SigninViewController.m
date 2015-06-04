@@ -78,9 +78,11 @@
 
 - (void) uploadMyGoing {
     
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *params = @{@"email"       :emailText.text,
-                             @"password"    :passwordText.text};
+    NSDictionary *params = @{@"email"           :emailText.text,
+                             @"password"        :passwordText.text,
+                             @"device_token"    :[NSString stringWithFormat:@"%@", [userDefault objectForKey:@"device_token"]]};
     
     [manager POST:@"http://heounsuk.com/festival/login_account.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {

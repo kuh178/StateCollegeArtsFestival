@@ -17,7 +17,7 @@
 @implementation AddUserInputViewController
 
 // photo tutorial: http://www.appcoda.com/ios-programming-camera-iphone-app/
-@synthesize imageView, takePhotoBtn, tagUsersBtn, uploadBtn, eventID, commentText, imageText, latitude, longitude, fromEvent;
+@synthesize imageView, tagUsersBtn, uploadBtn, eventID, commentText, imageText, latitude, longitude, fromEvent;
 
 NSData      *imageData;
 UIImage     *chosenImage;
@@ -74,12 +74,26 @@ NSString    *taggedUsers;
     [layer setShadowOffset: CGSizeMake(1,2)];
     [layer setShadowRadius:2.0];
     [imageView setClipsToBounds:YES];
+    
+    [self tapGestureRecognizerEventFavorite];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.screenName = @"AddUserInputViewController";
     self.navigationItem.backBarButtonItem.title = @"Back";
+}
+
+- (void) tapGestureRecognizerEventFavorite {
+    UITapGestureRecognizer *eventImageTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDetected)];
+    eventImageTap.numberOfTapsRequired = 1;
+    [imageText setUserInteractionEnabled:YES];
+    [imageText addGestureRecognizer:eventImageTap];
+}
+
+- (void) tapDetected {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Pick one" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Camera",@"Gallery", nil];
+    [alert show];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
@@ -103,11 +117,6 @@ NSString    *taggedUsers;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(IBAction)takePhotoBtnPress:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Pick one" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Camera",@"Gallery", nil];
-    [alert show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -186,10 +195,6 @@ NSString    *taggedUsers;
     else { // else (e.g., Cancel)
         
     }
-}
-
--(IBAction)addVoiceBtnPress:(id)sender {
-    
 }
 
 -(IBAction)uploadBtnPress:(id)sender {
@@ -272,10 +277,7 @@ NSString    *taggedUsers;
     }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    NSLog(@"textViewDidEndEditing");
-    
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     
     [UIView beginAnimations:nil context:NULL];

@@ -141,14 +141,11 @@
 
 }
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    /*
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString: @"AddUserInputViewController"]) {
         AddUserInputViewController *viewController = (AddUserInputViewController *)[segue destinationViewController];
         viewController.eventID = eventID;
     }
-    */
 }
 
 - (void) downloadContent {

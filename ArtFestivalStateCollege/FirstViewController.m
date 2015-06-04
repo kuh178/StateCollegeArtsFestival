@@ -29,6 +29,7 @@
 @synthesize eventList, eventListDay, jsonArray, tableViewList, segmentControl, refreshBtn, cameraBtn;
 
 int flag = firstDay;
+NSUserDefaults *userDefault;
 
 - (void)viewDidLoad
 {
@@ -44,6 +45,9 @@ int flag = firstDay;
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
+    //
+    userDefault = [NSUserDefaults standardUserDefaults];
+
     // show content
     [self downloadContent:firstDay];
 }
@@ -90,6 +94,8 @@ int flag = firstDay;
     UILabel *eventName              = (UILabel *)[cell viewWithTag:101];
     UIImageView *eventButton        = (UIImageView *)[cell viewWithTag:102];
     UILabel *eventDate              = (UILabel *)[cell viewWithTag:103];
+    UIImageView *eventFavorite      = (UIImageView *)[cell viewWithTag:104];
+    UIImageView *eventAttend        = (UIImageView *)[cell viewWithTag:105];
     
     // event image
     [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
@@ -120,6 +126,46 @@ int flag = firstDay;
     }
     else {
         eventButton.hidden = YES;
+    }
+    
+    // favorite or going
+    NSArray *favoriteArray = [item objectForKey:@"favorite_user_ary"];
+    NSArray *attendArray = [item objectForKey:@"going_user_ary"];
+    
+    // checking favorite
+    BOOL isFavorite = NO;
+    
+    for (int i = 0; i < [favoriteArray count]; i++) {
+        NSDictionary *fItem = [favoriteArray objectAtIndex:i];
+        if ([[fItem objectForKey:@"user_id"] intValue] == [[userDefault objectForKey:@"user_id"] intValue]) {
+            isFavorite = YES;
+            break;
+        }
+    }
+    
+    if (isFavorite) {
+        eventFavorite.hidden = NO;
+    }
+    else {
+        eventFavorite.hidden = YES;
+    }
+    
+    // checking attend
+    BOOL isAttend = NO;
+    
+    for (int i = 0; i < [attendArray count]; i++) {
+        NSDictionary *aItem = [attendArray objectAtIndex:i];
+        if ([[aItem objectForKey:@"user_id"] intValue] == [[userDefault objectForKey:@"user_id"] intValue]) {
+            isAttend = YES;
+            break;
+        }
+    }
+    
+    if (isAttend) {
+        eventAttend.hidden = NO;
+    }
+    else {
+        eventAttend.hidden = YES;
     }
     
     return cell;
