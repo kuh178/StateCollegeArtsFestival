@@ -86,7 +86,7 @@ NSString *booth_flag = @"A";
     
     // plan image
     [artistImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", imageArr[0]]]];
-    artistImage.layer.cornerRadius = 4.0f;
+    artistImage.layer.cornerRadius = artistImage.frame.size.width / 2;
     artistImage.clipsToBounds = YES;
     
     artistBooth.text = [item objectForKey:@"booth"];

@@ -32,6 +32,7 @@
 @synthesize eventID;
 @synthesize eventAttendImage, eventFavoriteImage;
 @synthesize userID, userImage, userName;
+@synthesize myLocationBtn;
 
 int photo_cnt = 0;
 int attend_flag = ADD_ATTEND;
@@ -54,6 +55,10 @@ UIActivityIndicatorView *indicator;
 	// Do any additional setup after loading the view.
     
     // button rounded corner
+    eventImage.layer.borderColor = [[UIColor blackColor] CGColor];
+    eventImage.layer.borderWidth = 1.0;
+    eventImage.layer.cornerRadius = 5;
+    
     eventEditBtn.layer.borderColor = [[UIColor blackColor] CGColor];
     eventEditBtn.layer.borderWidth = 1.0;
     eventEditBtn.layer.cornerRadius = 5;
@@ -322,6 +327,7 @@ UIActivityIndicatorView *indicator;
             eventDatetime.text = _date;
             
             [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
+            eventImage.contentMode = UIViewContentModeScaleAspectFill;
             eventImage.layer.cornerRadius = 4.0f;
             eventImage.clipsToBounds = YES;
             
@@ -569,6 +575,10 @@ UIActivityIndicatorView *indicator;
         viewController.hidesBottomBarWhenPushed = YES;
         [viewController setWebLink:[item objectForKey:@"website"]];
     }
+}
+
+- (IBAction)myLocationBtn:(id)sender {
+    [eventMap setCenterCoordinate:eventMap.userLocation.location.coordinate animated:YES];
 }
 
 @end

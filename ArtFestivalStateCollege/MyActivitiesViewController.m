@@ -108,6 +108,9 @@ UIActivityIndicatorView *indicator;
     UILabel *eventDate           = (UILabel *)[cell viewWithTag:102];
     UIImageView *yoImage         = (UIImageView *)[cell viewWithTag:103];
     
+    eventImage.layer.cornerRadius = eventImage.frame.size.width / 2;
+    eventImage.clipsToBounds = YES;
+    
     if (myType == MY_UPDATES) {
         // my update
         eventName.text = [item objectForKey:@"message"];
@@ -126,8 +129,6 @@ UIActivityIndicatorView *indicator;
     else if (myType == MY_EVENTS) {
         // event image
         [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
-        eventImage.layer.cornerRadius = 4.0f;
-        eventImage.clipsToBounds = YES;
         
         // event question
         eventName.text = [item objectForKey:@"name"];
@@ -158,8 +159,6 @@ UIActivityIndicatorView *indicator;
     else if (myType == MY_PHOTOS) { // MY_PHOTOS
         // event image
         [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
-        eventImage.layer.cornerRadius = 4.0f;
-        eventImage.clipsToBounds = YES;
         
         // event question
         eventName.text = [item objectForKey:@"comment"];
@@ -188,8 +187,6 @@ UIActivityIndicatorView *indicator;
     else if (myType == PEOPLE_LIKE_ME) { // PEOPLE_LIKE_ME
         // user_image
         [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image"]]]];
-        eventImage.layer.cornerRadius = 4.0f;
-        eventImage.clipsToBounds = YES;
     
         // user name
         eventName.text = [item objectForKey:@"name"];

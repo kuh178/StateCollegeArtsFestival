@@ -32,6 +32,7 @@
     
     IBOutlet UIButton           *eventRemoveBtn;
     IBOutlet UIButton           *eventEditBtn;
+    IBOutlet UIButton           *myLocationBtn;
     
     IBOutlet UIView             *eventView1;
     
@@ -85,6 +86,7 @@
 
 @property (nonatomic, retain) IBOutlet UIButton           *eventWebPageBtn;
 @property (nonatomic, retain) IBOutlet UIButton           *eventGoingAddBtn;
+@property (nonatomic, retain) IBOutlet UIButton           *myLocationBtn;
 
 @property (nonatomic, retain) IBOutlet UITextView         *eventDescription;
 @property (nonatomic, retain) IBOutlet MKMapView          *eventMap;
@@ -112,5 +114,6 @@
 - (IBAction)moreBtnPressed:(id)sender;
 
 - (IBAction)eventRemoveBtnPressed:(id)sender;
+- (IBAction)myLocationBtn:(id)sender;
 
 @end
