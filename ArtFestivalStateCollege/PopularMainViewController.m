@@ -114,7 +114,7 @@ UIActivityIndicatorView *indicator;
         
         // event image
         [eventImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"image_url"]]]];
-        eventImage.layer.cornerRadius = 4.0f;
+        eventImage.layer.cornerRadius = eventImage.frame.size.width / 2;
         eventImage.clipsToBounds = YES;
         
         // event name

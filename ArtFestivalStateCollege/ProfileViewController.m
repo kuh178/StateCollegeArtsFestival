@@ -38,6 +38,9 @@ NSString *username;
 NSString *email;
 NSString *profileImageLink;
 
+UIImage     *chosenImage;
+NSData      *imageData;
+
 NSMutableArray *userPhotoArray;
 
 - (void)viewDidLoad {
@@ -304,7 +307,6 @@ NSMutableArray *userPhotoArray;
             if (interest7 == 0) {
                 interestBtn7.alpha = 0.3;
             }
-
         }
         else {
             UIAlertView *dialog = [[UIAlertView alloc]init];
@@ -318,7 +320,6 @@ NSMutableArray *userPhotoArray;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
-
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -349,7 +350,7 @@ NSMutableArray *userPhotoArray;
         // [self.navigationController pushViewController:viewController animated:YES];
         
     }
-    else if ([title isEqualToString:@"Interest update"]){ // Interest update
+    else if ([title isEqualToString:@"Update interests"]){ // Interest update
         
         ChooseInterestViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseInterestViewController"];
         viewController.previousViewController = PROFILE_PAGE;
@@ -357,7 +358,11 @@ NSMutableArray *userPhotoArray;
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else if ([title isEqualToString:@"Change profile photo"]){ // Change profile photo
-        
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:picker animated:YES completion:NULL];
     }
     else if ([title isEqualToString:@"Logout"]){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Proceed to logout?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Logout", nil];
@@ -366,6 +371,26 @@ NSMutableArray *userPhotoArray;
     else if ([title isEqualToString:@"What is Wave?"]){
         // show a dialog explaining the meaning of WAVE
     }
+    else if ([title isEqualToString:@"Use this photo"]) {
+        [self changeProfilePhoto];
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    chosenImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    profileImage.image = chosenImage;
+    
+    // update imageData value
+    imageData = UIImageJPEGRepresentation(chosenImage, 0.8);
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Profile photo updated. Do you want to use this photo?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Use this photo", nil];
+    [alert show];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (IBAction)updateBtnPressed:(id)sender {
@@ -385,7 +410,7 @@ NSMutableArray *userPhotoArray;
                                                     message:@""
                                                    delegate:self
                                           cancelButtonTitle:@"Cancel"
-                                          otherButtonTitles:@"Interest update", @"Change profile photo", @"What is Wave?", @"Logout", nil];
+                                          otherButtonTitles:@"Update interests", @"Change profile photo", @"What is Wave?", @"Logout", nil];
     [alert show];
 }
 
@@ -414,6 +439,30 @@ NSMutableArray *userPhotoArray;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
+}
+
+- (void) changeProfilePhoto {
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"user_id"     :[NSString stringWithFormat:@"%d", [[userDefault objectForKey:@"user_id"] intValue]]};
+    
+    [manager POST:@"http://heounsuk.com/festival/upload_profile_photo.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"image" fileName:@"temp_image.png" mimeType:@"image/jpeg"];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"operation : %@", operation.responseString);
+        NSLog(@"Error: %@", error);
+        
+        UIAlertView *dialog = [[UIAlertView alloc]init];
+        [dialog setDelegate:self];
+        [dialog setTitle:@"Message"];
+        [dialog setMessage:operation.responseString];
+        [dialog addButtonWithTitle:@"OK"];
+        [dialog show];
+    }];
+
     
     
 }

@@ -11,6 +11,7 @@
 #import "FestivalMapViewController.h"
 #import "LoginViewController.h"
 #import "ProfileViewController.h"
+#import "ArtistsWebPageViewController.h"
 
 @interface MoreViewController ()
 
@@ -71,6 +72,12 @@
         ProfileViewController *viewController = (ProfileViewController *)[segue destinationViewController];
         viewController.userID = [[userDefault objectForKey:@"user_id"] intValue];
         viewController.hidesBottomBarWhenPushed = YES;
+    }
+    else if([[segue identifier] isEqualToString: @"ArtistsWebPageViewController"]) {
+        
+        ArtistsWebPageViewController *viewController = (ArtistsWebPageViewController *)[segue destinationViewController];
+        viewController.hidesBottomBarWhenPushed = YES;
+        [viewController setWebLink:@"http://www.arts-festival.com/"];
     }
 }
 

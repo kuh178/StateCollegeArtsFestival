@@ -60,8 +60,9 @@ NSUserDefaults *userDefault;
     
     // user image
     [userImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"user_image"]]]];
-    userImage.layer.cornerRadius = 5;
+    userImage.layer.cornerRadius = userImage.frame.size.width / 2;
     userImage.clipsToBounds = YES;
+    userImage.hidden = NO;
     // when user image pressed
     [self tapGestureRecognizer];
     [self tapGestureRecognizerFavorite];

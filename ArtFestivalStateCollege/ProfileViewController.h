@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GAITrackedViewController.h"
 
-@interface ProfileViewController : GAITrackedViewController {
+@interface ProfileViewController : GAITrackedViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
     IBOutlet UIImageView *profileImage;
     IBOutlet UIButton *logoutBtn;
     IBOutlet UIButton *seePhotosBtn;
@@ -83,7 +83,6 @@
 - (IBAction)changeProfilePhotoBtnPressed:(id)sender;
 - (IBAction)updateBtnPressed:(id)sender;
 - (IBAction)seePhotosBtnPressed:(id)sender;
-- (IBAction)logoutBtnPressed:(id)sender;
 - (IBAction)moreBtnPressed:(id)sender;
 - (IBAction)yoBtnPressed:(id)sender;
 
