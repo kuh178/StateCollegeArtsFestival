@@ -167,7 +167,7 @@
                                             <outlet property="delegate" destination="PFB-zI-vZS" id="xgT-7D-nGn"/>
                                         </connections>
                                     </mapView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFE-ni-dXt">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFE-ni-dXt">
                                         <rect key="frame" x="249" y="2" width="54" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="Enlarge">
@@ -208,7 +208,7 @@
                                                 <rect key="frame" x="2" y="92" width="150" height="33"/>
                                                 <subviews>
                                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="2015 Button.png" translatesAutoresizingMaskIntoConstraints="NO" id="Mxa-9d-0XA">
-                                                        <rect key="frame" x="115" y="3" width="28" height="28"/>
+                                                        <rect key="frame" x="115" y="-1" width="35" height="35"/>
                                                     </imageView>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="button?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWT-Im-07f">
                                                         <rect key="frame" x="6" y="1" width="106" height="30"/>
@@ -615,6 +615,7 @@
                                 <segments>
                                     <segment title="Sort by time"/>
                                     <segment title="Sort by distance"/>
+                                    <segment title="My Meet-ups"/>
                                 </segments>
                                 <color key="tintColor" red="0.15166696199999999" green="0.4997225341" blue="0.58652020029999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -3192,10 +3193,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="a1A-Jh-8dw"/>
-        <segue reference="Tez-Jf-lLx"/>
         <segue reference="fz2-k7-1Cn"/>
+        <segue reference="a1A-Jh-8dw"/>
+        <segue reference="A7U-9e-F82"/>
         <segue reference="1BB-rZ-rDp"/>
-        <segue reference="2Un-AD-2C6"/>
+        <segue reference="Tez-Jf-lLx"/>
     </inferredMetricsTieBreakers>
 </document>

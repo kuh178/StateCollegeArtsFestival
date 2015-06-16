@@ -178,7 +178,7 @@ NSMutableArray *userPhotoArray;
             userNameLabel.text = username;
             // profile image
             [profileImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", profileImageLink]]];
-            profileImage.layer.cornerRadius = 4.0f;
+            profileImage.layer.cornerRadius = profileImage.frame.size.width / 2;
             profileImage.clipsToBounds = YES;
             // other stats
             
@@ -271,7 +271,6 @@ NSMutableArray *userPhotoArray;
             pieChart.descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:11.0];
             [pieChart strokeChart];
             [viewGraph2 addSubview:pieChart];
-            
 
             // preferences
             // change the alpha value of interest btn depending on its value

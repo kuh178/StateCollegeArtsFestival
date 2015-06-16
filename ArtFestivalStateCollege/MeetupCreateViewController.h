@@ -25,7 +25,13 @@
     
     double selectedLocLatitude;
     double selectedLocLongitude;
+
+    NSString *meetupDatetime;
+    NSString *meetupDescription;
+    NSString *meetupPhoto;
     
+    int meetupID;
+    int type;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField          *meetupWhatText;
@@ -37,6 +43,13 @@
 
 @property (nonatomic, assign) double selectedLocLatitude;
 @property (nonatomic, assign) double selectedLocLongitude;
+
+@property (nonatomic, retain) NSString *meetupDatetime;
+@property (nonatomic, retain) NSString *meetupDescription;
+@property (nonatomic, retain) NSString *meetupPhoto;
+
+@property (nonatomic, assign) int meetupID;
+@property (nonatomic, assign) int type;
 
 
 -(IBAction)submitBtnPressed:(id)sender;

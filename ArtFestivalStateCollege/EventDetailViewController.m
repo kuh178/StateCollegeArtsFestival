@@ -15,6 +15,7 @@
 #import "ArtistsWebPageViewController.h"
 #import "QuartzCore/QuartzCore.h"
 #import "ProfileViewController.h"
+#import "MeetupCreateViewController.h"
 
 #define ADD_ATTEND 0;
 #define REMOVE_ATTEND 1;
@@ -369,7 +370,7 @@ UIActivityIndicatorView *indicator;
                 eventButton.textColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0];
                 
                 [eventButtonImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", userImage]]];
-                eventButtonImage.layer.cornerRadius = 4.0f;
+                eventButtonImage.layer.cornerRadius = eventButtonImage.frame.size.width / 2;
                 eventButtonImage.clipsToBounds = YES;
                 eventButtonImage.hidden = NO;
                 
@@ -529,6 +530,16 @@ UIActivityIndicatorView *indicator;
     }
     else if ([title isEqualToString:@"Edit this event"]) {
         
+        MeetupCreateViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MeetupCreateViewController"];
+        viewController.hidesBottomBarWhenPushed = YES;
+        [viewController setType:1];
+        [viewController setMeetupDatetime:[item objectForKey:@"datetime"]];
+        [viewController setMeetupDescription:[item objectForKey:@"description"]];
+        [viewController setMeetupPhoto:[item objectForKey:@"image_url"]];
+        [viewController setSelectedLocLatitude:[[item objectForKey:@"latitude"] doubleValue]];
+        [viewController setSelectedLocLongitude:[[item objectForKey:@"longitude"] doubleValue]];
+        [viewController setMeetupID:[[item objectForKey:@"id"] integerValue]];
+        [self.navigationController pushViewController:viewController animated:YES];
     }
 }
 

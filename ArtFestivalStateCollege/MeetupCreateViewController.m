@@ -8,7 +8,7 @@
 
 #import "MeetupCreateViewController.h"
 #import "AFHTTPRequestOperationManager.h"
-
+#import "SDWebImage/UIImageView+WebCache.h"
 
 @interface MeetupCreateViewController ()
 
@@ -20,6 +20,8 @@
 
 @synthesize meetupWhatText, meetupWhenPicker, mapView, submitBtn, addPhotoImage;
 @synthesize selectedLocLatitude, selectedLocLongitude;
+@synthesize meetupDatetime, meetupDescription, meetupPhoto;
+@synthesize type, meetupID;
 @synthesize myLocationBtn;
 
 NSData      *imageData;
@@ -41,6 +43,36 @@ UIImage     *chosenImage;
     
     // set-up map
     [self setupMapView];
+    
+    if (type == 0) { // type == 0 (new)
+        
+    }
+    else { // type == 1 (edit)
+        
+        NSLog(@"passed data: %f %f %@ %@ %@", selectedLocLatitude, selectedLocLongitude, meetupDescription, meetupPhoto, meetupDatetime);
+        
+        // show a push pin
+        CLLocationCoordinate2D loc = CLLocationCoordinate2DMake(selectedLocLatitude, selectedLocLongitude);
+        annotation = [[LocationAnnotation alloc]initWithCoordinate:loc];
+        [mapView removeAnnotations:[mapView annotations]];
+        [mapView addAnnotation:annotation];
+        
+        // description
+        [meetupWhatText setText:meetupDescription];
+        
+        // image
+        [addPhotoImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", meetupPhoto]]];
+        imageData = UIImageJPEGRepresentation(addPhotoImage.image, 0.8);
+        
+        // datetime
+        NSTimeInterval _interval=[meetupDatetime doubleValue];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+        
+        NSTimeInterval timeZoneOffset = [[NSTimeZone defaultTimeZone] secondsFromGMT]; // You could also use the systemTimeZone method
+        NSTimeInterval gmtTimeInterval = [date timeIntervalSinceReferenceDate] - timeZoneOffset;
+        NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
+        [meetupWhenPicker setDate:gmtDate];
+    }
     
     // tap-gesture recognizer
     [self tapGestureRecognizer];
@@ -158,7 +190,9 @@ UIImage     *chosenImage;
                                      @"datetime"    :[NSString stringWithFormat:@"%@", timeStampValue],
                                      @"description" :[NSString stringWithFormat:@"%@", meetUpWhat],
                                      @"latitude"    :[NSString stringWithFormat:@"%f", selectedLocLatitude],
-                                     @"longitude"   :[NSString stringWithFormat:@"%f", selectedLocLongitude]};
+                                     @"longitude"   :[NSString stringWithFormat:@"%f", selectedLocLongitude],
+                                     @"type"        :[NSString stringWithFormat:@"%d", type], // type = 0 : new / type = 1 : edit
+                                     @"id"          :[NSString stringWithFormat:@"%d", meetupID]};
             
             NSLog(@"size of file is %ld", (unsigned long)[imageData length]);
             
