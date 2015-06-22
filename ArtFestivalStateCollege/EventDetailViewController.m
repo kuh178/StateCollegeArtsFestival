@@ -7,7 +7,7 @@
 //
 
 #import "EventDetailViewController.h"
-#import "GoingDetailViewController.h"
+#import "UserListViewController.h"
 #import "UserInputDetailViewController.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "AFHTTPRequestOperationManager.h"
@@ -21,6 +21,9 @@
 #define REMOVE_ATTEND 1;
 #define ADD_FAVORITE 0;
 #define REMOVE_FAVORITE 1;
+
+#define SEE_ATTEND 0;
+#define SEE_FAVORITE 1;
 
 @interface EventDetailViewController ()
 @property (nonatomic, assign) BOOL statusBarHidden;
@@ -38,8 +41,10 @@
 int photo_cnt = 0;
 int attend_flag = ADD_ATTEND;
 int favorite_flag = ADD_FAVORITE;
+int type;
 NSMutableDictionary *item;
 UIActivityIndicatorView *indicator;
+NSUserDefaults *userDefault;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -96,8 +101,6 @@ UIActivityIndicatorView *indicator;
         moreBtn.enabled = false;
     }
     else {
-        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-        
         // hide the more button if this meetup item is not created by this user
         if ([[userDefault objectForKey:@"user_id"] intValue] == userID) {
             moreBtn.style = UIBarButtonItemStyleBordered;
@@ -124,6 +127,9 @@ UIActivityIndicatorView *indicator;
     [self.view addSubview:indicator];
     [indicator bringSubviewToFront:self.view];
     [indicator startAnimating];
+    
+    // userDefault
+    userDefault = [NSUserDefaults standardUserDefaults];
 }
 
 - (void) tapGestureRecognizer {
@@ -237,8 +243,7 @@ UIActivityIndicatorView *indicator;
             
             // get a list of going users
             NSMutableArray *goingArray = [NSMutableArray arrayWithCapacity:0];
-            NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-            
+        
             attend_flag = ADD_ATTEND;
             goingArray = [item objectForKey:@"going_user_ary"];
             for (int i = 0; i < [goingArray count]; i++) {
@@ -280,12 +285,12 @@ UIActivityIndicatorView *indicator;
             }
             // end favorite
             
-            
-            int attendCnt = [[item objectForKey:@"going_user_ary"] count];
+            // get counts for attends, favorites, and photos
+            int attendCnt = (int)[[item objectForKey:@"going_user_ary"] count];
             int favoriteCtn = [[item objectForKey:@"favorite_cnt"] intValue];
             int photoCnt = [[item objectForKey:@"user_content_cnt"] intValue];
+
             // update the going and userinput btn texts
-            
             if (attendCnt <= 1) {
                 [eventGoingBtn setTitle:[NSString stringWithFormat:@"%d attend", attendCnt] forState:UIControlStateNormal];
             }
@@ -306,7 +311,6 @@ UIActivityIndicatorView *indicator;
             else {
                 [eventUserInputBtn setTitle:[NSString stringWithFormat:@"%d photos", photoCnt] forState:UIControlStateNormal];
             }
-            
             
             // name and description
             eventName.text          = [item objectForKey:@"name"];
@@ -333,7 +337,9 @@ UIActivityIndicatorView *indicator;
             eventImage.clipsToBounds = YES;
             
             // add a push pin on the map
-            CLLocationCoordinate2D loc = CLLocationCoordinate2DMake([[item objectForKey:@"latitude"] doubleValue], [[item objectForKey:@"longitude"] doubleValue]);
+            CLLocationCoordinate2D loc = CLLocationCoordinate2DMake(
+                                                                    [[item objectForKey:@"latitude"] doubleValue],
+                                                                    [[item objectForKey:@"longitude"] doubleValue]);
             
             MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
             [annotation setCoordinate:loc];
@@ -409,8 +415,6 @@ UIActivityIndicatorView *indicator;
 
 - (void) uploadMyAttend {
     
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    
     NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -453,8 +457,6 @@ UIActivityIndicatorView *indicator;
 
 - (void) uploadMyFavorite {
     
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    
     NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -487,8 +489,6 @@ UIActivityIndicatorView *indicator;
 }
 
 - (void) removeEvent {
-    
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"],
@@ -538,24 +538,21 @@ UIActivityIndicatorView *indicator;
         [viewController setMeetupPhoto:[item objectForKey:@"image_url"]];
         [viewController setSelectedLocLatitude:[[item objectForKey:@"latitude"] doubleValue]];
         [viewController setSelectedLocLongitude:[[item objectForKey:@"longitude"] doubleValue]];
-        [viewController setMeetupID:[[item objectForKey:@"id"] integerValue]];
+        [viewController setMeetupID:(int)[[item objectForKey:@"id"] integerValue]];
         [self.navigationController pushViewController:viewController animated:YES];
     }
 }
 
 
 - (IBAction)eventGoingBtnPressed:(id)sender {
-    [self uploadMyAttend];
-}
-
-- (IBAction)eventUserInputBtnPressed:(id)sender {
-}
-
-- (IBAction)eventGoingAddBtnPressed:(id)sender {
+    type = SEE_ATTEND;
 }
 
 - (IBAction)eventLikeBtnPressed:(id)sender {
-    [self uploadMyFavorite];
+    type = SEE_FAVORITE;
+}
+
+- (IBAction)eventUserInputBtnPressed:(id)sender {
 }
 
 - (IBAction)eventRemoveBtnPressed:(id)sender {
@@ -586,6 +583,13 @@ UIActivityIndicatorView *indicator;
         viewController.hidesBottomBarWhenPushed = YES;
         [viewController setWebLink:[item objectForKey:@"website"]];
     }
+    else if ([[segue identifier] isEqualToString: @"UserListViewController"]) {
+        UserListViewController *viewController = (UserListViewController *)[segue destinationViewController];
+        viewController.hidesBottomBarWhenPushed = YES;
+        viewController.eventID = [[item objectForKey:@"id"] intValue];
+        viewController.type = type;
+    }
+    
 }
 
 - (IBAction)myLocationBtn:(id)sender {

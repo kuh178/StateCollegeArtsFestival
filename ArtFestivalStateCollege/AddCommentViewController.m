@@ -105,8 +105,9 @@ int selectedIndex = 0;
     
     // user image
     [userImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [cItem objectForKey:@"user_image"]]]];
-    userImage.layer.cornerRadius = 4.0f;
+    userImage.layer.cornerRadius = userImage.frame.size.width / 2;
     userImage.clipsToBounds = YES;
+    userImage.hidden = NO;
     
     // user name
     userName.text = [cItem objectForKey:@"user_name"];
@@ -128,7 +129,7 @@ int selectedIndex = 0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableDictionary *cItem = [userCommentsArray objectAtIndex:indexPath.row];
-    selectedIndex = indexPath.row;
+    selectedIndex = (int)indexPath.row;
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     

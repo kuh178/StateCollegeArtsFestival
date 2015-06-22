@@ -47,6 +47,7 @@ UIActivityIndicatorView *indicator;
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
+    // show download indicator
     indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
     indicator.center = self.view.center;
@@ -56,13 +57,11 @@ UIActivityIndicatorView *indicator;
     [self downloadContent];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
+- (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -137,8 +136,6 @@ UIActivityIndicatorView *indicator;
                 eventCount.text = [NSString stringWithFormat:@"%d attends, %d photos", [[item objectForKey:@"going_cnt"] intValue], [[item objectForKey:@"photo_cnt"] intValue]];
             }
         }
-        
-        
         
         // plan date
         /*

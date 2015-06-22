@@ -113,7 +113,7 @@ NSUserDefaults *userDefault;
 - (IBAction)facebookBtnPressed:(id)sender {
     
     // get the app delegate so that we can access the session property
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    //AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     [login logInWithReadPermissions:@[@"email", @"public_profile"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
@@ -201,7 +201,6 @@ NSUserDefaults *userDefault;
 - (void) uploadAccountInfo {
     
     NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
-
     NSLog(@"device token: %@", [userDefault objectForKey:@"device_token"]);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

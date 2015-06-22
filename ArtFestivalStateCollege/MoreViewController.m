@@ -20,6 +20,8 @@
 @implementation MoreViewController
 @synthesize logoutBtn;
 
+NSUserDefaults *userDefault;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -36,6 +38,8 @@
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:51.0/255.0 green:164.0/255.0 blue:192.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
+    userDefault = [NSUserDefaults standardUserDefaults];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -66,15 +70,11 @@
         viewController.hidesBottomBarWhenPushed = YES;
     }
     else if([[segue identifier] isEqualToString: @"ProfileViewController"]) {
-        
-        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-        
         ProfileViewController *viewController = (ProfileViewController *)[segue destinationViewController];
         viewController.userID = [[userDefault objectForKey:@"user_id"] intValue];
         viewController.hidesBottomBarWhenPushed = YES;
     }
     else if([[segue identifier] isEqualToString: @"ArtistsWebPageViewController"]) {
-        
         ArtistsWebPageViewController *viewController = (ArtistsWebPageViewController *)[segue destinationViewController];
         viewController.hidesBottomBarWhenPushed = YES;
         [viewController setWebLink:@"http://www.arts-festival.com/"];
@@ -90,15 +90,13 @@
     if (buttonIndex == 1) { // Logout
         
         // remove all keys in NSUserDefaults
-        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
         NSDictionary * dict = [userDefault dictionaryRepresentation];
         for (id key in dict) {
             [userDefault removeObjectForKey:key];
         }
         [userDefault synchronize];
         
-        // move to the login page
-        
+        // move to the login page        
         LoginViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         //[self presentViewController:viewController animated:NO completion:nil];
         viewController.hidesBottomBarWhenPushed = YES;

@@ -6,18 +6,20 @@
 //  Copyright (c) 2014 Kyungsik Han. All rights reserved.
 //
 
-#import "GoingDetailViewController.h"
+#import "UserListViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AFHTTPRequestOperationManager.h"
+#import "NHBalancedFlowLayout.h"
+#import "ProfileViewController.h"
 #import "JSON.h"
 
-@interface GoingDetailViewController ()
+@interface UserListViewController () <NHBalancedFlowLayoutDelegate>
 
 @end
 
-@implementation GoingDetailViewController
+@implementation UserListViewController
 
-@synthesize collectionView, userList, goingBtn, eventID;
+@synthesize userList, eventID, type;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,14 +34,20 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    if (type == 0) {
+        self.title = @"Attends";
+    }
+    else {
+        self.title = @"Favorites";
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.screenName = @"GoingDetailViewController";
     self.navigationItem.backBarButtonItem.title = @"Back";
-    [self downloadEventGoing];
+    [self downloadUserList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,11 +57,20 @@
 }
 
 #pragma mark - UICollectionView Datasource
-- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(NHBalancedFlowLayout *)collectionViewLayout preferredSizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [[userList objectAtIndex:indexPath.item] size];
+}
+
+#pragma mark - UICollectionView data source
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
     return 1;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
+{
     return [userList count];
 }
 
@@ -67,37 +84,33 @@
     UILabel *userName       = (UILabel *)[cell viewWithTag:101];
     
     [userImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [item objectForKey:@"user_image"]]]];
-    userImage.layer.cornerRadius = 4.0f;
+    userImage.layer.cornerRadius = userImage.frame.size.width / 2;
     userImage.clipsToBounds = YES;
+    userImage.hidden = NO;
     
     userName.text = [item objectForKey:@"user_name"];
     
     return cell;
 }
 
--(IBAction)goingBtnPressed:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Are you going this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Going", nil];
-    [alert show];
-}
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSMutableDictionary *item = [userList objectAtIndex:indexPath.row];
     
-    if ([title isEqualToString:@"Going"]){ // Going
-        
-    }
-    else {
-        
-    }
+    ProfileViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileViewController"];
+    viewController.hidesBottomBarWhenPushed = YES;
+    [viewController setUserID:[[item objectForKey:@"user_id"] intValue]];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
-
-- (void) downloadEventGoing {
+- (void) downloadUserList {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *params = @{@"event_id"    :[NSString stringWithFormat:@"%d", eventID]};
+    NSDictionary *params = @{@"event_id"    :[NSString stringWithFormat:@"%d", eventID],
+                             @"type"        :[NSString stringWithFormat:@"%d", type]};
     
-    [manager POST:@"http://heounsuk.com/festival/download_event_going_details.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    // change url
+    [manager POST:@"http://heounsuk.com/festival/download_user_lists.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         
@@ -105,7 +118,7 @@
             userList = [NSMutableArray arrayWithCapacity:0];
             [userList addObjectsFromArray:[responseObject objectForKey:@"results"]];
             
-            [collectionView reloadData];
+            [self.collectionView reloadData];
         }
         else {
             

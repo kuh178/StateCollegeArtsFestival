@@ -56,9 +56,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    NSLog(@"number of rows : %d", [newsList count]);
-    
     return [newsList count];
 }
 

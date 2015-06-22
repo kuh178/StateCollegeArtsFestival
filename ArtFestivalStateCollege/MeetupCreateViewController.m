@@ -236,7 +236,7 @@ UIImage     *chosenImage;
 
 - (void)setupMapView {
     
-    // set annotation.
+    // set annotation
     annotation = [[LocationAnnotation alloc]init];
     
     mapView.showsUserLocation = YES;
@@ -269,7 +269,7 @@ UIImage     *chosenImage;
         [locationManager requestAlwaysAuthorization];
     }
     
-    // ask LocationManager to give accurate location info as much as possible.
+    // ask LocationManager to give accurate location info as much as possible
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = kCLDistanceFilterNone;
     

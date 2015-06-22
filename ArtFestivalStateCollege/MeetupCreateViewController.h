@@ -31,7 +31,7 @@
     NSString *meetupPhoto;
     
     int meetupID;
-    int type;
+    int type; // type 0: new meetup / type 1: edit meetup
 }
 
 @property (nonatomic, retain) IBOutlet UITextField          *meetupWhatText;

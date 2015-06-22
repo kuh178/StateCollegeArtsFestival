@@ -7,7 +7,7 @@
 //
 
 #import "ArtistsDetailViewController.h"
-#import "GoingDetailViewController.h"
+#import "UserListViewController.h"
 #import "UserInputDetailViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ArtistsWebPageViewController.h"
@@ -137,7 +137,6 @@
     NSString *body = @"";
     
     NSString *email = [NSString stringWithFormat:@"%@%@", recipients, body];
-    
     email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
@@ -167,7 +166,6 @@
 - (void) uploadMyFavorite {
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    
     NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -210,7 +208,7 @@
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
             NSMutableArray *itemAry = [[NSMutableArray alloc]initWithCapacity:0];
             itemAry = [[responseObject objectForKey:@"results"] objectForKey:@"favorite_user_ary"];
-            int itemAryCnt = [itemAry count];
+            int itemAryCnt = (int)[itemAry count];
             
             NSLog(@"itemAryCnt: %d", itemAryCnt);
             

@@ -65,8 +65,8 @@
                              @"survey_id"       :[NSString stringWithFormat:@"%d", surveyID],
                              @"open_quesiton"   :openQuestionText.text,
                              @"datetime"        :timeStampValue,
-                             @"question1"       :[NSString stringWithFormat:@"%d", segmentQuestion1.selectedSegmentIndex+1],
-                             @"question2"       :[NSString stringWithFormat:@"%d", segmentQuestion2.selectedSegmentIndex+1]};
+                             @"question1"       :[NSString stringWithFormat:@"%d", (int)segmentQuestion1.selectedSegmentIndex+1],
+                             @"question2"       :[NSString stringWithFormat:@"%d", (int)segmentQuestion2.selectedSegmentIndex+1]};
     
     [manager POST:@"http://heounsuk.com/festival/upload_adhoc_answers.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {

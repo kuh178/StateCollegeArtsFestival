@@ -8,11 +8,10 @@
 
 #import "ArtistsMoreImagesViewController.h"
 #import "SDWebImage/UIImageView+WebCache.h"
-#import "JSON.h"
-
-#import "NHLinearPartition.h"
 #import "UIImage+Decompression.h"
 #import "NHBalancedFlowLayout.h"
+#import "NHLinearPartition.h"
+#import "JSON.h"
 
 @interface ArtistsMoreImagesViewController () <NHBalancedFlowLayoutDelegate>
 

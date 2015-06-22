@@ -150,7 +150,7 @@ UIActivityIndicatorView *indicator;
         
         // if it is a meet-up event, show a small icon
         if ([[item objectForKey:@"is_meetup"] intValue] == 1) {
-            yoImage.hidden = NO;
+            yoImage.hidden = YES;
         }
         else {
             yoImage.hidden = YES;
@@ -220,15 +220,15 @@ UIActivityIndicatorView *indicator;
     NSString* overdueMessage;
     
     if (years>0){
-        overdueMessage = [NSString stringWithFormat:@"%d %@", (years), (years==1?@"year ago":@"years ago")];
+        overdueMessage = [NSString stringWithFormat:@"%ld %@", (long)(years), (years==1?@"year ago":@"years ago")];
     }else if (months>0){
-        overdueMessage = [NSString stringWithFormat:@"%d %@", (months), (months==1?@"month ago":@"months ago")];
+        overdueMessage = [NSString stringWithFormat:@"%ld %@", (long)(months), (months==1?@"month ago":@"months ago")];
     }else if (days>0){
-        overdueMessage = [NSString stringWithFormat:@"%d %@", (days), (days==1?@"day ago":@"days ago")];
+        overdueMessage = [NSString stringWithFormat:@"%ld %@", (long)(days), (days==1?@"day ago":@"days ago")];
     }else if (hours>0){
-        overdueMessage = [NSString stringWithFormat:@"%d %@", (hours), (hours==1?@"hour ago":@"hours ago")];
+        overdueMessage = [NSString stringWithFormat:@"%ld %@", (long)(hours), (hours==1?@"hour ago":@"hours ago")];
     }else if (minutes>0){
-        overdueMessage = [NSString stringWithFormat:@"%d %@", (minutes), (minutes==1?@"minute ago":@"minutes ago")];
+        overdueMessage = [NSString stringWithFormat:@"%ld %@", (long)(minutes), (minutes==1?@"minute ago":@"minutes ago")];
     }else if (overdueTimeInterval<60){
         overdueMessage = [NSString stringWithFormat:@"a few seconds ago"];
     }
@@ -327,7 +327,6 @@ UIActivityIndicatorView *indicator;
                         // get an item
                         NSDictionary *item = [jsonArray objectAtIndex:i];
                         [myList addObject:item];
-        
                     }
                 }
                 else {

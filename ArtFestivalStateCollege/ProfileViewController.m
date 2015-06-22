@@ -187,8 +187,8 @@ NSMutableArray *userPhotoArray;
             
             int userCommentsCnt = [[item objectForKey:@"user_comments_cnt"] intValue];
             int userLikesCnt = [[item objectForKey:@"user_likes_cnt"] intValue];
-            int userPhotosCnt = [[item objectForKey:@"user_content"] count];
-            int userTaggedUsersCnt = [[item objectForKey:@"tagged_user"]count];
+            int userPhotosCnt = (int)[[item objectForKey:@"user_content"] count];
+            int userTaggedUsersCnt = (int)[[item objectForKey:@"tagged_user"]count];
             
             if (userCommentsCnt <= 1) {
                 commentsLabel.text = [NSString stringWithFormat:@"%d", userCommentsCnt];

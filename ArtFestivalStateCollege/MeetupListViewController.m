@@ -21,6 +21,8 @@
 
 @synthesize tableViewList, eventList, refreshBtn, filterSegment;
 
+NSMutableArray              *eventSubList;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -63,7 +65,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [eventList count];
+    return [eventSubList count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -77,7 +79,7 @@
     }
     
     // Display items
-    NSMutableDictionary *item       = [eventList objectAtIndex:indexPath.row];
+    NSMutableDictionary *item       = [eventSubList objectAtIndex:indexPath.row];
     UIImageView *eventImage         = (UIImageView *)[cell viewWithTag:100];
     UILabel *eventName              = (UILabel *)[cell viewWithTag:101];
     UILabel *eventDatetime          = (UILabel *)[cell viewWithTag:102];
@@ -109,7 +111,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableDictionary *item = [eventList objectAtIndex:indexPath.row];
+    NSMutableDictionary *item = [eventSubList objectAtIndex:indexPath.row];
    
     EventDetailViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
     viewController.hidesBottomBarWhenPushed = YES;
@@ -140,7 +142,11 @@
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
             eventList = [NSMutableArray arrayWithCapacity:0];
+            eventSubList = [NSMutableArray arrayWithCapacity:0];
+            
             [eventList addObjectsFromArray:[responseObject objectForKey:@"results"]];
+            eventSubList = eventList;
+            
             [tableViewList reloadData];
         }
         else {
@@ -165,12 +171,25 @@
 }
 
 -(IBAction)filterSegmentSelected:(id)sender {
+    
+    eventSubList = [NSMutableArray arrayWithCapacity:0];
+    
     if (filterSegment.selectedSegmentIndex == 0) { // filter by time
-
+        eventSubList = eventList;
     }
-    else { // filter by location
+    else if (filterSegment.selectedSegmentIndex == 1) { // filter by my-meetups
+        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
         
+        for (int i = 0; i < [eventList count]; i++) {
+            NSDictionary *item = [eventList objectAtIndex:i];
+            
+            if ([[item objectForKey:@"user_id"] intValue] == [[userDefault objectForKey:@"user_id"] intValue]) {
+                [eventSubList addObject:item];
+            }
+        }
     }
+    
+    [tableViewList reloadData];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

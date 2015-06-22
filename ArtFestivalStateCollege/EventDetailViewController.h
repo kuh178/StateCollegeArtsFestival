@@ -108,9 +108,7 @@
 
 - (IBAction)eventGoingBtnPressed:(id)sender;
 - (IBAction)eventUserInputBtnPressed:(id)sender;
-- (IBAction)eventGoingAddBtnPressed:(id)sender;
 - (IBAction)eventLikeBtnPressed:(id)sender;
-//- (IBAction)eventUserInputAddBtnPressed:(id)sender;
 - (IBAction)moreBtnPressed:(id)sender;
 
 - (IBAction)eventRemoveBtnPressed:(id)sender;
