@@ -370,6 +370,8 @@ NSMutableArray *userPhotoArray;
     }
     else if ([title isEqualToString:@"What is Wave?"]){
         // show a dialog explaining the meaning of WAVE
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What is Wave?" message:@"Wave is similar to a \"Poke\" on Facebook. If you want to just say hello or get attention, press the Wave button, and others will receive your Wave messages." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil];
+        [alert show];
     }
     else if ([title isEqualToString:@"Use this photo"]) {
         [self changeProfilePhoto];

@@ -16,7 +16,7 @@
 @end
 
 @implementation FestivalMapViewController
-@synthesize mapView, locationList, annotations;
+@synthesize mapView, locationList, annotations, mylocationBtn;
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -38,6 +38,10 @@
     mapView.layer.cornerRadius = 5;
     mapView.layer.borderWidth = 1;
     
+    mylocationBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    mylocationBtn.layer.cornerRadius = 5;
+    mylocationBtn.layer.borderWidth = 1;
+    
     // download location first
     [self downloadContent];
     
@@ -47,7 +51,7 @@
     [super viewDidAppear:animated];
     self.screenName = @"FestivalMapViewController";
     self.navigationItem.backBarButtonItem.title = @"Back";
-    self.hidesBottomBarWhenPushed = YES;
+    //self.hidesBottomBarWhenPushed = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,6 +66,7 @@
     mapView.showsUserLocation = YES;
     mapView.mapType = MKMapTypeStandard;
     mapView.delegate = self;
+    /*
     CLLocationCoordinate2D location;
     
     MKCoordinateRegion region;
@@ -74,6 +79,7 @@
     
     [mapView setRegion:region animated:FALSE];
     [mapView regionThatFits:region];
+     */
     
     // initialize locationManager
     locationManager = [[CLLocationManager alloc] init];
@@ -119,6 +125,83 @@
     }
 }
 
+-(MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    
+    if ([[annotation title] isEqualToString:@"Food"]) {
+        MKPinAnnotationView *pin=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotation"];
+        
+        pin.highlighted = NO;
+        pin.enabled = YES;
+        pin.canShowCallout = YES;
+        pin.image = [UIImage imageNamed:@"food_icon.png"];
+        
+        return pin;
+    }
+    else if ([[annotation title] isEqualToString:@"Information"]) {
+        MKPinAnnotationView *pin=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotation"];
+        
+        pin.highlighted = NO;
+        pin.enabled = YES;
+        pin.canShowCallout = YES;
+        pin.image = [UIImage imageNamed:@"information_icon.png"];
+        
+        return pin;
+    }
+    else if ([[annotation title] isEqualToString:@"Sales booth"]) {
+        MKPinAnnotationView *pin=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotation"];
+        
+        pin.highlighted = NO;
+        pin.enabled = YES;
+        pin.canShowCallout = YES;
+        pin.image = [UIImage imageNamed:@"present_icon.png"];
+        
+        return pin;
+    }
+    else if ([[annotation title] isEqualToString:@"Restroom"]) {
+        MKPinAnnotationView *pin=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotation"];
+        
+        pin.highlighted = NO;
+        pin.enabled = YES;
+        pin.canShowCallout = YES;
+        pin.image = [UIImage imageNamed:@"restroom_icon.png"];
+        
+        return pin;
+    }
+    else if ([[annotation title] isEqualToString:@"First Aid"]) {
+        MKPinAnnotationView *pin=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotation"];
+        
+        pin.highlighted = NO;
+        pin.enabled = YES;
+        pin.canShowCallout = YES;
+        pin.image = [UIImage imageNamed:@"firstaid_icon.png"];
+        
+        return pin;
+    }
+    else if ([[annotation title] isEqualToString:@"Parking"]) {
+        MKPinAnnotationView *pin=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotation"];
+        
+        pin.highlighted = NO;
+        pin.enabled = YES;
+        pin.canShowCallout = YES;
+        pin.image = [UIImage imageNamed:@"parking_icon.png"];
+        
+        return pin;
+    }
+    else if ([[annotation title] isEqualToString:@"Bus stop"]) {
+        MKPinAnnotationView *pin=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotation"];
+        
+        pin.highlighted = NO;
+        pin.enabled = YES;
+        pin.canShowCallout = YES;
+        pin.image = [UIImage imageNamed:@"bus_icon.png"];
+        
+        return pin;
+    }
+    else {
+        return nil;
+    }
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
     // do something below here, if we need user location data.
@@ -157,5 +240,8 @@
     }];
 }
 
+-(IBAction)mylocationBtnPressed:(id)sender {
+    [mapView setCenterCoordinate:mapView.userLocation.location.coordinate animated:YES];
+}
 
 @end

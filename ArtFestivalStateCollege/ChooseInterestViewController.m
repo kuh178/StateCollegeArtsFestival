@@ -8,6 +8,7 @@
 
 #import "ChooseInterestViewController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "CommunityConnectionQuestionsViewController.h"
 #import "JSON.h"
 
 @interface ChooseInterestViewController ()
@@ -37,6 +38,13 @@ NSString *gender;
     
     genderBtn.layer.cornerRadius = 5;
     genderBtn.layer.borderWidth = 1;
+    
+    if (previousViewController == LOGIN_PAGE) {
+        [submitBtn setTitle:@"Next" forState:UIControlStateNormal];
+    }
+    else {
+        [submitBtn setTitle:@"Submit" forState:UIControlStateNormal];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,10 +63,90 @@ NSString *gender;
  */
 
 -(IBAction)submitBtnPressed:(id)sender {
-    [self uploadUserInfo];
+    
+    if (previousViewController == LOGIN_PAGE) {
+        [self moveToTheCommunityQuestionsView];
+    }
+    else {
+        [self uploadPreferences];
+    }
 }
 
--(void)uploadUserInfo {
+-(void)moveToTheCommunityQuestionsView {
+    
+    int interest1;
+    int interest2;
+    int interest3;
+    int interest4;
+    int interest5;
+    int interest6;
+    int interest7;
+    
+    if (interestBtn1.selectedSegmentIndex == 0) {
+        interest1 = 1;
+    }
+    else {
+        interest1 = 0;
+    }
+    
+    if (interestBtn2.selectedSegmentIndex == 0) {
+        interest2 = 1;
+    }
+    else {
+        interest2 = 0;
+    }
+    
+    if (interestBtn3.selectedSegmentIndex == 0) {
+        interest3 = 1;
+    }
+    else {
+        interest3 = 0;
+    }
+    
+    if (interestBtn4.selectedSegmentIndex == 0) {
+        interest4 = 1;
+    }
+    else {
+        interest4 = 0;
+    }
+    
+    if (interestBtn5.selectedSegmentIndex == 0) {
+        interest5 = 1;
+    }
+    else {
+        interest5 = 0;
+    }
+    
+    if (interestBtn6.selectedSegmentIndex == 0) {
+        interest6 = 1;
+    }
+    else {
+        interest6 = 0;
+    }
+    
+    if (interestBtn7.selectedSegmentIndex == 0) {
+        interest7 = 1;
+    }
+    else {
+        interest7 = 0;
+    }
+    
+    CommunityConnectionQuestionsViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CommunityConnectionQuestionsViewController"];
+    
+    [viewController setInterest1:interest1];
+    [viewController setInterest2:interest2];
+    [viewController setInterest3:interest3];
+    [viewController setInterest4:interest4];
+    [viewController setInterest5:interest5];
+    [viewController setInterest6:interest6];
+    [viewController setInterest7:interest7];
+    [viewController setGender:gender];
+    [viewController setAge:age];
+    
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+-(void)uploadPreferences {
     
     int interest1;
     int interest2;
@@ -136,16 +224,7 @@ NSString *gender;
         NSLog(@"Success: %@", responseObject);
         
         if ([[responseObject objectForKey:@"success"]boolValue] == TRUE) {
-            
-            if (previousViewController == LOGIN_PAGE) {
-                // move to the main page
-                UITabBarController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
-                [self presentViewController:viewController animated:YES completion:nil];
-                [self removeFromParentViewController];
-            }
-            else { // from profile
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            }
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
         else {
             UIAlertView *dialog = [[UIAlertView alloc]init];
@@ -160,6 +239,7 @@ NSString *gender;
         NSLog(@"Error: %@", error);
     }];
 }
+
 
 -(IBAction)genderBtnPressed:(id)sender {
     UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Choose your gender" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:

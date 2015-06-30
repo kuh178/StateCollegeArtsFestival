@@ -163,31 +163,22 @@ UIImage     *chosenImage;
     
     // get what text
     NSString *meetUpWhat = meetupWhatText.text;
-    // get date time
-    NSLocale *usLocale = [[NSLocale alloc]
-                          initWithLocaleIdentifier:@"en_US"];
     
+    // get date time
     NSDate *pickerDate = [meetupWhenPicker date] ;
     NSLog(@"pickerDate %@", pickerDate);
-    
-    NSString *selectionString = [[NSString alloc]
-                                 initWithFormat:@"%@",
-                                 [pickerDate descriptionWithLocale:usLocale]];
-    // Sunday, March 22, 2015 at 4:39:12 PM Eastern Daylight Time
-    
+    double pickTimestamp = [pickerDate timeIntervalSince1970];
+
     if(![meetUpWhat isEqual:[NSNull null]] ||
        selectedLocLatitude == 0.0 ||
-       selectedLocLongitude == 0.0 ||
-       [selectionString isEqual:[NSNull null]]) {
+       selectedLocLongitude == 0.0) {
         
         if (imageData) {
             NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
             
-            NSString *timeStampValue = [NSString stringWithFormat:@"%ld",(long)[pickerDate timeIntervalSince1970]];
-            
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"],
-                                     @"datetime"    :[NSString stringWithFormat:@"%@", timeStampValue],
+                                     @"datetime"    :[NSString stringWithFormat:@"%f", pickTimestamp],
                                      @"description" :[NSString stringWithFormat:@"%@", meetUpWhat],
                                      @"latitude"    :[NSString stringWithFormat:@"%f", selectedLocLatitude],
                                      @"longitude"   :[NSString stringWithFormat:@"%f", selectedLocLongitude],

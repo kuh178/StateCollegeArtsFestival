@@ -49,7 +49,6 @@
 		FA5193371B07A654009A1CC6 /* 1431811075_25.Camera-Front-32.png in Resources */ = {isa = PBXBuildFile; fileRef = FA5193351B07A654009A1CC6 /* 1431811075_25.Camera-Front-32.png */; };
 		FA67962718D6719700A5BECC /* twitter_blue_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = FA67962618D6719700A5BECC /* twitter_blue_bar.png */; };
 		FA6F12A71B13F97100F4ECAA /* MyActivityQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6F12A61B13F97100F4ECAA /* MyActivityQuestionViewController.m */; };
-		FA6F12A91B14C8D500F4ECAA /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6F12A81B14C8D500F4ECAA /* libGoogleAnalyticsServices.a */; };
 		FA6F12AB1B14CA1800F4ECAA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6F12AA1B14CA1800F4ECAA /* libsqlite3.dylib */; };
 		FA78AD571958A04B0000EEC2 /* ArtistsMoreImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA78AD561958A04B0000EEC2 /* ArtistsMoreImagesViewController.m */; };
 		FA8B7FA218DE172A001F3B1B /* map-paper-7.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FA118DE172A001F3B1B /* map-paper-7.png */; };
@@ -67,10 +66,19 @@
 		FA8B7FD518F1E9CF001F3B1B /* website.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FD418F1E9CF001F3B1B /* website.png */; };
 		FA8B7FD818F1EC2E001F3B1B /* FestivalMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B7FD718F1EC2E001F3B1B /* FestivalMapViewController.m */; };
 		FA8B7FDA18F25818001F3B1B /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8B7FD918F25817001F3B1B /* plus.png */; };
+		FA9D14831B41C735008000E7 /* survey_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA9D14821B41C735008000E7 /* survey_icon.png */; };
+		FA9D14871B425C5E008000E7 /* present_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA9D14861B425C5E008000E7 /* present_icon.png */; };
+		FA9D14891B425D25008000E7 /* food_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA9D14881B425D25008000E7 /* food_icon.png */; };
+		FA9D148D1B425E86008000E7 /* information_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA9D148C1B425E86008000E7 /* information_icon.png */; };
+		FA9D14911B42600E008000E7 /* firstaid_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA9D14901B42600E008000E7 /* firstaid_icon.png */; };
+		FA9D14931B42607F008000E7 /* restroom_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA9D14921B42607F008000E7 /* restroom_icon.png */; };
+		FA9D14951B42615D008000E7 /* parking_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA9D14941B42615D008000E7 /* parking_icon.png */; };
+		FA9D149B1B4263DC008000E7 /* bus_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA9D149A1B4263DC008000E7 /* bus_icon.png */; };
+		FA9D149D1B4267FF008000E7 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9D149C1B4267FF008000E7 /* libGoogleAnalyticsServices.a */; };
+		FA9D14A91B426A32008000E7 /* StoryBoard_Small.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA9D14A81B426A32008000E7 /* StoryBoard_Small.storyboard */; };
 		FAAA6072195E954300433679 /* FestivalMapWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAA6071195E954300433679 /* FestivalMapWebViewController.m */; };
 		FAAA6074195E973B00433679 /* festivalmap.pdf in Resources */ = {isa = PBXBuildFile; fileRef = FAAA6073195E973A00433679 /* festivalmap.pdf */; };
 		FAAA6075195EB3C500433679 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E8E418C6509800BDD03D /* XCTest.framework */; };
-		FAAA6078195EB4E700433679 /* StoryBoard_Small.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAAA6076195EB4E700433679 /* StoryBoard_Small.storyboard */; };
 		FAC153AD19058BBB004B7923 /* ArtistsWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC153AC19058BBB004B7923 /* ArtistsWebPageViewController.m */; };
 		FAC3914119514B9600A2ED2D /* PopularMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC3914019514B9600A2ED2D /* PopularMainViewController.m */; };
 		FAC3914419514D2100A2ED2D /* 2014_poster.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAC3914219514D2100A2ED2D /* 2014_poster.jpg */; };
@@ -98,6 +106,8 @@
 		FAC79C951B1FED6F00A69065 /* star_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = FAC79C931B1FED6F00A69065 /* star_normal.png */; };
 		FAC79C9D1B20027A00A69065 /* button_switch_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = FAC79C9C1B20027A00A69065 /* button_switch_vertical.png */; };
 		FAC79CA11B20227200A69065 /* upload_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = FAC79CA01B20227200A69065 /* upload_normal.png */; };
+		FACA416E1B38500900935C1C /* 2015_button_faceonly_white.png in Resources */ = {isa = PBXBuildFile; fileRef = FACA416D1B38500900935C1C /* 2015_button_faceonly_white.png */; };
+		FACA41711B39CDB400935C1C /* CommunityConnectionQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACA41701B39CDB400935C1C /* CommunityConnectionQuestionsViewController.m */; };
 		FAF6E8C318C6509800BDD03D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E8C218C6509800BDD03D /* Foundation.framework */; };
 		FAF6E8C518C6509800BDD03D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E8C418C6509800BDD03D /* CoreGraphics.framework */; };
 		FAF6E8C718C6509800BDD03D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E8C618C6509800BDD03D /* UIKit.framework */; };
@@ -140,7 +150,6 @@
 		FAF6E97918D4D37100BDD03D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97818D4D37100BDD03D /* libicucore.dylib */; };
 		FAF6E97B18D4D37800BDD03D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97A18D4D37800BDD03D /* OpenGLES.framework */; };
 		FAF6E97D18D4D38400BDD03D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97C18D4D38400BDD03D /* QuartzCore.framework */; };
-		FAF6E97F18D4D38B00BDD03D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E97E18D4D38B00BDD03D /* AdSupport.framework */; };
 		FAF6E98A18D4D52000BDD03D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E98918D4D52000BDD03D /* LoginViewController.m */; };
 		FAF6E99318D5582900BDD03D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF6E99218D5582900BDD03D /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -221,7 +230,6 @@
 		FA67962618D6719700A5BECC /* twitter_blue_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_blue_bar.png; sourceTree = "<group>"; };
 		FA6F12A51B13F97100F4ECAA /* MyActivityQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivityQuestionViewController.h; sourceTree = "<group>"; };
 		FA6F12A61B13F97100F4ECAA /* MyActivityQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivityQuestionViewController.m; sourceTree = "<group>"; };
-		FA6F12A81B14C8D500F4ECAA /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		FA6F12AA1B14CA1800F4ECAA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		FA78AD551958A04B0000EEC2 /* ArtistsMoreImagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsMoreImagesViewController.h; sourceTree = "<group>"; };
 		FA78AD561958A04B0000EEC2 /* ArtistsMoreImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsMoreImagesViewController.m; sourceTree = "<group>"; };
@@ -242,10 +250,29 @@
 		FA8B7FD618F1EC2E001F3B1B /* FestivalMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalMapViewController.h; sourceTree = "<group>"; };
 		FA8B7FD718F1EC2E001F3B1B /* FestivalMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalMapViewController.m; sourceTree = "<group>"; };
 		FA8B7FD918F25817001F3B1B /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		FA9D14821B41C735008000E7 /* survey_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = survey_icon.png; sourceTree = "<group>"; };
+		FA9D14861B425C5E008000E7 /* present_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = present_icon.png; sourceTree = "<group>"; };
+		FA9D14881B425D25008000E7 /* food_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food_icon.png; sourceTree = "<group>"; };
+		FA9D148C1B425E86008000E7 /* information_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_icon.png; sourceTree = "<group>"; };
+		FA9D14901B42600E008000E7 /* firstaid_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = firstaid_icon.png; sourceTree = "<group>"; };
+		FA9D14921B42607F008000E7 /* restroom_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restroom_icon.png; sourceTree = "<group>"; };
+		FA9D14941B42615D008000E7 /* parking_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parking_icon.png; sourceTree = "<group>"; };
+		FA9D149A1B4263DC008000E7 /* bus_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bus_icon.png; sourceTree = "<group>"; };
+		FA9D149C1B4267FF008000E7 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		FA9D149E1B4268B3008000E7 /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		FA9D149F1B4268B3008000E7 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		FA9D14A01B4268B3008000E7 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		FA9D14A11B4268B3008000E7 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		FA9D14A21B4268B3008000E7 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		FA9D14A31B4268B3008000E7 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		FA9D14A41B4268B3008000E7 /* GAIFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		FA9D14A51B4268B3008000E7 /* GAILogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		FA9D14A61B4268B3008000E7 /* GAITrackedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		FA9D14A71B4268B3008000E7 /* GAITracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		FA9D14A81B426A32008000E7 /* StoryBoard_Small.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StoryBoard_Small.storyboard; sourceTree = "<group>"; };
 		FAAA6070195E954300433679 /* FestivalMapWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalMapWebViewController.h; sourceTree = "<group>"; };
 		FAAA6071195E954300433679 /* FestivalMapWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalMapWebViewController.m; sourceTree = "<group>"; };
 		FAAA6073195E973A00433679 /* festivalmap.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = festivalmap.pdf; sourceTree = "<group>"; };
-		FAAA6077195EB4E700433679 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/StoryBoard_Small.storyboard; sourceTree = "<group>"; };
 		FAC153AB19058BBB004B7923 /* ArtistsWebPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsWebPageViewController.h; sourceTree = "<group>"; };
 		FAC153AC19058BBB004B7923 /* ArtistsWebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsWebPageViewController.m; sourceTree = "<group>"; };
 		FAC3913F19514B9600A2ED2D /* PopularMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopularMainViewController.h; sourceTree = "<group>"; };
@@ -282,6 +309,9 @@
 		FAC79C931B1FED6F00A69065 /* star_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_normal.png; sourceTree = "<group>"; };
 		FAC79C9C1B20027A00A69065 /* button_switch_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_switch_vertical.png; sourceTree = "<group>"; };
 		FAC79CA01B20227200A69065 /* upload_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload_normal.png; sourceTree = "<group>"; };
+		FACA416D1B38500900935C1C /* 2015_button_faceonly_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2015_button_faceonly_white.png; sourceTree = "<group>"; };
+		FACA416F1B39CDB400935C1C /* CommunityConnectionQuestionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityConnectionQuestionsViewController.h; sourceTree = "<group>"; };
+		FACA41701B39CDB400935C1C /* CommunityConnectionQuestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityConnectionQuestionsViewController.m; sourceTree = "<group>"; };
 		FAF6E8BF18C6509800BDD03D /* ArtFestivalStateCollege.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtFestivalStateCollege.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF6E8C218C6509800BDD03D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FAF6E8C418C6509800BDD03D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -347,12 +377,6 @@
 		FAF6E97E18D4D38B00BDD03D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		FAF6E98818D4D52000BDD03D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		FAF6E98918D4D52000BDD03D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		FAF6E98C18D545F000BDD03D /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
-		FAF6E98D18D545F000BDD03D /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
-		FAF6E98E18D545F000BDD03D /* GAIFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
-		FAF6E98F18D545F000BDD03D /* GAILogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
-		FAF6E99018D545F000BDD03D /* GAITrackedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
-		FAF6E99118D545F000BDD03D /* GAITracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		FAF6E99218D5582900BDD03D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -382,15 +406,14 @@
 				FA0A6BB718DB636F00E706F5 /* AssetsLibrary.framework in Frameworks */,
 				FAF6E99318D5582900BDD03D /* MapKit.framework in Frameworks */,
 				FAF6E8C718C6509800BDD03D /* UIKit.framework in Frameworks */,
-				FAF6E97F18D4D38B00BDD03D /* AdSupport.framework in Frameworks */,
 				FAF6E97918D4D37100BDD03D /* libicucore.dylib in Frameworks */,
+				FA9D149D1B4267FF008000E7 /* libGoogleAnalyticsServices.a in Frameworks */,
 				FAF6E97718D4D36A00BDD03D /* libc++.dylib in Frameworks */,
 				FAF6E97118D4D35700BDD03D /* CoreData.framework in Frameworks */,
 				FAF6E96F18D4D34F00BDD03D /* AVFoundation.framework in Frameworks */,
 				C7A828CD1B156B84003DD26E /* ParseUI.framework in Frameworks */,
 				FAF6E96718D4D32C00BDD03D /* ImageIO.framework in Frameworks */,
 				C7A828C91B156B84003DD26E /* Parse.framework in Frameworks */,
-				FA6F12A91B14C8D500F4ECAA /* libGoogleAnalyticsServices.a in Frameworks */,
 				FAF6E8C318C6509800BDD03D /* Foundation.framework in Frameworks */,
 				ABBDD3DF803F4EE1AFE08F86 /* libPods.a in Frameworks */,
 			);
@@ -505,6 +528,15 @@
 		FA6B17821AD06D850086F493 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FA9D149A1B4263DC008000E7 /* bus_icon.png */,
+				FA9D14941B42615D008000E7 /* parking_icon.png */,
+				FA9D14921B42607F008000E7 /* restroom_icon.png */,
+				FA9D14901B42600E008000E7 /* firstaid_icon.png */,
+				FA9D148C1B425E86008000E7 /* information_icon.png */,
+				FA9D14881B425D25008000E7 /* food_icon.png */,
+				FA9D14861B425C5E008000E7 /* present_icon.png */,
+				FA9D14821B41C735008000E7 /* survey_icon.png */,
+				FACA416D1B38500900935C1C /* 2015_button_faceonly_white.png */,
 				FAC79CA01B20227200A69065 /* upload_normal.png */,
 				FAC79C9C1B20027A00A69065 /* button_switch_vertical.png */,
 				FAC79C921B1FED6F00A69065 /* star_selected.png */,
@@ -626,6 +658,7 @@
 		FAF6E8C118C6509800BDD03D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA9D149C1B4267FF008000E7 /* libGoogleAnalyticsServices.a */,
 				C7A828DF1B156D01003DD26E /* CoreBluetooth.framework */,
 				C7A828D61B156C5E003DD26E /* Accounts.framework */,
 				C7A828D41B156C3B003DD26E /* StoreKit.framework */,
@@ -634,7 +667,6 @@
 				C7A828CE1B156BE9003DD26E /* AudioToolbox.framework */,
 				C7A828C11B156B84003DD26E /* parse-library-1.7.4 */,
 				FA6F12AA1B14CA1800F4ECAA /* libsqlite3.dylib */,
-				FA6F12A81B14C8D500F4ECAA /* libGoogleAnalyticsServices.a */,
 				FA0A6BB618DB636F00E706F5 /* AssetsLibrary.framework */,
 				FAF6E99218D5582900BDD03D /* MapKit.framework */,
 				FAF6E97E18D4D38B00BDD03D /* AdSupport.framework */,
@@ -682,7 +714,7 @@
 				FAF6E8D118C6509800BDD03D /* AppDelegate.h */,
 				FAF6E8D218C6509800BDD03D /* AppDelegate.m */,
 				FAF6E8D418C6509800BDD03D /* StoryBoard5.storyboard */,
-				FAAA6076195EB4E700433679 /* StoryBoard_Small.storyboard */,
+				FA9D14A81B426A32008000E7 /* StoryBoard_Small.storyboard */,
 				FAF6E8DD18C6509800BDD03D /* Images.xcassets */,
 				FAF6E8C918C6509800BDD03D /* Supporting Files */,
 			);
@@ -788,6 +820,8 @@
 				FAC391671953523900A2ED2D /* SigninViewController.m */,
 				FA48A31C1AD375CC00B21CCE /* ChooseInterestViewController.h */,
 				FA48A31D1AD375CC00B21CCE /* ChooseInterestViewController.m */,
+				FACA416F1B39CDB400935C1C /* CommunityConnectionQuestionsViewController.h */,
+				FACA41701B39CDB400935C1C /* CommunityConnectionQuestionsViewController.m */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -795,12 +829,16 @@
 		FAF6E98B18D545E400BDD03D /* GoogleAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				FAF6E98C18D545F000BDD03D /* GAI.h */,
-				FAF6E98D18D545F000BDD03D /* GAIDictionaryBuilder.h */,
-				FAF6E98E18D545F000BDD03D /* GAIFields.h */,
-				FAF6E98F18D545F000BDD03D /* GAILogger.h */,
-				FAF6E99018D545F000BDD03D /* GAITrackedViewController.h */,
-				FAF6E99118D545F000BDD03D /* GAITracker.h */,
+				FA9D149E1B4268B3008000E7 /* GAI.h */,
+				FA9D149F1B4268B3008000E7 /* GAIDictionaryBuilder.h */,
+				FA9D14A01B4268B3008000E7 /* GAIEcommerceFields.h */,
+				FA9D14A11B4268B3008000E7 /* GAIEcommerceProduct.h */,
+				FA9D14A21B4268B3008000E7 /* GAIEcommerceProductAction.h */,
+				FA9D14A31B4268B3008000E7 /* GAIEcommercePromotion.h */,
+				FA9D14A41B4268B3008000E7 /* GAIFields.h */,
+				FA9D14A51B4268B3008000E7 /* GAILogger.h */,
+				FA9D14A61B4268B3008000E7 /* GAITrackedViewController.h */,
+				FA9D14A71B4268B3008000E7 /* GAITracker.h */,
 			);
 			name = GoogleAnalytics;
 			sourceTree = "<group>";
@@ -889,6 +927,7 @@
 			files = (
 				FAC79C911B1FE00C00A69065 /* running_selected.png in Resources */,
 				FA27BE0D1AF93C3300715ABF /* people-7.png in Resources */,
+				FA9D14831B41C735008000E7 /* survey_icon.png in Resources */,
 				FA446E911956A430007941C6 /* ist_logo.png in Resources */,
 				FAC79C8F1B1FDC4E00A69065 /* thumb_up_normal.png in Resources */,
 				FAC79C811B1FC12700A69065 /* wave.png in Resources */,
@@ -898,16 +937,23 @@
 				FA8B7FB218DE1CEF001F3B1B /* microphone-7.png in Resources */,
 				FAF6E96118D4D17F00BDD03D /* FB-f-Logo__blue_1024.png in Resources */,
 				FA8B7FCD18F1E816001F3B1B /* thumbs_up.png in Resources */,
+				FA9D14891B425D25008000E7 /* food_icon.png in Resources */,
+				FA9D14A91B426A32008000E7 /* StoryBoard_Small.storyboard in Resources */,
+				FACA416E1B38500900935C1C /* 2015_button_faceonly_white.png in Resources */,
 				FA8B7FB018DE1AE9001F3B1B /* flag-7.png in Resources */,
 				FA8B7FA818DE1789001F3B1B /* photos-default-7.png in Resources */,
 				FA0A6BD018DB97ED00E706F5 /* picture.png in Resources */,
 				FAF6E8DE18C6509800BDD03D /* Images.xcassets in Resources */,
 				FA5193301B07A226009A1CC6 /* 1431810271_40.Cloud-32.png in Resources */,
+				FA9D14931B42607F008000E7 /* restroom_icon.png in Resources */,
 				FAF6E8CD18C6509800BDD03D /* InfoPlist.strings in Resources */,
+				FA9D14911B42600E008000E7 /* firstaid_icon.png in Resources */,
 				FAC391611952D37B00A2ED2D /* medal_bronze.png in Resources */,
 				FA446E7519558199007941C6 /* Festival-Map.png in Resources */,
+				FA9D14871B425C5E008000E7 /* present_icon.png in Resources */,
 				FAC391621952D37B00A2ED2D /* medal_gold.png in Resources */,
 				FA20E73B1B06282000228CAA /* 2015 Button.png in Resources */,
+				FA9D148D1B425E86008000E7 /* information_icon.png in Resources */,
 				FA8B7FA418DE173B001F3B1B /* trophy-7.png in Resources */,
 				FAC79C951B1FED6F00A69065 /* star_normal.png in Resources */,
 				FA8B7FA218DE172A001F3B1B /* map-paper-7.png in Resources */,
@@ -916,19 +962,20 @@
 				FAC79C8C1B1FDC4E00A69065 /* running_normal.png in Resources */,
 				FA67962718D6719700A5BECC /* twitter_blue_bar.png in Resources */,
 				FAC79C941B1FED6F00A69065 /* star_selected.png in Resources */,
-				FAAA6078195EB4E700433679 /* StoryBoard_Small.storyboard in Resources */,
 				FA3B86901B1760BC00450ACE /* 2015_button_faceonly.png in Resources */,
 				FAC79C8D1B1FDC4E00A69065 /* picture_normal.png in Resources */,
 				FAC3914B1952A1FC00A2ED2D /* info.png in Resources */,
 				FA8B7FAA18DE17A7001F3B1B /* man-7.png in Resources */,
 				FAC391471952A10E00A2ED2D /* picture_100_100.png in Resources */,
 				FA8B7FA618DE175E001F3B1B /* music-7.png in Resources */,
+				FA9D14951B42615D008000E7 /* parking_icon.png in Resources */,
 				FA8B7FB418DE1E0A001F3B1B /* slr_camera.png in Resources */,
 				FAC79C9D1B20027A00A69065 /* button_switch_vertical.png in Resources */,
 				FAC3914419514D2100A2ED2D /* 2014_poster.jpg in Resources */,
 				FAC391491952A16500A2ED2D /* compass_256_256.png in Resources */,
 				FAAA6074195E973B00433679 /* festivalmap.pdf in Resources */,
 				FA446E7719560312007941C6 /* message-7.png in Resources */,
+				FA9D149B1B4263DC008000E7 /* bus_icon.png in Resources */,
 				FAC79C8E1B1FDC4E00A69065 /* info_normal.png in Resources */,
 				FA8B7FD518F1E9CF001F3B1B /* website.png in Resources */,
 				FA5193361B07A654009A1CC6 /* 1431811170_15.Pencil-32.png in Resources */,
@@ -1025,6 +1072,7 @@
 				FA0A6BD518DBC3C900E706F5 /* EventMapViewViewController.m in Sources */,
 				FAC391551952A93B00A2ED2D /* HeatMapViewController.m in Sources */,
 				FAAA6072195E954300433679 /* FestivalMapWebViewController.m in Sources */,
+				FACA41711B39CDB400935C1C /* CommunityConnectionQuestionsViewController.m in Sources */,
 				C7A828DB1B156CBA003DD26E /* BloothLocationServices.m in Sources */,
 				FAF6E90318C6869300BDD03D /* MoreViewController.m in Sources */,
 				FA6F12A71B13F97100F4ECAA /* MyActivityQuestionViewController.m in Sources */,
@@ -1072,14 +1120,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FAAA6076195EB4E700433679 /* StoryBoard_Small.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FAAA6077195EB4E700433679 /* Base */,
-			);
-			name = StoryBoard_Small.storyboard;
-			sourceTree = "<group>";
-		};
 		FAF6E8CB18C6509800BDD03D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1213,7 +1253,7 @@
 					Dev/ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a,
 					"$(PROJECT_DIR)",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
@@ -1250,7 +1290,7 @@
 					Dev/ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a,
 					"$(PROJECT_DIR)",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",

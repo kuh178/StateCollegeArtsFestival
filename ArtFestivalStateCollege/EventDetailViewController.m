@@ -431,15 +431,6 @@ NSUserDefaults *userDefault;
         
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
            [self downloadEventUpdates];
-            
-            // update attend_flag
-            if (attend_flag == 0) { // if attend_flag == ADD_ATTEND
-                attend_flag = REMOVE_ATTEND;
-            }
-            else {
-                attend_flag = ADD_ATTEND;
-            }
-            
         }
         else {
             UIAlertView *dialog = [[UIAlertView alloc]init];

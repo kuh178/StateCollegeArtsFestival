@@ -254,6 +254,8 @@ NSUserDefaults *userDefault;
             [dialog addButtonWithTitle:@"OK"];
             [dialog show];
             
+            [userDefault setObject:@"T" forKey:@"refresh"];
+            
             [self.navigationController popViewControllerAnimated:YES];
         }
         else {

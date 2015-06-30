@@ -10,7 +10,6 @@
 #import "PNColor.h"
 #import "PNChartLabel.h"
 
-
 @interface PNBarChart () {
     NSMutableArray *_xChartLabels;
     NSMutableArray *_yChartLabels;
@@ -57,56 +56,74 @@
     _xLabelSkip          = 1;
     _yLabelSum           = 4;
     _labelMarginTop      = 0;
-    _chartMargin         = 15.0;
+    _chartMargin         = 25.0;
     _barRadius           = 2.0;
     _showChartBorder     = NO;
+    _showLevelLine       = NO;
     _yChartLabelWidth    = 18;
     _rotateForXAxisText  = false;
+    _isGradientShow      = YES;
+    _isShowNumbers       = YES;
+	_yLabelFormatter = ^(CGFloat yValue){
+		return [NSString stringWithFormat:@"%1.f",yValue];
+	};
 }
 
 - (void)setYValues:(NSArray *)yValues
 {
     _yValues = yValues;
+  //make the _yLabelSum value dependant of the distinct values of yValues to avoid duplicates on yAxis
+  
+  if (_showLabel) {
+    [self __addYCoordinateLabelsValues];
+  } else {
+    [self processYMaxValue];
+  }
+}
 
-    //make the _yLabelSum value dependant of the distinct values of yValues to avoid duplicates on yAxis
-    int yLabelsDifTotal = (int)[NSSet setWithArray:yValues].count;
-    _yLabelSum = yLabelsDifTotal % 2 == 0 ? yLabelsDifTotal : yLabelsDifTotal + 1;
-
+- (void)processYMaxValue {
+    NSArray *yAxisValues = _yLabels ? _yLabels : _yValues;
+    _yLabelSum = _yLabels ? _yLabels.count - 1 :_yLabelSum;
     if (_yMaxValue) {
         _yValueMax = _yMaxValue;
     } else {
-        [self getYValueMax:yValues];
+        [self getYValueMax:yAxisValues];
     }
     
-    if (_yChartLabels) {
-        [self viewCleanupForCollection:_yChartLabels];
-    }else{
-        _yLabels = [NSMutableArray new];
+    if (_yLabelSum==4) {
+        _yLabelSum = yAxisValues.count;
+        (_yLabelSum % 2 == 0) ? _yLabelSum : _yLabelSum++;
+    }
+}
+
+#pragma mark - Private Method
+#pragma mark - 添加柱状图的Y轴坐标
+- (void)__addYCoordinateLabelsValues{
+  
+  [self viewCleanupForCollection:_yChartLabels];
+  
+  [self processYMaxValue];
+  
+  float sectionHeight = (self.frame.size.height - _chartMargin * 2 - kXLabelHeight) / _yLabelSum;
+  for (int i = 0; i <= _yLabelSum; i++) {
+    NSString *labelText;
+    if (_yLabels) {
+      float yAsixValue = [_yLabels[_yLabels.count - i - 1] floatValue];
+      labelText= _yLabelFormatter(yAsixValue);
+    } else {
+      labelText = _yLabelFormatter((float)_yValueMax * ( (_yLabelSum - i) / (float)_yLabelSum ));
     }
     
-    if (_showLabel) {
-        //Add y labels
-        
-        float yLabelSectionHeight = (self.frame.size.height - _chartMargin * 2 - kXLabelHeight) / _yLabelSum;
-        
-        for (int index = 0; index < _yLabelSum; index++) {
-            
-            NSString *labelText = _yLabelFormatter((float)_yValueMax * ( (_yLabelSum - index) / (float)_yLabelSum ));
-            
-            PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake(0,
-                                                                                  yLabelSectionHeight * index + _chartMargin - kYLabelHeight/2.0,
-                                                                                  _yChartLabelWidth,
-                                                                                  kYLabelHeight)];
-            label.font = _labelFont;
-            label.textColor = _labelTextColor;
-            [label setTextAlignment:NSTextAlignmentRight];
-            label.text = labelText;
-            
-            [_yChartLabels addObject:label];
-            [self addSubview:label];
-            
-        }
-    }
+    CGRect frame = (CGRect){0, sectionHeight * i + _chartMargin - kYLabelHeight/2.0, _yChartLabelWidth, kYLabelHeight};
+    PNChartLabel *label = [[PNChartLabel alloc] initWithFrame:frame];
+    label.font = _labelFont;
+    label.textColor = _labelTextColor;
+    [label setTextAlignment:NSTextAlignmentRight];
+    label.text = labelText;
+    [self addSubview:label];
+    
+    [_yChartLabels addObject:label];
+  }
 }
 
 -(void)updateChartData:(NSArray *)data{
@@ -116,10 +133,10 @@
 
 - (void)getYValueMax:(NSArray *)yLabels
 {
-    int max = [[yLabels valueForKeyPath:@"@max.intValue"] intValue];
+    CGFloat max = [[yLabels valueForKeyPath:@"@max.floatValue"] floatValue];
 
     //ensure max is even
-    _yValueMax = max % 2 == 0 ? max : max + 1;
+   _yValueMax = max ;
 
     if (_yValueMax == 0) {
         _yValueMax = _yMinValue;
@@ -135,9 +152,10 @@
     }else{
         _xChartLabels = [NSMutableArray new];
     }
-    
-    if (_showLabel) {
-        _xLabelWidth = (self.frame.size.width - _chartMargin * 2) / [xLabels count];
+	
+	_xLabelWidth = (self.frame.size.width - _chartMargin * 2) / [xLabels count];
+	
+    if (_showLabel) {		
         int labelAddCount = 0;
         for (int index = 0; index < _xLabels.count; index++) {
             labelAddCount += 1;
@@ -208,25 +226,27 @@
             }
             
             bar = [[PNBar alloc] initWithFrame:CGRectMake(barXPosition, //Bar X position
-                                                          self.frame.size.height - chartCavanHeight - kXLabelHeight - _chartMargin, //Bar Y position
+                                                          self.frame.size.height - chartCavanHeight - kXLabelHeight - _chartMargin , //Bar Y position
                                                           barWidth, // Bar witdh
-                                                          chartCavanHeight)]; //Bar height
-            
+                                                          self.showLevelLine ? chartCavanHeight/2.0:chartCavanHeight)]; //Bar height
+          
             //Change Bar Radius
             bar.barRadius = _barRadius;
             
             //Change Bar Background color
             bar.backgroundColor = _barBackgroundColor;
-            
             //Bar StrokColor First
             if (self.strokeColor) {
                 bar.barColor = self.strokeColor;
             }else{
                 bar.barColor = [self barColorAtIndex:index];
             }
+          
             // Add gradient
-            bar.barColorGradientStart = _barColorGradientStart;
-            
+            if (self.isGradientShow) {
+             bar.barColorGradientStart = bar.barColor;
+            }
+          
             //For Click Index
             bar.tag = index;
             
@@ -236,15 +256,26 @@
         
         //Height Of Bar
         float value = [valueString floatValue];
-        
-        float grade = (float)value / (float)_yValueMax;
-        
+        float grade =fabsf((float)value / (float)_yValueMax);
+      
         if (isnan(grade)) {
             grade = 0;
         }
+        bar.maxDivisor = (float)_yValueMax;
         bar.grade = grade;
+        bar.isShowNumber = self.isShowNumbers;
+        CGRect originalFrame = bar.frame;
+        NSString *currentNumber =  [NSString stringWithFormat:@"%f",value];
+      
+        if ([[currentNumber substringToIndex:1] isEqualToString:@"-"] && self.showLevelLine) {
+        CGAffineTransform transform =CGAffineTransformMakeRotation(M_PI);
+        [bar setTransform:transform];
+        originalFrame.origin.y = bar.frame.origin.y + bar.frame.size.height;
+        bar.frame = originalFrame;
+        bar.isNegative = YES;
         
-        index += 1;
+      }
+      index += 1;
     }
 }
 
@@ -276,10 +307,7 @@
         [progressline setLineWidth:1.0];
         [progressline setLineCapStyle:kCGLineCapSquare];
         _chartBottomLine.path = progressline.CGPath;
-
-
         _chartBottomLine.strokeColor = PNLightGrey.CGColor;
-
 
         CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
         pathAnimation.duration = 0.5;
@@ -291,7 +319,7 @@
         _chartBottomLine.strokeEnd = 1.0;
 
         [self.layer addSublayer:_chartBottomLine];
-
+      
         //Add left Chart Line
 
         _chartLeftLine = [CAShapeLayer layer];
@@ -308,10 +336,7 @@
         [progressLeftline setLineWidth:1.0];
         [progressLeftline setLineCapStyle:kCGLineCapSquare];
         _chartLeftLine.path = progressLeftline.CGPath;
-
-
         _chartLeftLine.strokeColor = PNLightGrey.CGColor;
-
 
         CABasicAnimation *pathLeftAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
         pathLeftAnimation.duration = 0.5;
@@ -324,8 +349,43 @@
 
         [self.layer addSublayer:_chartLeftLine];
     }
+  
+  // Add Level Separator Line
+  if (_showLevelLine) {
+    _chartLevelLine = [CAShapeLayer layer];
+    _chartLevelLine.lineCap      = kCALineCapButt;
+    _chartLevelLine.fillColor    = [[UIColor whiteColor] CGColor];
+    _chartLevelLine.lineWidth    = 1.0;
+    _chartLevelLine.strokeEnd    = 0.0;
+    
+    UIBezierPath *progressline = [UIBezierPath bezierPath];
+    
+    [progressline moveToPoint:CGPointMake(_chartMargin, (self.frame.size.height - kXLabelHeight )/2.0)];
+    [progressline addLineToPoint:CGPointMake(self.frame.size.width - _chartMargin,  (self.frame.size.height - kXLabelHeight )/2.0)];
+    
+    [progressline setLineWidth:1.0];
+    [progressline setLineCapStyle:kCGLineCapSquare];
+    _chartLevelLine.path = progressline.CGPath;
+    
+    _chartLevelLine.strokeColor = PNLightGrey.CGColor;
+    
+    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    pathAnimation.duration = 0.5;
+    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    pathAnimation.fromValue = @0.0f;
+    pathAnimation.toValue = @1.0f;
+    [_chartLevelLine addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+    
+    _chartLevelLine.strokeEnd = 1.0;
+    
+    [self.layer addSublayer:_chartLevelLine];
+  } else {
+    if (_chartLevelLine) {
+      [_chartLevelLine removeFromSuperlayer];
+      _chartLevelLine = nil;
+    }
+  }
 }
-
 
 - (void)viewCleanupForCollection:(NSMutableArray *)array
 {
@@ -348,7 +408,6 @@
     }
 }
 
-
 #pragma mark - Touch detection
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -356,7 +415,6 @@
     [self touchPoint:touches withEvent:event];
     [super touchesBegan:touches withEvent:event];
 }
-
 
 - (void)touchPoint:(NSSet *)touches withEvent:(UIEvent *)event
 {

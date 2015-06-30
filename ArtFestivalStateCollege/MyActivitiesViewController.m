@@ -38,6 +38,7 @@
 
 int myType = MY_UPDATES;
 UIActivityIndicatorView *indicator;
+NSUserDefaults *userDefault;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,6 +64,8 @@ UIActivityIndicatorView *indicator;
     [self.view addSubview:indicator];
     [indicator bringSubviewToFront:self.view];
     
+    userDefault = [NSUserDefaults standardUserDefaults];
+    
     [self downloadMyUpdates];
 }
 
@@ -80,6 +83,12 @@ UIActivityIndicatorView *indicator;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    // this is for refreshing the view after removing the photo
+    if ([[userDefault objectForKey:@"refresh"] isEqualToString:@"T"]) {
+        [userDefault setObject:@"F" forKey:@"refresh"];
+        [self downloadMyPhotos];
+    }
 }
 
 // Table view property
@@ -119,8 +128,9 @@ UIActivityIndicatorView *indicator;
         double timestamp = [[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]] doubleValue];
         eventDate.text = [self dailyLanguage:(timestamp-[[item objectForKey:@"datetime"] doubleValue])];
         
-        if ([[item objectForKey:@"action"] intValue] == ACTION_YO) {
+        if ([[item objectForKey:@"action"] intValue] == ACTION_SURVEY) {
             yoImage.hidden = NO;
+            
         }
         else {
             yoImage.hidden = YES;
@@ -249,8 +259,9 @@ UIActivityIndicatorView *indicator;
         }
         else if ([[item objectForKey:@"action"] intValue] == ACTION_SURVEY) {
             MyActivityQuestionViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MyActivityQuestionViewController"];
-            [viewController setSurveyID:[[item objectForKey:@"id"] intValue]]; // passing the survey ID
-            [viewController setQAry:[item objectForKey:@"survey_questions"]];
+            [viewController setSurveyID:[[item objectForKey:@"special_id"] intValue]]; // passing the survey ID
+            [viewController setQAry:[item objectForKey:@"survey_questions"]]; // passing survey question array
+            [viewController setQMainQuestion:[item objectForKey:@"survey_main_question"]]; // passing survey main question
             viewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:viewController animated:YES];
         }
@@ -307,8 +318,6 @@ UIActivityIndicatorView *indicator;
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-        
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"]};
         
@@ -358,8 +367,6 @@ UIActivityIndicatorView *indicator;
     
     [indicator startAnimating];
     
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"]};
     
@@ -404,8 +411,6 @@ UIActivityIndicatorView *indicator;
 - (void) downloadMyUpdates {
     
     [indicator startAnimating];
-    
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"]};
@@ -453,8 +458,6 @@ UIActivityIndicatorView *indicator;
 
 - (void) downloadPeopleLikeMe {
     [indicator startAnimating];
-    
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"user_id"     :[userDefault objectForKey:@"user_id"]};

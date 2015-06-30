@@ -256,7 +256,7 @@
     }
     
     if (status != kCLAuthorizationStatusAuthorizedAlways){
-        NSString *message = @"Location Services Disabled! Blooth Events uses location services to provide exclusive offers to users based on their location at the conference! Please enable Location services in Settings to get the full experience.";
+        NSString *message = @"Location Services Disabled. Please enable Location services in Settings to get the full experience!";
         [self locationServicesNotAuthed:message];
     }
     
@@ -596,8 +596,8 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
         case CBCentralManagerStatePoweredOn: stateString = @"Bluetooth is currently powered on and available to use."; break;
         default: stateString = @"State unknown, update imminent."; break;
     }
-    
-    if ( self.bluetoothManager.state == CBCentralManagerStateUnauthorized || self.bluetoothManager.state == CBCentralManagerStateUnsupported || self.bluetoothManager.state == CBCentralManagerStatePoweredOff){
+
+    if (self.bluetoothManager.state == CBCentralManagerStatePoweredOff){
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Bluetooth Error!"
                                                         message:stateString
@@ -607,6 +607,17 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
         [alert show];
     }
     
+    /*
+    if ( self.bluetoothManager.state == CBCentralManagerStateUnauthorized || self.bluetoothManager.state == CBCentralManagerStateUnsupported || self.bluetoothManager.state == CBCentralManagerStatePoweredOff){
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Bluetooth Error!"
+                                                        message:stateString
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+     */
 }
 
 //local notification

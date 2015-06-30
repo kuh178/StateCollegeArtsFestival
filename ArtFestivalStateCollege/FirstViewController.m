@@ -19,6 +19,7 @@
 #define secondDay   2
 #define thirdDay    3
 #define fourthDay   4
+#define fifthDay    5
 
 @interface FirstViewController ()
 
@@ -285,8 +286,11 @@ NSUserDefaults *userDefault;
     else if (selectedSegment == 2){ // 3nd
         flag = thirdDay;
     }
-    else { // 4th
+    else if (selectedSegment == 3){ // 4th
         flag = fourthDay;
+    }
+    else if (selectedSegment == 4){ // 5th
+        flag = fifthDay;
     }
     
     // get the items based on the day

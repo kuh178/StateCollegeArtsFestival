@@ -90,8 +90,6 @@
         
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
            // move to the main page
-            //try locationServices
-            
             NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
             [userDefault setObject:[responseObject objectForKey:@"user_name"] forKey:@"user_name"];
             [userDefault setObject:[responseObject objectForKey:@"user_id"] forKey:@"user_id"];

@@ -19,7 +19,7 @@
 
 @implementation SecondViewController
 
-@synthesize artistList, artistBoothList, jsonArray, tableViewList, refreshBtn, segmentControl;
+@synthesize artistList, artistBoothList, jsonArray, tableViewList, refreshBtn, location1Btn, location2Btn, location3Btn, location4Btn, location5Btn, location6Btn;
 
 NSString *booth_flag = @"A";
 
@@ -31,6 +31,8 @@ NSString *booth_flag = @"A";
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:51.0/255.0 green:164.0/255.0 blue:192.0/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
+    self.title = @"Allen Street (A)";
     
     [self downloadContent];
 }
@@ -176,31 +178,18 @@ NSString *booth_flag = @"A";
     [self downloadContent];
 }
 
--(IBAction)segmentPressed:(id)sender {
-    UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
-    NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;
-    
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+   if ([[segue identifier] isEqualToString: @"UserInputDetailViewController"]) {
+        UserInputDetailViewController *viewController = (UserInputDetailViewController *)[segue destinationViewController];
+        viewController.hidesBottomBarWhenPushed = YES;
+        viewController.eventID = -1;
+    }
+}
+
+- (void) updateArtist {
     artistBoothList = [NSMutableArray arrayWithCapacity:0];
     
-    if (selectedSegment == 0) { // A
-        booth_flag = @"A";
-    }
-    else if (selectedSegment == 1){ // B
-        booth_flag = @"B";
-    }
-    else if (selectedSegment == 2){ // M
-        booth_flag = @"M";
-    }
-    else if (selectedSegment == 3){ // O
-        booth_flag = @"O";
-    }
-    else if (selectedSegment == 4){ // P
-        booth_flag = @"P";
-    }
-    else if (selectedSegment == 5) { // R
-        booth_flag = @"R";
-    }
-
     // get the items based on the day
     for (int i = 0 ; i < [artistList count] ; i++) {
         
@@ -214,13 +203,47 @@ NSString *booth_flag = @"A";
     [tableViewList reloadData];
 }
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-   if ([[segue identifier] isEqualToString: @"UserInputDetailViewController"]) {
-        UserInputDetailViewController *viewController = (UserInputDetailViewController *)[segue destinationViewController];
-        viewController.hidesBottomBarWhenPushed = YES;
-        viewController.eventID = -1;
-    }
+
+-(IBAction)location1BtnPressed:(id)sender {
+    booth_flag = @"A";
+    self.title = @"Allen Street (A)";
+    
+    [self updateArtist];
+}
+
+-(IBAction)location2BtnPressed:(id)sender {
+    booth_flag = @"O";
+    self.title = @"Fairmount Ave (O)";
+    
+    [self updateArtist];
+}
+
+-(IBAction)location3BtnPressed:(id)sender {
+    booth_flag = @"R";
+    self.title = @"Fraser Street (R)";
+    
+    [self updateArtist];
+}
+
+-(IBAction)location4BtnPressed:(id)sender {
+    booth_flag = @"M";
+    self.title = @"Old Main Mall (M)";
+    
+    [self updateArtist];
+}
+
+-(IBAction)location5BtnPressed:(id)sender {
+    booth_flag = @"P";
+    self.title = @"Pollock Road (P)";
+    
+    [self updateArtist];
+}
+
+-(IBAction)location6BtnPressed:(id)sender {
+    booth_flag = @"B";
+    self.title = @"Burrows Road (B)";
+    
+    [self updateArtist];
 }
 
 

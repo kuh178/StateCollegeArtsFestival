@@ -15,6 +15,7 @@
 
 @interface FestivalMapViewController : GAITrackedViewController <MKMapViewDelegate, CLLocationManagerDelegate>{
     IBOutlet MKMapView          *mapView;
+    IBOutlet UIButton           *mylocationBtn;
     
     CLLocationManager           *locationManager;
     
@@ -23,8 +24,10 @@
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView    *mapView;
+@property (nonatomic, retain) IBOutlet UIButton     *mylocationBtn;
 @property (nonatomic, retain) NSMutableArray        *locationList;
 @property (nonatomic, retain) NSMutableArray        *annotations;
 
+-(IBAction)mylocationBtnPressed:(id)sender;
 
 @end

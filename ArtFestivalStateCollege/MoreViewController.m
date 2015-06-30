@@ -19,8 +19,10 @@
 
 @implementation MoreViewController
 @synthesize logoutBtn;
+@synthesize homepageBtn, event1Btn, event2Btn, event3Btn, event4Btn;
 
 NSUserDefaults *userDefault;
+NSString *webLink;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,12 +42,15 @@ NSUserDefaults *userDefault;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     userDefault = [NSUserDefaults standardUserDefaults];
+    
+    webLink = @"";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.screenName = @"MoreViewController";
     self.navigationItem.backBarButtonItem.title = @"Back";
+    //self.hidesBottomBarWhenPushed = YES;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -76,8 +81,8 @@ NSUserDefaults *userDefault;
     }
     else if([[segue identifier] isEqualToString: @"ArtistsWebPageViewController"]) {
         ArtistsWebPageViewController *viewController = (ArtistsWebPageViewController *)[segue destinationViewController];
+        [viewController setWebLink:webLink];
         viewController.hidesBottomBarWhenPushed = YES;
-        [viewController setWebLink:@"http://www.arts-festival.com/"];
     }
 }
 
@@ -109,6 +114,26 @@ NSUserDefaults *userDefault;
     else { // Cancel
         
     }
+}
+
+- (IBAction)homepageBtnPressed:(id)sender {
+    webLink = @"http://www.arts-festival.com/";
+}
+
+- (IBAction)event1BtnPressed:(id)sender {
+    webLink = @"http://www.arts-festival.com/italian-street-painting";
+}
+
+- (IBAction)event2BtnPressed:(id)sender {
+    webLink = @"http://www.arts-festival.com/silent-auction";
+}
+
+- (IBAction)event3BtnPressed:(id)sender {
+    webLink = @"http://www.arts-festival.com/sand-sculpture";
+}
+
+- (IBAction)event4BtnPressed:(id)sender {
+    webLink = @"http://www.arts-festival.com/penn-state-alumni-weekend";
 }
 
 

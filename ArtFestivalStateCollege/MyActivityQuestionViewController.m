@@ -15,8 +15,8 @@
 
 @implementation MyActivityQuestionViewController
 
-@synthesize question1Label, question2Label, question3Label;
-@synthesize openQuestionText, segmentQuestion1, segmentQuestion2, submitBtn, surveyID, qAry;
+@synthesize questionMainLabel, question1Label, question2Label, question3Label, question4Label;
+@synthesize segmentQuestion1, segmentQuestion2, segmentQuestion3, segmentQuestion4, submitBtn, surveyID, qAry, qMainQuestion;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,10 +26,12 @@
     submitBtn.layer.borderWidth = 1.0;
     submitBtn.layer.cornerRadius = 5;
     
-    question1Label.text = [[qAry objectAtIndex:0] objectForKey:@"survey_question"];
-    question2Label.text = [[qAry objectAtIndex:1] objectForKey:@"survey_question"];
-    question3Label.text = [[qAry objectAtIndex:2] objectForKey:@"survey_question"];
+    questionMainLabel.text = qMainQuestion;
     
+    question1Label.text = [qAry objectAtIndex:0];
+    question2Label.text = [qAry objectAtIndex:1];
+    question3Label.text = [qAry objectAtIndex:2];
+    question4Label.text = [qAry objectAtIndex:3];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -63,16 +65,25 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"user_id"         :[userDefault objectForKey:@"user_id"],
                              @"survey_id"       :[NSString stringWithFormat:@"%d", surveyID],
-                             @"open_quesiton"   :openQuestionText.text,
                              @"datetime"        :timeStampValue,
                              @"question1"       :[NSString stringWithFormat:@"%d", (int)segmentQuestion1.selectedSegmentIndex+1],
-                             @"question2"       :[NSString stringWithFormat:@"%d", (int)segmentQuestion2.selectedSegmentIndex+1]};
+                             @"question2"       :[NSString stringWithFormat:@"%d", (int)segmentQuestion2.selectedSegmentIndex+1],
+                             @"question3"       :[NSString stringWithFormat:@"%d", (int)segmentQuestion3.selectedSegmentIndex+1],
+                             @"question4"       :[NSString stringWithFormat:@"%d", (int)segmentQuestion4.selectedSegmentIndex+1]};
     
     [manager POST:@"http://heounsuk.com/festival/upload_adhoc_answers.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
+            
+            UIAlertView *dialog = [[UIAlertView alloc]init];
+            [dialog setDelegate:nil];
+            [dialog setTitle:@"Message"];
+            [dialog setMessage:@"Thank you for answering the survey"];
+            [dialog addButtonWithTitle:@"Close"];
+            [dialog show];
+            
             // when succeed, dismiss the current view controller
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -92,7 +103,11 @@
 }
 
 - (IBAction)submitBtnPressed:(id)sender {
-    if (![openQuestionText.text isEqual:[NSNull null]]) {
+    
+    if (segmentQuestion1.selectedSegmentIndex != -1 &&
+        segmentQuestion2.selectedSegmentIndex != -1 &&
+        segmentQuestion3.selectedSegmentIndex != -1 &&
+        segmentQuestion4.selectedSegmentIndex != -1) {
         [self submitAnswers];
     }
     else {
