@@ -88,9 +88,9 @@
 
 - (IBAction)submitBtnPressed:(id)sender {
     
-    int answer1 = answer1Segment.selectedSegmentIndex;
-    int answer2 = answer2Segment.selectedSegmentIndex;
-    int answer3 = answer3Segment.selectedSegmentIndex;
+    int answer1 = (int)answer1Segment.selectedSegmentIndex;
+    int answer2 = (int)answer2Segment.selectedSegmentIndex;
+    int answer3 = (int)answer3Segment.selectedSegmentIndex;
     
     [self uploadUserInfo:answer1 answer2:answer2 answer3:answer3];
 }

@@ -12,6 +12,7 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "UserPhotoListViewController.h"
 #import "ChooseInterestViewController.h"
+#import "UserAttendViewController.h"
 #import "AppDelegate.h"
 #import "PNChart.h"
 
@@ -42,6 +43,10 @@ UIImage     *chosenImage;
 NSData      *imageData;
 
 NSMutableArray *userPhotoArray;
+NSMutableArray *userLikeArray;
+NSMutableArray *userCommentArray;
+NSMutableArray *userEventArray;
+NSMutableArray *userArtistArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -133,21 +138,39 @@ NSMutableArray *userPhotoArray;
     UserPhotoListViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserPhotoListViewController"];
     viewController.photoList = userPhotoArray;
     viewController.username = username;
+    viewController.type = 0;
     viewController.hidesBottomBarWhenPushed = YES;
     [viewController.navigationController setNavigationBarHidden:YES];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void) likeTapDetected {
-
+    UserPhotoListViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserPhotoListViewController"];
+    viewController.photoList = userLikeArray;
+    viewController.username = username;
+    viewController.type = 2;
+    viewController.hidesBottomBarWhenPushed = YES;
+    [viewController.navigationController setNavigationBarHidden:YES];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void) commentTapDetected {
-
+    UserPhotoListViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserPhotoListViewController"];
+    viewController.photoList = userCommentArray;
+    viewController.username = username;
+    viewController.type = 1;
+    viewController.hidesBottomBarWhenPushed = YES;
+    [viewController.navigationController setNavigationBarHidden:YES];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void) userTapDetected {
-
+    UserAttendViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserAttendViewController"];
+    viewController.username = username;
+    viewController.eventList = userEventArray;
+    viewController.hidesBottomBarWhenPushed = YES;
+    [viewController.navigationController setNavigationBarHidden:YES];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void) downloadProfile {
@@ -163,7 +186,11 @@ NSMutableArray *userPhotoArray;
 
         if([[responseObject objectForKey:@"success"] boolValue] == TRUE) {
             NSMutableArray *jsonArray = [NSMutableArray arrayWithCapacity:0];
-            userPhotoArray = [NSMutableArray arrayWithCapacity:0];
+            userPhotoArray      = [NSMutableArray arrayWithCapacity:0];
+            userLikeArray       = [NSMutableArray arrayWithCapacity:0];
+            userCommentArray    = [NSMutableArray arrayWithCapacity:0];
+            userEventArray      = [NSMutableArray arrayWithCapacity:0];
+            userArtistArray     = [NSMutableArray arrayWithCapacity:0];
             [jsonArray addObjectsFromArray:[responseObject objectForKey:@"results"]];
             
             NSMutableDictionary *item = [jsonArray objectAtIndex:0];
@@ -172,7 +199,11 @@ NSMutableArray *userPhotoArray;
             email = [item objectForKey:@"email"];
             profileImageLink = [item objectForKey:@"image"];
             
-            userPhotoArray = [item objectForKey:@"user_content"];
+            userPhotoArray      = [item objectForKey:@"user_content"];
+            userLikeArray       = [item objectForKey:@"user_likes"];
+            userCommentArray    = [item objectForKey:@"user_comments"];
+            userEventArray      = [item objectForKey:@"user_events"];
+            userArtistArray     = [item objectForKey:@"user_artist"];
             
             NSLog(@"%@", profileImage);
             
@@ -188,7 +219,7 @@ NSMutableArray *userPhotoArray;
             int userCommentsCnt = [[item objectForKey:@"user_comments_cnt"] intValue];
             int userLikesCnt = [[item objectForKey:@"user_likes_cnt"] intValue];
             int userPhotosCnt = (int)[[item objectForKey:@"user_content"] count];
-            int userTaggedUsersCnt = (int)[[item objectForKey:@"tagged_user"]count];
+            //int userTaggedUsersCnt = (int)[[item objectForKey:@"tagged_user"]count];
             
             if (userCommentsCnt <= 1) {
                 commentsLabel.text = [NSString stringWithFormat:@"%d", userCommentsCnt];
@@ -217,13 +248,13 @@ NSMutableArray *userPhotoArray;
                 photosTextLabel.text = @"photos";
             }
             
-            if (userTaggedUsersCnt <= 1) {
-                uniqueUsersLabel.text = [NSString stringWithFormat:@"%d", userTaggedUsersCnt];
-                uniqueUsersTextLabel.text = @"unique user";
+            if ((unsigned long)userEventArray.count <= 1) {
+                uniqueUsersLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)userEventArray.count];
+                uniqueUsersTextLabel.text = @"performance";
             }
             else {
-                uniqueUsersLabel.text = [NSString stringWithFormat:@"%d", userTaggedUsersCnt];
-                uniqueUsersTextLabel.text = @"unique users";
+                uniqueUsersLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)userEventArray.count];
+                uniqueUsersTextLabel.text = @"performances";
             }
             
             // chart

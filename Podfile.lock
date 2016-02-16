@@ -52,12 +52,12 @@ PODS:
   - UICountingLabel (1.2.0)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.0)
+  - AFNetworking
   - CCHMapClusterController
   - Facebook-iOS-SDK
-  - NHBalancedFlowLayout (~> 0.2)
+  - NHBalancedFlowLayout
   - PNChart
-  - SDWebImage (~> 3.6)
+  - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e

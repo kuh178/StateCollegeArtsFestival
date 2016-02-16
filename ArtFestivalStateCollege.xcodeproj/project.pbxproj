@@ -28,6 +28,7 @@
 		FA0A6BCA18DB970F00E706F5 /* art-gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = FA0A6BC918DB970F00E706F5 /* art-gallery.png */; };
 		FA0A6BD018DB97ED00E706F5 /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = FA0A6BCF18DB97ED00E706F5 /* picture.png */; };
 		FA0A6BD518DBC3C900E706F5 /* EventMapViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6BD418DBC3C900E706F5 /* EventMapViewViewController.m */; };
+		FA15A7A81B46371900F7051C /* UserAttendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA15A7A71B46371900F7051C /* UserAttendViewController.m */; };
 		FA20E73B1B06282000228CAA /* 2015 Button.png in Resources */ = {isa = PBXBuildFile; fileRef = FA20E73A1B06282000228CAA /* 2015 Button.png */; };
 		FA20E73D1B06307500228CAA /* 2015 Poster_resized.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA20E73C1B06307500228CAA /* 2015 Poster_resized.jpg */; };
 		FA27BDFE1AF7EEE500715ABF /* UserPhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA27BDFD1AF7EEE500715ABF /* UserPhotoListViewController.m */; };
@@ -200,6 +201,8 @@
 		FA0A6BCF18DB97ED00E706F5 /* picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture.png; sourceTree = "<group>"; };
 		FA0A6BD318DBC3C900E706F5 /* EventMapViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMapViewViewController.h; sourceTree = "<group>"; };
 		FA0A6BD418DBC3C900E706F5 /* EventMapViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMapViewViewController.m; sourceTree = "<group>"; };
+		FA15A7A61B46371900F7051C /* UserAttendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAttendViewController.h; sourceTree = "<group>"; };
+		FA15A7A71B46371900F7051C /* UserAttendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAttendViewController.m; sourceTree = "<group>"; };
 		FA20E73A1B06282000228CAA /* 2015 Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2015 Button.png"; sourceTree = "<group>"; };
 		FA20E73C1B06307500228CAA /* 2015 Poster_resized.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2015 Poster_resized.jpg"; sourceTree = "<group>"; };
 		FA27BDFC1AF7EEE500715ABF /* UserPhotoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPhotoListViewController.h; sourceTree = "<group>"; };
@@ -521,6 +524,8 @@
 				FA4407B61AD318D9001CEFFC /* ProfileViewController.m */,
 				FA27BDFC1AF7EEE500715ABF /* UserPhotoListViewController.h */,
 				FA27BDFD1AF7EEE500715ABF /* UserPhotoListViewController.m */,
+				FA15A7A61B46371900F7051C /* UserAttendViewController.h */,
+				FA15A7A71B46371900F7051C /* UserAttendViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -1072,6 +1077,7 @@
 				FA0A6BD518DBC3C900E706F5 /* EventMapViewViewController.m in Sources */,
 				FAC391551952A93B00A2ED2D /* HeatMapViewController.m in Sources */,
 				FAAA6072195E954300433679 /* FestivalMapWebViewController.m in Sources */,
+				FA15A7A81B46371900F7051C /* UserAttendViewController.m in Sources */,
 				FACA41711B39CDB400935C1C /* CommunityConnectionQuestionsViewController.m in Sources */,
 				C7A828DB1B156CBA003DD26E /* BloothLocationServices.m in Sources */,
 				FAF6E90318C6869300BDD03D /* MoreViewController.m in Sources */,
@@ -1249,8 +1255,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/kyungsikhan/Keith/iPhone,
-					Dev/ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a,
 					"$(PROJECT_DIR)",
 				);
 				ONLY_ACTIVE_ARCH = NO;
@@ -1286,8 +1290,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/kyungsikhan/Keith/iPhone,
-					Dev/ExternalFrameworks/GoogleAnalyticsServicesiOS_3.03a,
 					"$(PROJECT_DIR)",
 				);
 				ONLY_ACTIVE_ARCH = NO;

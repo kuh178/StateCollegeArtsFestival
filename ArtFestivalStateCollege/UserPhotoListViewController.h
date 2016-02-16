@@ -12,9 +12,11 @@
 @interface UserPhotoListViewController : GAITrackedViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
     NSMutableArray *photoList;
     NSString *username;
+    int type;
 }
 
 @property (nonatomic, retain) NSMutableArray *photoList;
 @property (nonatomic, retain) NSString *username;
+@property (nonatomic, assign) int type;
 
 @end
